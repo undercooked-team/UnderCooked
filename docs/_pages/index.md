@@ -23,6 +23,7 @@ Below is a link to the GitHub Repository we've been developing our game in:
 ## The Team
 Details for all the team members can be found here:
 
+_**TO BE ADDED**_
 
 ## Requirements:
 
