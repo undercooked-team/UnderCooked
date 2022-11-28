@@ -23,7 +23,7 @@ subtitle                 : "A Frantic Cooking Game!" # site tagline that appears
 name                     : "UnderCooked"
 description              : "This website is a showcase of our frantic cooking game, UnderCooked! (Inspired by OverCooked, UnderCooked is a project from students at the University of York."
 url                      : "https://undercooked-team.github.io/UnderCooked/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-# baseurl                  : "" # the subpath of your site, e.g. "/blog"
+baseurl                  : "/docs" # the subpath of your site, e.g. "/blog"
 repository               : "undercooked-team/UnderCooked" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
