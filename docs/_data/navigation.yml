@@ -6,6 +6,8 @@ main:
     url: "/#download-undercooked"
   - title: "Our GitHub Repository"
     url: "/#our-github-repository"
+  - title: "The Team"
+    url: "/#the-team"
   - title: "Requirements"
     url: "/#requirements"
   - title: "Architecture"

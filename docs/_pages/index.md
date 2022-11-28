@@ -20,6 +20,10 @@ Below is a link to the GitHub Repository we've been developing our game in:
 
 > [{{ page.github }}{{ site.repository }}]({{ page.github }}{{ site.repository }})
 
+## The Team
+Details for all the team members can be found here:
+
+
 ## Requirements:
 
 ## Architecture:
