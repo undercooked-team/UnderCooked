@@ -14,6 +14,7 @@ gem "github-pages", "~> 227", group: :jekyll_plugins
 # To upgrade, run `bundle update`.
 gem "minimal-mistakes-jekyll"
 
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 # The following plugins are automatically loaded by the theme-gem:
 #   gem "jekyll-paginate"
 #   gem "jekyll-sitemap"

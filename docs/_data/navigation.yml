@@ -1,7 +1,23 @@
 # main links
 main:
-  - title: "Quick-Start Guide"
-    url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+  - title: "Home"
+    url: "/#home-page"
+  - title: "Download UnderCooked"
+    url: "/#download-undercooked"
+  - title: "Our GitHub Repository"
+    url: "/#our-github-repository"
+  - title: "Requirements"
+    url: "/#requirements"
+  - title: "Architecture"
+    url: "/#architecture"
+  - title: "Method Selection and Planning"
+    url: "/#method-selection-and-planning"
+  - title: "Risk Assessment and Mitigation"
+    url: "/#risk-assessment-and-mitigation"
+  - title: "Implementation"
+    url: "/#implementation"
+  # - title: "Quick-Start Guide"
+  #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"

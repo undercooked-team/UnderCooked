@@ -19,11 +19,11 @@ minimal_mistakes_skin    : "air"
 locale                   : "en-GB"
 title                    : "UnderCooked"
 title_separator          : "-"
-subtitle                 : "A frantic cooking game!" # site tagline that appears below site title in masthead
+subtitle                 : "A Frantic Cooking Game!" # site tagline that appears below site title in masthead
 name                     : "UnderCooked"
-description              : "A showcase of our frantic cooking game, UnderCooked! (Inspired by OverCooked) A Project from students at the University of York."
+description              : "This website is a showcase of our frantic cooking game, UnderCooked! (Inspired by OverCooked, UnderCooked is a project from students at the University of York."
 url                      : "https://undercooked-team.github.io/UnderCooked/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : "/docs" # the subpath of your site, e.g. "/blog"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "undercooked-team/UnderCooked" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
@@ -219,8 +219,8 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
@@ -280,14 +280,21 @@ compress_html:
 
 # Defaults
 defaults:
-  # _posts
+  # _pages
   - scope:
-      path: ""
-      type: posts
+      path: "_pages"
+      type: pages
     values:
       layout: single
       author_profile: true
-      read_time: true
-      comments: # true
-      share: true
-      related: true
+  # _posts
+  # - scope:
+  #     path: ""
+  #     type: posts
+  #   values:
+  #     layout: single
+  #     author_profile: true
+  #     read_time: true
+  #     comments: # true
+  #     share: true
+  #     related: true
