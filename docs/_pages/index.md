@@ -3,6 +3,7 @@ layout: single
 permalink: /
 title: false
 github: https://github.com/
+author_profile: false
 ---
 # Home Page
 Welcome to our homepage for UnderCooked!
