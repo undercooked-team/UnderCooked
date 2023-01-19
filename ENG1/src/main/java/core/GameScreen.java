@@ -83,9 +83,13 @@ public class GameScreen extends ScreenAdapter {
         return world;
     }
 
-    public void setCook(int cookIndex)
+    public Cook setCook(int cookIndex)
     {
+        if (cookIndex < 0 || cookIndex > cooks.size) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         this.cook = cooks.get(cookIndex);
+        return this.cook;
     }
 
     public int addCook(Cook newCook) {
