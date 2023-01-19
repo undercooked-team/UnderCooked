@@ -1,6 +1,7 @@
 package core;
 
 import Helper.MapHelper;
+import Objects.Cooks.Cook1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -24,13 +25,18 @@ public class GameScreen extends ScreenAdapter {
 
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private MapHelper mapHelper;
+    private int xOffset = 480;
+    private int yOffset = 320;
+
+    //Objects
+    private Cook1 cook1;
     public GameScreen(OrthographicCamera camera)
     {
         this.camera = camera;
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0,0), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
-        this.mapHelper = new MapHelper();
+        this.mapHelper = new MapHelper(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
     }
 
@@ -40,7 +46,7 @@ public class GameScreen extends ScreenAdapter {
         cameraUpdate();
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
-
+        cook1.update();
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             Gdx.app.exit();
@@ -49,7 +55,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void cameraUpdate()
     {
-        camera.position.set(new Vector3(450,300,0));
+        camera.position.set(new Vector3(0 + xOffset,0+yOffset,0));
         camera.update();
     }
 
@@ -57,7 +63,7 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta)
     {
         this.update();
-        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         orthogonalTiledMapRenderer.render();
@@ -67,5 +73,15 @@ public class GameScreen extends ScreenAdapter {
 
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+    }
+
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public void setCook1(Cook1 cook1)
+    {
+        this.cook1 = cook1;
     }
 }
