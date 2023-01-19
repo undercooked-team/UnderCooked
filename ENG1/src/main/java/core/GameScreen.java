@@ -1,7 +1,7 @@
 package core;
 
 import Helper.MapHelper;
-import Objects.Cooks.Cook1;
+import Objects.Cooks.Cook;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import org.lwjgl.opengl.GL20;
 
 import static Helper.Constants.PPM;
@@ -29,9 +30,11 @@ public class GameScreen extends ScreenAdapter {
     private int yOffset = 320;
 
     //Objects
-    private Cook1 cook1;
+    private Array<Cook> cooks;
+    private Cook cook;
     public GameScreen(OrthographicCamera camera)
     {
+        this.cooks = new Array<>();
         this.camera = camera;
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0,0), false);
@@ -46,7 +49,7 @@ public class GameScreen extends ScreenAdapter {
         cameraUpdate();
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
-        cook1.update();
+        cook.update();
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             Gdx.app.exit();
@@ -80,8 +83,13 @@ public class GameScreen extends ScreenAdapter {
         return world;
     }
 
-    public void setCook1(Cook1 cook1)
+    public void setCook(int cookIndex)
     {
-        this.cook1 = cook1;
+        this.cook = cooks.get(cookIndex);
+    }
+
+    public int addCook(Cook newCook) {
+        cooks.add(newCook);
+        return cooks.size-1;
     }
 }

@@ -1,13 +1,11 @@
 package Helper;
-import Objects.Cooks.Cook1;
+import Objects.Cooks.Cook;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -80,7 +78,8 @@ public class MapHelper {
                 if(rectangleName.equals("Cook1"))
                 {
                     Body body = BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),false, gameScreen.getWorld());
-                    gameScreen.setCook1(new Cook1(rectangle.getWidth(), rectangle.getHeight(), body));
+                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body));
+                    gameScreen.setCook(cookInd);
                 }
             }
         }
