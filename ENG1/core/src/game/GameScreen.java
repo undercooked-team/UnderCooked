@@ -1,5 +1,6 @@
 package game;
 
+import helper.Hud;
 import helper.MapHelper;
 import cooks.Cook;
 import com.badlogic.gdx.Gdx;
@@ -20,6 +21,7 @@ import static helper.Constants.PPM;
 
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
+    private Hud hud;
     private SpriteBatch batch;
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
@@ -43,6 +45,7 @@ public class GameScreen extends ScreenAdapter {
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         this.mapHelper = new MapHelper(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
+        this.hud = new Hud(batch);
     }
 
     private void update()
@@ -80,7 +83,7 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         orthogonalTiledMapRenderer.render();
-
+        hud.stage.draw();
         batch.begin();
 
         for (Cook thisCook : cooks) {
