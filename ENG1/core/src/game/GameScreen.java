@@ -83,6 +83,9 @@ public class GameScreen extends ScreenAdapter {
 
         batch.begin();
 
+        for (Cook thisCook : cooks) {
+            thisCook.render(batch);
+        }
 
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
