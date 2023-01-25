@@ -5,12 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import helper.BodyHelper;
 import helper.CollisionHelper;
+import org.w3c.dom.Text;
 
 import java.util.Stack;
 
@@ -19,6 +21,7 @@ import static helper.Constants.PPM;
 public class Cook extends GameEntity{
 
     private Sprite sprite;
+    private TextureAtlas textureAtlas;
     private CookInteractor cookInteractor;
     private Facing dir;
 
@@ -34,8 +37,8 @@ public class Cook extends GameEntity{
         super(width, height, body);
         this.dir = Facing.NONE;
         this.speed = 10f;
-        this.sprite = new Sprite(new Texture("cooks/Cook1.png"));
-        this.sprite.setSize(width,height);
+        this.textureAtlas = new TextureAtlas("cooks/cook_direction.atlas");
+        this.sprite = this.textureAtlas.createSprite("down");
 
         float cookInteractorSize = 32;
         World world = body.getWorld();
@@ -62,6 +65,7 @@ public class Cook extends GameEntity{
     @Override
     public void render(SpriteBatch batch) {
         sprite.setPosition(x*PPM-width/2,y*PPM-height/2);
+        this.sprite.setSize(width,height);
         sprite.draw(batch);
     }
 
@@ -72,22 +76,26 @@ public class Cook extends GameEntity{
         if(Gdx.input.isKeyPressed(Input.Keys.D))
         {
             velX += 1;
-            this.dir = Facing.LEFT;
+            this.dir = Facing.RIGHT;
+            this.sprite = textureAtlas.createSprite("right");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A))
         {
             velX += -1;
-            this.dir = Facing.RIGHT;
+            this.dir = Facing.LEFT;
+            this.sprite = textureAtlas.createSprite("left");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.W))
         {
             velY += 1;
             this.dir = Facing.UP;
+            this.sprite = textureAtlas.createSprite("up");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S))
         {
             velY += -1;
             this.dir = Facing.DOWN;
+            this.sprite = textureAtlas.createSprite("down");
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

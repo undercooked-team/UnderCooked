@@ -25,9 +25,9 @@ public class CookInteractor extends GameEntity {
     private float relativeX(Cook.Facing dir) {
         switch (dir) {
             case RIGHT:
-                return -1.5F;
+                return 1.2F;
             case LEFT:
-                return 1.5F;
+                return -1.2F;
             default:
                 return 0F;
         }
@@ -36,9 +36,9 @@ public class CookInteractor extends GameEntity {
     private float relativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
-                return 2F;
+                return 1.8F;
             case DOWN:
-                return -2F;
+                return -1.8F;
             default:
                 return 0F;
         }
