@@ -16,14 +16,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.GL20;
 
-import java.sql.Time;
-
 import static helper.Constants.PPM;
 
 
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
-    private float dt;
     private Hud hud;
     private SpriteBatch batch;
     private World world;
@@ -53,24 +50,25 @@ public class GameScreen extends ScreenAdapter {
 
     private void update()
     {
-        world.step(1/60f,6,2);
         cameraUpdate();
-
-        batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
+        batch.setProjectionMatrix(camera.combined);
         for (Cook thisCook : cooks) {
-            if (thisCook != cook) {
-                thisCook.getBody().setLinearVelocity(0F,0F);
+            thisCook.getBody().setLinearVelocity(0F,0F);
+            if (thisCook == cook) {
+                thisCook.userInput();
             }
         }
-        cook.update();
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             setCook((cookIndex + 1) % cooks.size);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             Gdx.app.exit();
+        }
+        world.step(1/60f,6,2);
+        for (Cook thisCook : cooks) {
+            thisCook.update();
         }
     }
 
@@ -84,8 +82,6 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta)
     {
         this.update();
-        dt = (dt + (Gdx.graphics.getDeltaTime()));
-        hud.update(dt);
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
