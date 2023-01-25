@@ -1,11 +1,11 @@
-package Objects.Cooks;
+package cooks;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 
-import static Helper.Constants.PPM;
+import static helper.Constants.PPM;
 
 public class Cook extends GameEntity{
 

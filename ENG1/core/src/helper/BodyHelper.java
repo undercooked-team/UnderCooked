@@ -1,8 +1,8 @@
-package main.java.Helper;
+package helper;
 
 import com.badlogic.gdx.physics.box2d.*;
 
-import static main.java.Helper.Constants.PPM;
+import static helper.Constants.PPM;
 
 public class BodyHelper {
     public static Body createBody(float x, float y, float width, float height, boolean isStatic, World world)

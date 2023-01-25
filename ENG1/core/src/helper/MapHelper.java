@@ -1,5 +1,5 @@
-package main.java.Helper;
-import main.java.Objects.Cooks.Cook;
+package helper;
+import cooks.Cook;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -9,13 +9,13 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-// import com.badlogic.gdx.physics.box2d.Body;
-// import com.badlogic.gdx.physics.box2d.BodyDef;
-// import com.badlogic.gdx.physics.box2d.PolygonShape;
-// import com.badlogic.gdx.physics.box2d.Shape;
-import main.java.core.GameScreen;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
+import game.GameScreen;
 
-import static main.java.Helper.Constants.PPM;
+import static helper.Constants.PPM;
 
 public class MapHelper {
     private GameScreen gameScreen;
@@ -75,11 +75,17 @@ public class MapHelper {
                 Rectangle rectangle = ((RectangleMapObject) mapObject).getRectangle();
                 String rectangleName = mapObject.getName();
 
-                if(rectangleName.equals("Cook1"))
+                if(rectangleName.equals("CookStart"))
                 {
                     Body body = BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),false, gameScreen.getWorld());
                     int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body));
                     gameScreen.setCook(cookInd);
+                }
+
+                if(rectangleName.equals("Cook"))
+                {
+                    Body body = BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),false, gameScreen.getWorld());
+                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body));
                 }
             }
         }

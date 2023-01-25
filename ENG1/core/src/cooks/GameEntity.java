@@ -1,4 +1,4 @@
-package Objects.Cooks;
+package cooks;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
