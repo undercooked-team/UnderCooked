@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import game.GameScreen;
+import stations.Station;
 
 import static helper.Constants.PPM;
 
@@ -61,6 +62,10 @@ public class MapHelper {
 
     }
 
+    private Body makeBody(Rectangle rectangle, boolean isStatic) {
+        return BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),isStatic, gameScreen.getWorld());
+    }
+
     private void parseMapObjects(MapObjects mapObjects)
     {
         for(MapObject mapObject:mapObjects)
@@ -77,15 +82,36 @@ public class MapHelper {
 
                 if(rectangleName.equals("CookStart"))
                 {
-                    Body body = BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),false, gameScreen.getWorld());
-                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body));
+                    Body body = makeBody(rectangle, false);
+                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
                     gameScreen.setCook(cookInd);
+                    continue;
                 }
 
                 if(rectangleName.equals("Cook"))
                 {
-                    Body body = BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),false, gameScreen.getWorld());
-                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body));
+                    Body body = makeBody(rectangle, false);
+                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
+                    continue;
+                }
+
+                Rectangle normalRect = new Rectangle(rectangle);
+                normalRect.setX(normalRect.getX() * PPM);
+                normalRect.setY(normalRect.getY() * PPM);
+
+                if(rectangleName.startsWith("Station")) {
+                    // Stations
+                    rectangleName = rectangleName.substring("Station".length());
+                    Body body = makeBody(rectangle, true);
+                    gameScreen.addStation(new Station(rectangle.getWidth(), rectangle.getHeight(), body, rectangle, Station.StationType.PREPARATION));
+                    switch(rectangleName) {
+                        case "Cutting":
+
+                    }
+                }
+
+                if (rectangleName.startsWith("Pantry")) {
+                    // Pantries
                 }
             }
         }
