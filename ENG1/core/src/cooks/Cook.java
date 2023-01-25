@@ -12,6 +12,7 @@ public class Cook extends GameEntity{
     public Cook(float width, float height, Body body) {
         super(width, height, body);
         this.speed = 10f;
+
     }
 
     @Override
