@@ -1,8 +1,9 @@
 package food;
-import stations.stations;
-import java.util.HashMap;
 
 public class FoodItem {
+    /**
+    * IDs of all the different possible types of food ingredients.
+    */
     public enum FoodID {
         lettuce,
         lettuceChop,
@@ -15,7 +16,25 @@ public class FoodItem {
         bun,
         none
     }
-    //public HashMap<Tuple<FoodID,stations.stationID>, FoodID> = new HashMap<Tuple<FoodID,stations.stationID>, FoodID>();
-    ///public FoodID interaction(FoodID foodID, stations.stationID stationID){};
+
+    /**
+    * The ID of this FoodItem. Has a public get and set.
+    */
+    private FoodID foodID;
+    public FoodID GetID(FoodID newID) {
+        return foodID;
+    }
+    public void SetID(FoodID newID) {
+        foodID = newID;
+    }
+
+    /**
+    * FoodItem Constructor. Creates a new FoodItem of ingredient: foodIDin
+    * @param foodIDin : The ingredient you want to create a FoodItem out of.
+    * @return FoodItem
+    */
+    public FoodItem(FoodID foodIDin) {
+        foodID = foodIDin;
+    }
 }
 
