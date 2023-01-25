@@ -1,6 +1,4 @@
 package food;
-import stations.stations;
-import java.util.HashMap;
 
 public class FoodItem {
     public enum FoodID {

@@ -1,5 +1,6 @@
 package helper;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
 import static helper.Constants.PPM;
@@ -21,5 +22,22 @@ public class BodyHelper {
         shape.dispose();
         return body;
     }
+
+    public static Rectangle createRectangle(float x, float y, float width, float height)
+    {
+        return new Rectangle(x,y,width,height);
+    }
+
+    public static boolean checkCollision(Rectangle rect1, Rectangle rect2) {
+        return rect1.overlaps(rect2);
+    }
+
+    /*public static boolean checkCollision(Rectangle rect, Body body) {
+        // First convert the body into a rectangle (fixed rotation is true)
+        Fixture fixture = body.getFixtureList().get(0);
+        PolygonShape shape = (PolygonShape) fixture.getShape();
+        //Contact
+        return false;
+    }*/
 
 }
