@@ -15,19 +15,22 @@ import java.awt.*;
 public class Hud {
     public Stage stage;
     private Viewport viewport;
-    private float timeCount;
+    private int timeCount ;
+    private int CustomerCount;
 
 
 
     Label timeLabel;
     Label CustomerLabel;
+    Label timer;
+    Label CustomerScore;
 
 
     public Hud(SpriteBatch batch)
     {
 
         timeCount = 0;
-
+        CustomerCount = 5;
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, new OrthographicCamera());
         stage = new Stage(viewport, batch);
 
@@ -36,16 +39,33 @@ public class Hud {
         table.setFillParent(true);
 
 
-        timeLabel = new Label("TIME:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        CustomerLabel = new Label("CUSTOMERS:", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeLabel = new Label(String.format("%03d", timeCount), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        timer = new Label("TIMER:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+
+        CustomerLabel = new Label("CUSTOMERS:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        CustomerScore = new Label(String.format("%01d", CustomerCount), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
 
 
-        table.add(CustomerLabel).expandX().padTop(20);
+        table.add(CustomerLabel).expandX().padTop(60);
+        table.add(CustomerScore).expandX().padTop(60);
 
-        table.add(timeLabel).expandX().padTop(20);
+
+        table.add(timer).expandX().padTop(60);
+        table.add(timeLabel).expandX().padTop(60);
 
         stage.addActor(table);
+
+    }
+
+    public void update(float dt)
+    {
+        if(dt==60)
+        {
+            timeCount++;
+
+        }
+        timeLabel.setText(String.format("%03d", timeCount));
 
     }
 }

@@ -16,11 +16,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.GL20;
 
+import java.sql.Time;
+
 import static helper.Constants.PPM;
 
 
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
+    private float dt;
     private Hud hud;
     private SpriteBatch batch;
     private World world;
@@ -52,6 +55,7 @@ public class GameScreen extends ScreenAdapter {
     {
         world.step(1/60f,6,2);
         cameraUpdate();
+
         batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
         for (Cook thisCook : cooks) {
@@ -60,6 +64,7 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         cook.update();
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             setCook((cookIndex + 1) % cooks.size);
         }
@@ -79,6 +84,8 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta)
     {
         this.update();
+        dt = (dt + (Gdx.graphics.getDeltaTime()));
+        hud.update(dt);
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
