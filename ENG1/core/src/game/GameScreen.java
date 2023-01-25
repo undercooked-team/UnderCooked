@@ -86,7 +86,6 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         orthogonalTiledMapRenderer.render();
-        hud.stage.draw();
         batch.begin();
 
         for (Cook thisCook : cooks) {
@@ -95,6 +94,7 @@ public class GameScreen extends ScreenAdapter {
 
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        hud.stage.draw();
     }
 
     public World getWorld()
