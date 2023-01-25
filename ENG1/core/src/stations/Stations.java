@@ -1,6 +1,6 @@
 package stations;
 
-public class stations {
+public class Stations {
     public enum stationID{
         fry,
         cut,
