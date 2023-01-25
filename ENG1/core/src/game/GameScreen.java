@@ -50,22 +50,25 @@ public class GameScreen extends ScreenAdapter {
 
     private void update()
     {
-        world.step(1/60f,6,2);
         cameraUpdate();
-        batch.setProjectionMatrix(camera.combined);
         orthogonalTiledMapRenderer.setView(camera);
+        batch.setProjectionMatrix(camera.combined);
         for (Cook thisCook : cooks) {
-            if (thisCook != cook) {
-                thisCook.getBody().setLinearVelocity(0F,0F);
+            thisCook.getBody().setLinearVelocity(0F,0F);
+            if (thisCook == cook) {
+                thisCook.userInput();
             }
         }
-        cook.update();
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             setCook((cookIndex + 1) % cooks.size);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             Gdx.app.exit();
+        }
+        world.step(1/60f,6,2);
+        for (Cook thisCook : cooks) {
+            thisCook.update();
         }
     }
 
