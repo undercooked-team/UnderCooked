@@ -14,11 +14,12 @@ import helper.BodyHelper;
 import helper.CollisionHelper;
 import org.w3c.dom.Text;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 import static helper.Constants.PPM;
+import food.FoodItem.FoodID;
 
-public class Cook extends GameEntity{
+public class Cook extends GameEntity {
 
     private Sprite sprite;
     private TextureAtlas textureAtlas;
@@ -32,6 +33,8 @@ public class Cook extends GameEntity{
         DOWN,
         NONE
     }
+    /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
+    private ArrayList<FoodID> foodStack;
 
     public Cook(float width, float height, Body body, CollisionHelper ch) {
         super(width, height, body);
@@ -48,8 +51,11 @@ public class Cook extends GameEntity{
         interactorBody.setActive(false);
 
         this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, ch);
+        this.foodStack = new ArrayList<>();
     }
 
+    /// #################################################################################
+    /// Movement and User Input
 
     public void userInput() {
         checkUserInput();
@@ -69,6 +75,7 @@ public class Cook extends GameEntity{
         sprite.draw(batch);
     }
 
+    /** Responsible for detecting user input.*/
     private void checkUserInput()
     {
         velX = 0;
@@ -104,5 +111,32 @@ public class Cook extends GameEntity{
 
         body.setLinearVelocity(velX * speed,velY * speed);
 
+    }
+
+    /// #################################################################################
+    /// foodStack and methods
+
+    public FoodID peekStack() {
+        try {
+            return foodStack.get(0);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+    public FoodID popStack() {
+      try {
+          return foodStack.remove(0);
+      } catch (IndexOutOfBoundsException e) {
+          return null;
+      }
+    }
+    public void addStack(FoodID newFood) {
+        foodStack.add(0, newFood);
+    }
+    public ArrayList<FoodID> getStack() {
+        return foodStack;
+  }
+    public void setStack(ArrayList<FoodID> newStack) {
+        foodStack = newStack;
     }
 }
