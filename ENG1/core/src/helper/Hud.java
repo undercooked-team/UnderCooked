@@ -17,7 +17,7 @@ public class Hud {
 
     public Stage stage;
     private Viewport viewport;
-    private int timeCount=0, WorldTimer=0 ;
+    private int timeCount=0, lastTime = 0, WorldTimer=0 ;
     private int CustomerCount;
 
 
@@ -60,16 +60,10 @@ public class Hud {
 
     }
 
-    public void update(float dt)
+    public void update(int secondsPassed)
     {
 
-        timeCount+= dt;
-        if(timeCount >= 1)
-        {
-            WorldTimer++;
-            timeLabel.setText(String.format("%03d", WorldTimer));
-            timeCount = 0;
-        }
+        timeLabel.setText(String.format("%03d", secondsPassed));
 
 
     }

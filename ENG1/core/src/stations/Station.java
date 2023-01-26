@@ -26,6 +26,10 @@ public class Station extends GameEntity {
         this.interactRect = rect;
     }
 
+    public Rectangle getRectangle() {
+        return this.interactRect;
+    }
+
     public void interact() {
 
         System.out.println("Ping! Interacted with station at x=" + body.getPosition().x*PPM +

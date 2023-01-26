@@ -1,6 +1,7 @@
 package game;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.TimeUtils;
 import helper.CollisionHelper;
 import helper.Hud;
 import helper.MapHelper;
@@ -18,14 +19,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.GL20;
 import stations.Station;
-import stations.Stations;
 
 import static helper.Constants.PPM;
 
 
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
-    private float elapsedTime, seconds = 0;
+    private long startTime = 0;
+    private int secondsPassed = 0;
     private Hud hud;
     private SpriteBatch batch;
     private World world;
@@ -33,7 +34,7 @@ public class GameScreen extends ScreenAdapter {
 
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private MapHelper mapHelper;
-    private Stations stations;
+    private Array<Station> stations;
     protected CollisionHelper collisionHelper;
     private int xOffset = 480;
     private int yOffset = 320;
@@ -44,10 +45,11 @@ public class GameScreen extends ScreenAdapter {
     private int cookIndex;
     public GameScreen(OrthographicCamera camera)
     {
+        this.startTime = TimeUtils.millis();
+        this.secondsPassed = 0;
         this.cooks = new Array<>();
-        this.stations = new Stations();
-        this.collisionHelper = new CollisionHelper();
-        this.collisionHelper.setStations(stations);
+        this.stations = new Array<>();
+        this.collisionHelper = new CollisionHelper(this);
         this.cookIndex = -1;
         this.camera = camera;
         this.batch = new SpriteBatch();
@@ -60,9 +62,13 @@ public class GameScreen extends ScreenAdapter {
 
     private void update()
     {
-        elapsedTime += Gdx.graphics.getRawDeltaTime();
+        long diffInMillis = TimeUtils.timeSinceMillis(startTime);
+        if (diffInMillis > 1000) {
+            startTime = TimeUtils.millis();
+            secondsPassed += 1;
+        }
 
-        hud.update(elapsedTime);
+        hud.update(secondsPassed);
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
@@ -132,11 +138,21 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void addStation(Station station) {
-        stations.addStation(station);
+        stations.add(station);
     }
 
     public CollisionHelper getCollisionHelper() {
         return collisionHelper;
+    }
+
+    public Array<Station> stationCollisions(Rectangle collision) {
+        Array<Station> output = new Array<>();
+        for (Station station : stations) {
+            if (collision.overlaps(station.getRectangle())) {
+                output.add(station);
+            }
+        }
+        return output;
     }
 
 }

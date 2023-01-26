@@ -2,14 +2,18 @@ package helper;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import game.GameScreen;
 import stations.Station;
-import stations.Stations;
 
 import static helper.Constants.PPM;
 
 public class CollisionHelper {
 
-    protected Stations stations;
+    protected GameScreen gameScreen;
+
+    public CollisionHelper(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
+    }
 
     private float distRectToStation(Rectangle rect, Station station) {
         return Util.distancePoints(rect.x-rect.getWidth()/2,
@@ -19,7 +23,7 @@ public class CollisionHelper {
     }
 
     public Station getStationInteract(Rectangle rectangle) {
-        Array<Station> intStations = stations.rectangleCollisions(rectangle);
+        Array<Station> intStations = gameScreen.stationCollisions(rectangle);
         if (intStations.size == 0) {
             return null;
         }
@@ -35,8 +39,8 @@ public class CollisionHelper {
         return closest;
     }
 
-    public void setStations(Stations stations) {
+    /*public void setStations(Stations stations) {
         this.stations = stations;
-    }
+    }*/
 
 }
