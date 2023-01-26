@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
-import stations.Stations;
+import stations.Station;
 
 import static helper.Constants.PPM;
 
@@ -59,7 +59,7 @@ public class CookInteractor extends GameEntity {
 
     public void checkCollisions() {
         System.out.println("Attempting to interact...");
-        Stations interactStation = ch.getStationInteract(collision);
+        Station interactStation = ch.getStationInteract(collision);
         if (interactStation != null) {
             interactStation.interact();
         } else {

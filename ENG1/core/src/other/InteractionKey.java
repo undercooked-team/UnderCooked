@@ -1,6 +1,6 @@
-package interactions;
+package other;
 import food.FoodItem.FoodID;
-import stations.Stations.StationID;
+import stations.Station.StationID;
 
 public class InteractionKey {
     public final FoodID x;
