@@ -81,6 +81,10 @@ public class GameScreen extends ScreenAdapter {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             setCook((cookIndex + 1) % cooks.size);
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            hud.UpdateCustomers();
+        }
+
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             Gdx.app.exit();

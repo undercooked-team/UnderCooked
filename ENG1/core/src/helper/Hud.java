@@ -64,7 +64,14 @@ public class Hud {
     {
 
         timeLabel.setText(String.format("%03d", secondsPassed));
-
-
+    }
+    public void UpdateCustomers()
+    {
+        if(CustomerCount<1)
+        {
+            throw new RuntimeException();
+        }
+        CustomerCount--;
+        CustomerScore.setText(String.format("%1d",CustomerCount));
     }
 }
