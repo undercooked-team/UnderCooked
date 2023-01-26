@@ -69,7 +69,7 @@ public class Hud {
     {
         if(CustomerCount<1)
         {
-            throw new RuntimeException();
+            throw new RuntimeException("Customer count should not go below 0.");
         }
         CustomerCount--;
         CustomerScore.setText(String.format("%1d",CustomerCount));
