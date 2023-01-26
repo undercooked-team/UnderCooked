@@ -7,7 +7,8 @@ public class Stations {
         fry,
         cut,
         counter,
-        bin
+        bin,
+        none
     }
 
 }

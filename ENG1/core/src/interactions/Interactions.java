@@ -14,7 +14,7 @@ public class Interactions {
     static {
         interactions.put(new InteractionKey(FoodID.lettuce, StationID.cut), FoodID.lettuceChop);
         interactions.put(new InteractionKey(FoodID.tomato, StationID.cut), FoodID.tomatoChop);
-        interactions.put(new InteractionKey(FoodID.onionChop, StationID.cut), FoodID.onionChop);
+        interactions.put(new InteractionKey(FoodID.onion, StationID.cut), FoodID.onionChop);
         interactions.put(new InteractionKey(FoodID.meat, StationID.fry), FoodID.meatCook);
     }
 

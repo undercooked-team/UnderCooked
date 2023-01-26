@@ -6,11 +6,17 @@ import cooks.Cook;
 
 public class Station extends CookInteractable {
 
+    Stations.StationID stationID;
+
     public Station(float width, float height, Body body, Rectangle rectangle) {
-        super(64,64,body,rectangle);
+        super(width,height,body,rectangle);
+    }
+
+    public void setID(Stations.StationID stationID) {
+        this.stationID = stationID;
     }
 
     public void interact(Cook cook) {
-
+        System.out.println(stationID);
     }
 }

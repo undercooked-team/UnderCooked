@@ -13,7 +13,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import food.FoodItem;
 import game.GameScreen;
+import stations.Pantry;
 import stations.Station;
 import stations.Stations;
 
@@ -105,15 +107,52 @@ public class MapHelper {
                     rectangleName = rectangleName.substring("Station".length());
                     Body body = makeBody(rectangle, true);
                     Station station = new Station(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
-                    gameScreen.addStation(station);
+                    gameScreen.addInteractable(station);
                     switch(rectangleName) {
-                        case "Cutting":
-
+                        case "Cut":
+                            station.setID(Stations.StationID.cut);
+                            break;
+                        case "Fry":
+                            station.setID(Stations.StationID.fry);
+                            break;
+                        case "Counter":
+                            station.setID(Stations.StationID.counter);
+                            break;
+                        case "Bin":
+                            station.setID(Stations.StationID.bin);
+                            break;
+                        default:
+                            station.setID(Stations.StationID.none);
+                            break;
                     }
                 }
 
                 if (rectangleName.startsWith("Pantry")) {
                     // Pantries
+                    rectangleName = rectangleName.substring("Pantry".length());
+                    Body body = makeBody(rectangle, true);
+                    Pantry pantry = new Pantry(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
+                    gameScreen.addInteractable(pantry);
+                    switch(rectangleName) {
+                        case "Lettuce":
+                            pantry.setItem(FoodItem.FoodID.lettuce);
+                            break;
+                        case "Tomato":
+                            pantry.setItem(FoodItem.FoodID.tomato);
+                            break;
+                        case "Onion":
+                            pantry.setItem(FoodItem.FoodID.onion);
+                            break;
+                        case "Meat":
+                            pantry.setItem(FoodItem.FoodID.meat);
+                            break;
+                        case "Bun":
+                            pantry.setItem(FoodItem.FoodID.bun);
+                            break;
+                        default:
+                            pantry.setItem(FoodItem.FoodID.none);
+                            break;
+                    }
                 }
             }
         }

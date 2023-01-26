@@ -141,7 +141,7 @@ public class GameScreen extends ScreenAdapter {
         return cooks.size-1;
     }
 
-    public void addStation(CookInteractable cookInteractable) {
+    public void addInteractable(CookInteractable cookInteractable) {
         interactables.add(cookInteractable);
     }
 
