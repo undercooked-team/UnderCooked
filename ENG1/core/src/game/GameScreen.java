@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.GL20;
-import stations.Stations;
+import stations.CookInteractable;
 
 import static helper.Constants.PPM;
 
@@ -34,7 +34,7 @@ public class GameScreen extends ScreenAdapter {
 
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private MapHelper mapHelper;
-    private Array<Stations> stations;
+    private Array<CookInteractable> interactables;
     protected CollisionHelper collisionHelper;
     private int xOffset = 480;
     private int yOffset = 320;
@@ -48,7 +48,7 @@ public class GameScreen extends ScreenAdapter {
         this.startTime = TimeUtils.millis();
         this.secondsPassed = 0;
         this.cooks = new Array<>();
-        this.stations = new Array<>();
+        this.interactables = new Array<>();
         this.collisionHelper = new CollisionHelper(this);
         this.cookIndex = -1;
         this.camera = camera;
@@ -141,19 +141,19 @@ public class GameScreen extends ScreenAdapter {
         return cooks.size-1;
     }
 
-    public void addStation(Stations station) {
-        stations.add(station);
+    public void addStation(CookInteractable cookInteractable) {
+        interactables.add(cookInteractable);
     }
 
     public CollisionHelper getCollisionHelper() {
         return collisionHelper;
     }
 
-    public Array<Stations> stationCollisions(Rectangle collision) {
-        Array<Stations> output = new Array<>();
-        for (Stations station : stations) {
-            if (collision.overlaps(station.getRectangle())) {
-                output.add(station);
+    public Array<CookInteractable> stationCollisions(Rectangle collision) {
+        Array<CookInteractable> output = new Array<>();
+        for (CookInteractable cookInteractable : interactables) {
+            if (collision.overlaps(cookInteractable.getRectangle())) {
+                output.add(cookInteractable);
             }
         }
         return output;

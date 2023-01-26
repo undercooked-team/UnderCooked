@@ -104,7 +104,7 @@ public class Cook extends GameEntity {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            cookInteractor.checkCollisions();
+            cookInteractor.checkCollisions(this);
         }
 
         body.setLinearVelocity(velX * speed,velY * speed);

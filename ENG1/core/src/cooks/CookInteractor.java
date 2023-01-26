@@ -1,10 +1,11 @@
 package cooks;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
+import stations.CookInteractable;
+import stations.Station;
 import stations.Stations;
 
 import static helper.Constants.PPM;
@@ -57,11 +58,11 @@ public class CookInteractor extends GameEntity {
         this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
 
-    public void checkCollisions() {
+    public void checkCollisions(Cook cook) {
         System.out.println("Attempting to interact...");
-        Stations interactStation = ch.getStationInteract(collision);
+        CookInteractable interactStation = ch.getInteract(collision);
         if (interactStation != null) {
-            interactStation.interact();
+            interactStation.interact(cook);
         } else {
             System.out.println("Failed!");
         }

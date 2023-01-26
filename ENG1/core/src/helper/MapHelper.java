@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import game.GameScreen;
+import stations.Station;
 import stations.Stations;
 
 import static helper.Constants.PPM;
@@ -103,7 +104,8 @@ public class MapHelper {
                     // Stations
                     rectangleName = rectangleName.substring("Station".length());
                     Body body = makeBody(rectangle, true);
-                    gameScreen.addStation(new Stations(rectangle.getWidth(), rectangle.getHeight(), body, rectangle, Stations.StationType.PREPARATION));
+                    Station station = new Station(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
+                    gameScreen.addStation(station);
                     switch(rectangleName) {
                         case "Cutting":
 
