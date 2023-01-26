@@ -63,8 +63,8 @@ public class GameScreen extends ScreenAdapter {
     private void update()
     {
         long diffInMillis = TimeUtils.timeSinceMillis(startTime);
-        if (diffInMillis > 1000) {
-            startTime = TimeUtils.millis();
+        if (diffInMillis >= 1000) {
+            startTime += 1000;
             secondsPassed += 1;
         }
 
