@@ -14,9 +14,9 @@ import helper.BodyHelper;
 import helper.CollisionHelper;
 import org.w3c.dom.Text;
 
-import java.util.ArrayList;
-
 import static helper.Constants.PPM;
+
+import food.FoodStack;
 import food.FoodItem.FoodID;
 
 public class Cook extends GameEntity {
@@ -25,6 +25,8 @@ public class Cook extends GameEntity {
     private TextureAtlas textureAtlas;
     private CookInteractor cookInteractor;
     private Facing dir;
+    /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
+    public FoodStack foodStack;
 
     enum Facing {
         RIGHT,
@@ -33,8 +35,6 @@ public class Cook extends GameEntity {
         DOWN,
         NONE
     }
-    /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
-    private ArrayList<FoodID> foodStack;
 
     public Cook(float width, float height, Body body, CollisionHelper ch) {
         super(width, height, body);
@@ -51,11 +51,9 @@ public class Cook extends GameEntity {
         interactorBody.setActive(false);
 
         this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, ch);
-        this.foodStack = new ArrayList<>();
+        // Initialize FoodStack
+        this.foodStack = new FoodStack();
     }
-
-    /// #################################################################################
-    /// Movement and User Input
 
     public void userInput() {
         checkUserInput();
@@ -111,32 +109,5 @@ public class Cook extends GameEntity {
 
         body.setLinearVelocity(velX * speed,velY * speed);
 
-    }
-
-    /// #################################################################################
-    /// foodStack and methods
-
-    public FoodID peekStack() {
-        try {
-            return foodStack.get(0);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
-    }
-    public FoodID popStack() {
-      try {
-          return foodStack.remove(0);
-      } catch (IndexOutOfBoundsException e) {
-          return null;
-      }
-    }
-    public void addStack(FoodID newFood) {
-        foodStack.add(0, newFood);
-    }
-    public ArrayList<FoodID> getStack() {
-        return foodStack;
-  }
-    public void setStack(ArrayList<FoodID> newStack) {
-        foodStack = newStack;
     }
 }
