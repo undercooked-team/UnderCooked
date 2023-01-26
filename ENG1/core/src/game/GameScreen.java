@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.GL20;
-import stations.Station;
+import stations.Stations;
 
 import static helper.Constants.PPM;
 
@@ -34,7 +34,7 @@ public class GameScreen extends ScreenAdapter {
 
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private MapHelper mapHelper;
-    private Array<Station> stations;
+    private Array<Stations> stations;
     protected CollisionHelper collisionHelper;
     private int xOffset = 480;
     private int yOffset = 320;
@@ -137,7 +137,7 @@ public class GameScreen extends ScreenAdapter {
         return cooks.size-1;
     }
 
-    public void addStation(Station station) {
+    public void addStation(Stations station) {
         stations.add(station);
     }
 
@@ -145,9 +145,9 @@ public class GameScreen extends ScreenAdapter {
         return collisionHelper;
     }
 
-    public Array<Station> stationCollisions(Rectangle collision) {
-        Array<Station> output = new Array<>();
-        for (Station station : stations) {
+    public Array<Stations> stationCollisions(Rectangle collision) {
+        Array<Stations> output = new Array<>();
+        for (Stations station : stations) {
             if (collision.overlaps(station.getRectangle())) {
                 output.add(station);
             }
