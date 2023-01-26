@@ -25,6 +25,7 @@ import static helper.Constants.PPM;
 
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
+    private float elapsedTime, seconds = 0;
     private Hud hud;
     private SpriteBatch batch;
     private World world;
@@ -59,6 +60,9 @@ public class GameScreen extends ScreenAdapter {
 
     private void update()
     {
+        elapsedTime += Gdx.graphics.getRawDeltaTime();
+
+        hud.update(elapsedTime);
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
@@ -90,6 +94,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta)
     {
+
         this.update();
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

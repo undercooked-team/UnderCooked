@@ -13,9 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import java.awt.*;
 
 public class Hud {
+
+
     public Stage stage;
     private Viewport viewport;
-    private int timeCount ;
+    private int timeCount=0, WorldTimer=0 ;
     private int CustomerCount;
 
 
@@ -39,7 +41,7 @@ public class Hud {
         table.setFillParent(true);
 
 
-        timeLabel = new Label(String.format("%03d", timeCount), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        timeLabel = new Label(String.format("%03d", WorldTimer), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         timer = new Label("TIMER:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
         CustomerLabel = new Label("CUSTOMERS:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
@@ -60,12 +62,15 @@ public class Hud {
 
     public void update(float dt)
     {
-        if(dt==60)
-        {
-            timeCount++;
 
+        timeCount+= dt;
+        if(timeCount >= 1)
+        {
+            WorldTimer++;
+            timeLabel.setText(String.format("%03d", WorldTimer));
+            timeCount = 0;
         }
-        timeLabel.setText(String.format("%03d", timeCount));
+
 
     }
 }
