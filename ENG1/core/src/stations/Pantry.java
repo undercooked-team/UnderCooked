@@ -2,6 +2,7 @@ package stations;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 import cooks.Cook;
 import food.FoodItem;
 
@@ -27,7 +28,7 @@ public class Pantry extends CookInteractable {
         if (foodID == FoodItem.FoodID.bun) {
             boolean bottom = true;
             // Look through the stack, and alternate between top bun or bottom bun.
-            ArrayList<FoodItem.FoodID> foodItems = cook.foodStack.getStack();
+            Array<FoodItem.FoodID> foodItems = cook.foodStack.getStack();
             for (FoodItem.FoodID foodItem : foodItems) {
                 if (foodItem == FoodItem.FoodID.bottomBun) {
                     bottom = false;

@@ -58,7 +58,6 @@ public class GameScreen extends ScreenAdapter {
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = new CollisionHelper(this);
-        this.gameSprites = new GameSprites();
         this.cookIndex = -1;
         this.camera = camera;
         this.screenController = screenController;
@@ -184,10 +183,13 @@ public class GameScreen extends ScreenAdapter {
         interactables.add(cookInteractable);
     }
 
+    public void addRenderGameEntity(GameEntity entity) {
+        drawQueue.add(entity);
+    }
+
     public CollisionHelper getCollisionHelper() {
         return collisionHelper;
     }
-    public GameSprites getGameSprites() { return gameSprites; }
 
     public Array<CookInteractable> stationCollisions(Rectangle collision) {
         Array<CookInteractable> output = new Array<>();

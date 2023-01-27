@@ -1,26 +1,29 @@
 package food;
 
-import java.util.ArrayList;
-
+import com.badlogic.gdx.utils.Array;
 import food.FoodItem.FoodID;
 
 public class FoodStack {
     /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
-    private ArrayList<FoodID> foodStack;
+    private Array<FoodID> foodStack;
 
     /**
-     * Constructor for FoodStack. Can accept multiple FoodID paramters to
+     * Constructor for FoodStack. Can accept multiple FoodID parameters to
      * initialize the foodStack with.
      * @param foods A list of ingredients to add to the foodStack. Index 0 = Top.
      */
     public FoodStack(FoodID... foods) {
-        this(new ArrayList<FoodID>());
+        this(new Array<FoodID>());
         for (FoodID foodID : foods) {
             foodStack.add(foodID);
         }
     }
 
-    public FoodStack(ArrayList<FoodID> foodStack) {
+    public FoodStack() {
+        this(new Array<FoodID>());
+    }
+
+    public FoodStack(Array<FoodID> foodStack) {
         this.foodStack = foodStack;
     }
 
@@ -41,7 +44,7 @@ public class FoodStack {
     */
     public FoodID popStack() {
       try {
-          return foodStack.remove(0);
+          return foodStack.removeIndex(0);
       } catch (IndexOutOfBoundsException e) {
           return null;
       }
@@ -51,27 +54,27 @@ public class FoodStack {
     * @param newFood The item to add to the top of the foodstack.
     */
     public void addStack(FoodID newFood) {
-        foodStack.add(0, newFood);
+        foodStack.insert(0, newFood);
     }
     /**
     * foodStack getter
     * @return foodStack
     */
-    public ArrayList<FoodID> getStack() {
+    public Array<FoodID> getStack() {
         return foodStack;
     }
     /**
     * foodStack setter
     * @param newStack The new foodStack
     */
-    public void setStack(ArrayList<FoodID> newStack) {
+    public void setStack(Array<FoodID> newStack) {
         foodStack = newStack;
     }
     /**
     * Returns the number of items on the foodStack.
     * @return Size of the foodStack
     */
-    public int size() { return foodStack.size(); }
+    public int size() { return foodStack.size; }
     /**
     * Get a string of the foodStack.
     * @return Returns a string containing the items in the foodStack. Index 0 = Top FoodItem
