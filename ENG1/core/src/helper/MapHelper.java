@@ -86,7 +86,7 @@ public class MapHelper {
                 if(rectangleName.equals("CookStart"))
                 {
                     Body body = makeBody(rectangle, false);
-                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
+                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                     gameScreen.setCook(cookInd);
                     continue;
                 }
@@ -94,7 +94,7 @@ public class MapHelper {
                 if(rectangleName.equals("Cook"))
                 {
                     Body body = makeBody(rectangle, false);
-                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
+                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                     continue;
                 }
 
@@ -104,21 +104,21 @@ public class MapHelper {
 
                 if(rectangleName.startsWith("Station")) {
                     // Stations
-                    rectangleName = rectangleName.substring("Station".length());
+                    rectangleName = rectangleName.substring("Station".length()).toLowerCase();
                     Body body = makeBody(rectangle, true);
                     Station station = new Station(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
                     gameScreen.addInteractable(station);
                     switch(rectangleName) {
-                        case "Cut":
+                        case "cut":
                             station.setID(Stations.StationID.cut);
                             break;
-                        case "Fry":
+                        case "fry":
                             station.setID(Stations.StationID.fry);
                             break;
-                        case "Counter":
+                        case "counter":
                             station.setID(Stations.StationID.counter);
                             break;
-                        case "Bin":
+                        case "bin":
                             station.setID(Stations.StationID.bin);
                             break;
                         default:
@@ -129,24 +129,24 @@ public class MapHelper {
 
                 if (rectangleName.startsWith("Pantry")) {
                     // Pantries
-                    rectangleName = rectangleName.substring("Pantry".length());
+                    rectangleName = rectangleName.substring("Pantry".length()).toLowerCase();
                     Body body = makeBody(rectangle, true);
                     Pantry pantry = new Pantry(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
                     gameScreen.addInteractable(pantry);
                     switch(rectangleName) {
-                        case "Lettuce":
+                        case "lettuce":
                             pantry.setItem(FoodItem.FoodID.lettuce);
                             break;
-                        case "Tomato":
+                        case "tomato":
                             pantry.setItem(FoodItem.FoodID.tomato);
                             break;
-                        case "Onion":
+                        case "onion":
                             pantry.setItem(FoodItem.FoodID.onion);
                             break;
-                        case "Meat":
+                        case "meat":
                             pantry.setItem(FoodItem.FoodID.meat);
                             break;
-                        case "Bun":
+                        case "bun":
                             pantry.setItem(FoodItem.FoodID.bun);
                             break;
                         default:

@@ -1,5 +1,6 @@
 package game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
 import helper.CollisionHelper;
@@ -35,7 +36,8 @@ public class GameScreen extends ScreenAdapter {
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private MapHelper mapHelper;
     private Array<CookInteractable> interactables;
-    protected CollisionHelper collisionHelper;
+    private CollisionHelper collisionHelper;
+    private GameSprites gameSprites;
     private int xOffset = 480;
     private int yOffset = 320;
 
@@ -49,6 +51,7 @@ public class GameScreen extends ScreenAdapter {
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = new CollisionHelper(this);
+        this.gameSprites = new GameSprites();
         this.cookIndex = -1;
         this.camera = camera;
         this.batch = new SpriteBatch();
@@ -151,6 +154,7 @@ public class GameScreen extends ScreenAdapter {
     public CollisionHelper getCollisionHelper() {
         return collisionHelper;
     }
+    public GameSprites getGameSprites() { return gameSprites; }
 
     public Array<CookInteractable> stationCollisions(Rectangle collision) {
         Array<CookInteractable> output = new Array<>();

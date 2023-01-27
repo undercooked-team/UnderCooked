@@ -1,0 +1,48 @@
+
+food.png
+size: 53, 44
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+bun
+  rotate: false
+  xy: 28, 31
+  size: 22, 11
+  orig: 22, 11
+  offset: 0, 0
+  index: -1
+burger
+  rotate: false
+  xy: 2, 23
+  size: 24, 19
+  orig: 24, 19
+  offset: 0, 0
+  index: -1
+lettuce
+  rotate: false
+  xy: 37, 9
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+meat
+  rotate: false
+  xy: 28, 25
+  size: 19, 4
+  orig: 19, 4
+  offset: 0, 0
+  index: -1
+onion
+  rotate: false
+  xy: 2, 2
+  size: 18, 19
+  orig: 18, 19
+  offset: 0, 0
+  index: -1
+tomato
+  rotate: false
+  xy: 22, 7
+  size: 13, 14
+  orig: 13, 14
+  offset: 0, 0
+  index: -1

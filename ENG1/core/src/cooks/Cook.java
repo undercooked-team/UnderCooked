@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
+import game.GameScreen;
+import game.GameSprites;
 import helper.BodyHelper;
 import helper.CollisionHelper;
 import org.w3c.dom.Text;
@@ -22,8 +24,9 @@ import food.FoodItem.FoodID;
 public class Cook extends GameEntity {
 
     private Sprite sprite;
-    private TextureAtlas textureAtlas;
+    private GameSprites gameSprites;
     private CookInteractor cookInteractor;
+    private GameScreen gameScreen;
     private Facing dir;
     /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
     public FoodStack foodStack;
@@ -36,16 +39,15 @@ public class Cook extends GameEntity {
         NONE
     }
 
-    public Cook(float width, float height, Body body, CollisionHelper ch) {
+    public Cook(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         this.dir = Facing.DOWN;
         this.speed = 10f;
+        this.gameScreen = gameScreen;
+        this.gameSprites = gameScreen.getGameSprites();
 
         // Initialize FoodStack
         this.foodStack = new FoodStack();
-
-        // Get the sprites
-        this.textureAtlas = new TextureAtlas("cooks/cook.atlas");
 
         // Set the sprite
         setSprite();
@@ -57,7 +59,7 @@ public class Cook extends GameEntity {
         Body interactorBody = BodyHelper.createBody(this.x,this.y,cookInteractorSize,cookInteractorSize,true,world);
         interactorBody.setActive(false);
 
-        this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, ch);
+        this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, gameScreen.getCollisionHelper());
     }
 
     public void userInput() {
@@ -78,7 +80,7 @@ public class Cook extends GameEntity {
         if (foodStack.size() > 0) {
             spriteName += "h";
         }
-        sprite = this.textureAtlas.createSprite(spriteName + dir);
+        sprite = gameSprites.getSprite(GameSprites.SpriteID.COOK, spriteName + dir);
     }
 
     @Override
