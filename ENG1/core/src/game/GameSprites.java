@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import food.FoodItem;
 import interactions.InteractionKey;
-import stations.Stations;
 
 import java.util.HashMap;
 
