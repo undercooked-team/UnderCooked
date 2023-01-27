@@ -8,8 +8,16 @@ public class FoodStack {
     /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
     private ArrayList<FoodID> foodStack;
 
-    public FoodStack() {
+    /**
+     * Constructor for FoodStack. Can accept multiple FoodID paramters to
+     * initialize the foodStack with.
+     * @param foods A list of ingredients to add to the foodStack. Index 0 = Top.
+     */
+    public FoodStack(FoodID... foods) {
         this(new ArrayList<FoodID>());
+        for (FoodID foodID : foods) {
+            foodStack.add(foodID);
+        }
     }
 
     public FoodStack(ArrayList<FoodID> foodStack) {
