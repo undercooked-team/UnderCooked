@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
 import stations.CookInteractable;
 
+import static cooks.Cook.OFFSET_Y;
 import static helper.Constants.PPM;
 
 public class CookInteractor extends GameEntity {
@@ -35,9 +36,12 @@ public class CookInteractor extends GameEntity {
     private float relativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
-                return 1.8F;
+                return 0.8F;
             case DOWN:
-                return -1.8F;
+                return -0.8F;
+            case RIGHT:
+            case LEFT:
+                return 0.4F;
             default:
                 return 0F;
         }

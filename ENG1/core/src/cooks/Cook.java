@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import food.FoodItem;
 import game.GameScreen;
 import game.GameSprites;
 import helper.BodyHelper;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class Cook extends GameEntity {
 
     private Sprite sprite;
+    private float spriteHeight, spriteWidth;
     private GameSprites gameSprites;
     private CookInteractor cookInteractor;
     private GameScreen gameScreen;
@@ -29,6 +31,7 @@ public class Cook extends GameEntity {
     /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
     public FoodStack foodStack;
     private Array<Facing> inputs;
+    protected static final float OFFSET_Y = 27F; // Offset for the sprites after changing the collision of the Cook
 
     enum Facing {
         RIGHT,
@@ -89,9 +92,7 @@ public class Cook extends GameEntity {
     public void render(SpriteBatch batch) {
         setSprite();
         sprite.setPosition(x*PPM-width/2-2.5F,y*PPM-height/2); // -2.5 for a similar reason to the below one
-        this.sprite.setSize(width+5,height); // + 2 * 2.5 (5) as the sprite is 19x28, but the collision box is 42.5x70 (17 * 2.5 x 28 * 2.5)
-        // The reason is that when the sprite is in the holding sprite, it uses an extra pixel on either side depending on which direction
-        // the cook is looking
+        this.sprite.setSize(47.5F,70);
 
         // If the cook is looking anywhere but down, draw the food first
         if (dir != Facing.DOWN) {
@@ -136,7 +137,7 @@ public class Cook extends GameEntity {
         float xOffset = foodRelativeX(dir), yOffset = foodRelativeY(dir);
         // Get offset based on direction.
 
-        float drawX = x*PPM, drawY = y*PPM;
+        float drawX = x*PPM, drawY = (y*PPM) + OFFSET_Y;
         /*if (foodStack.size() > 0) {
             foodStack.popStack();
         }*/
@@ -256,6 +257,12 @@ public class Cook extends GameEntity {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             cookInteractor.checkCollisions(this);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            ArrayList<FoodID> foodItems = foodStack.getStack();
+            for (int i = foodStack.size()-1 ; i >= 0 ; i--) {
+                foodItems.remove(i);
+            }
         }
 
         body.setLinearVelocity(velX * speed,velY * speed);

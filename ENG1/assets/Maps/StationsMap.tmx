@@ -26,8 +26,8 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="14" name="CookStart" x="128" y="288" width="42.5" height="70"/>
-  <object id="32" name="Cook" x="640" y="288" width="42.5" height="70"/>
+  <object id="14" name="CookStart" x="128" y="288" width="42.5" height="20"/>
+  <object id="32" name="Cook" x="640" y="288" width="42.5" height="20"/>
   <object id="15" x="0" y="0">
    <polygon points="0,0 448,0 448,64 0,64"/>
   </object>
