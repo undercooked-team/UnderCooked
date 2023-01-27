@@ -8,7 +8,7 @@ public class Interactions {
     /// Since interactions and interaction() don't need to be in FoodItem.java or Station.java to work, it may not be very suitable there
 
     /** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
-    public static final HashMap<String, FoodID> interactions = new HashMap<>();
+    private static final HashMap<String, FoodID> interactions = new HashMap<>();
     static {
         interactions.put(InteractionKey(FoodID.lettuce, StationID.cut), FoodID.lettuceChop);
         interactions.put(InteractionKey(FoodID.tomato, StationID.cut), FoodID.tomatoChop);
