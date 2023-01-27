@@ -1,5 +1,7 @@
 package food;
 
+import java.util.HashMap;
+
 public class FoodItem {
     /**
     * IDs of all the different possible types of food ingredients.
@@ -15,6 +17,20 @@ public class FoodItem {
         meatCook,
         bun,
         none
+    }
+
+    public static final HashMap<FoodID, Integer> foodHeights = new HashMap<>();
+
+    static {
+        foodHeights.put(FoodID.lettuce, 2);
+        foodHeights.put(FoodID.lettuceChop, 1);
+        foodHeights.put(FoodID.tomato, 2);
+        foodHeights.put(FoodID.tomatoChop, 1);
+        foodHeights.put(FoodID.onion, 2);
+        foodHeights.put(FoodID.onionChop, 1);
+        foodHeights.put(FoodID.meat, 1);
+        foodHeights.put(FoodID.meatCook, 1);
+        foodHeights.put(FoodID.bun, 1);
     }
 
     /**
