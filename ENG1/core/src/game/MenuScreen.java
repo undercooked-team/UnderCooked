@@ -40,9 +40,12 @@ public class MenuScreen extends ScreenAdapter {
 
         Label StartLabel = new Label("PRESS ENTER TO START", font);
         table.add(StartLabel).expandX();
+        table.row();
+
+        Label InstructionLabel = new Label("PRESS I FOR INSTRUCTIONS", font);
+        table.add(InstructionLabel).expandX();
 
         welcomeLabel.setFontScale(4);
-
         stage.addActor(table);
 
     }

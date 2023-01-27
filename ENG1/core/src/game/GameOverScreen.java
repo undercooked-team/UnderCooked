@@ -24,8 +24,6 @@ public class GameOverScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private Stage stage;
 
-    private int hoursTaken, minutesTaken, secondsTaken;
-
     private Label timeLabel;
 
 
