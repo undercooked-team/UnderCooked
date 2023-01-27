@@ -5,6 +5,7 @@ package game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -18,6 +19,8 @@ public class Boot extends Game {
       INSTANCE = this;
   }
   private Viewport gamePort;
+  private SpriteBatch spriteBatch;
+  private ScreenController screenController;
 
   @Override
   public void create()
@@ -25,13 +28,19 @@ public class Boot extends Game {
       this.widthScreen = Gdx.graphics.getWidth();
       this.heightScreen = Gdx.graphics.getHeight();
       this.orthographicCamera = new OrthographicCamera();
+      this.spriteBatch = new SpriteBatch();
       gamePort = new FitViewport(960,640, orthographicCamera);
-      setScreen(new GameScreen(orthographicCamera));
+      this.screenController = new ScreenController(this,orthographicCamera);
+      setScreen(new MenuScreen(screenController, orthographicCamera));
   }
 
-    public void resize(int width, int height)
+  public void resize(int width, int height)
     {
         gamePort.update(width, height);
     }
+
+  public SpriteBatch getSpriteBatch() {
+      return spriteBatch;
+  }
 
 }
