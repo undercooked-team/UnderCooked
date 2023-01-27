@@ -4,8 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import food.FoodItem;
-import interactions.InteractionKey;
-import stations.Stations;
+import stations.Station;
 
 import java.util.HashMap;
 

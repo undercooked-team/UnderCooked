@@ -19,5 +19,8 @@ public class Pantry extends CookInteractable {
 
     public void interact(Cook cook) {
         System.out.println(foodID);
+        // Add the new FoodItem onto the stack.
+        cook.foodStack.addStack(foodID);
+        System.out.println(cook.foodStack);
     }
 }
