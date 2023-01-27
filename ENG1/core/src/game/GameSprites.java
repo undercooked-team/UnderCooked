@@ -1,5 +1,6 @@
 package game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
@@ -10,6 +11,19 @@ public class GameSprites {
     public enum SpriteID {
         COOK,
         FOOD
+    }
+
+    static GameSprites instance;
+
+    private GameSprites() {
+
+    }
+
+    public static GameSprites getInstance() {
+        if (instance == null) {
+            instance = new GameSprites();
+        }
+        return instance;
     }
 
     public static final HashMap<SpriteID, TextureAtlas> textureAtlases = new HashMap<>();
