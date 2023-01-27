@@ -6,13 +6,22 @@ import cooks.Cook;
 
 public class Station extends CookInteractable {
 
-    Stations.StationID stationID;
+    /** IDs of all the different possible types of stations.*/
+    public enum StationID {
+        fry,
+        cut,
+        counter,
+        bin,
+        none
+    }
+
+    StationID stationID;
 
     public Station(float width, float height, Body body, Rectangle rectangle) {
         super(width,height,body,rectangle);
     }
 
-    public void setID(Stations.StationID stationID) {
+    public void setID(StationID stationID) {
         this.stationID = stationID;
     }
 

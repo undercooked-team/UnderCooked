@@ -2,12 +2,10 @@ package interactions;
 
 import java.util.HashMap;
 import food.FoodItem.FoodID;
-import stations.Stations.StationID;
+import stations.Station.StationID;
 
 public class Interactions {
-    /// Since interactions and interaction() don't need to be in Station.java to work, it may not be very suitable here
-    /// I made the choice of adding them here because a food item logically does not need to be as concerned with interactions
-    /// as a station.
+    /// Since interactions and interaction() don't need to be in FoodItem.java or Station.java to work, it may not be very suitable there
 
     /** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
     public static final HashMap<InteractionKey, FoodID> interactions = new HashMap<>();

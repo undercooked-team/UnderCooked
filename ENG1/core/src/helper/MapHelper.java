@@ -17,7 +17,6 @@ import food.FoodItem;
 import game.GameScreen;
 import stations.Pantry;
 import stations.Station;
-import stations.Stations;
 
 import static helper.Constants.PPM;
 
@@ -110,19 +109,19 @@ public class MapHelper {
                     gameScreen.addInteractable(station);
                     switch(rectangleName) {
                         case "Cut":
-                            station.setID(Stations.StationID.cut);
+                            station.setID(Station.StationID.cut);
                             break;
                         case "Fry":
-                            station.setID(Stations.StationID.fry);
+                            station.setID(Station.StationID.fry);
                             break;
                         case "Counter":
-                            station.setID(Stations.StationID.counter);
+                            station.setID(Station.StationID.counter);
                             break;
                         case "Bin":
-                            station.setID(Stations.StationID.bin);
+                            station.setID(Station.StationID.bin);
                             break;
                         default:
-                            station.setID(Stations.StationID.none);
+                            station.setID(Station.StationID.none);
                             break;
                     }
                 }
