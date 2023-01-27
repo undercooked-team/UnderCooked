@@ -38,10 +38,10 @@ public class Cook extends GameEntity {
 
     public Cook(float width, float height, Body body, CollisionHelper ch) {
         super(width, height, body);
-        this.dir = Facing.NONE;
+        this.dir = Facing.DOWN;
         this.speed = 10f;
-        this.textureAtlas = new TextureAtlas("cooks/cook_direction.atlas");
-        this.sprite = this.textureAtlas.createSprite("down");
+        this.textureAtlas = new TextureAtlas("cooks/cook.atlas");
+        setSprite();
 
         float cookInteractorSize = 32;
         World world = body.getWorld();
@@ -66,10 +66,15 @@ public class Cook extends GameEntity {
         this.cookInteractor.updatePosition(x,y,dir);
     }
 
+    private void setSprite() {
+
+    }
+
     @Override
     public void render(SpriteBatch batch) {
+        setSprite();
         sprite.setPosition(x*PPM-width/2,y*PPM-height/2);
-        this.sprite.setSize(width,height);
+        this.sprite.setSize(width+200,height); // +200 as the sprite is 190x280, but the collision box is 170x280
         sprite.draw(batch);
     }
 
@@ -82,25 +87,21 @@ public class Cook extends GameEntity {
         {
             velX += 1;
             this.dir = Facing.RIGHT;
-            this.sprite = textureAtlas.createSprite("right");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A))
         {
             velX += -1;
             this.dir = Facing.LEFT;
-            this.sprite = textureAtlas.createSprite("left");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.W))
         {
             velY += 1;
             this.dir = Facing.UP;
-            this.sprite = textureAtlas.createSprite("up");
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S))
         {
             velY += -1;
             this.dir = Facing.DOWN;
-            this.sprite = textureAtlas.createSprite("down");
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
