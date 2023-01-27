@@ -85,7 +85,7 @@ public class MapHelper {
                 if(rectangleName.equals("CookStart"))
                 {
                     Body body = makeBody(rectangle, false);
-                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
+                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                     gameScreen.setCook(cookInd);
                     continue;
                 }
@@ -93,7 +93,7 @@ public class MapHelper {
                 if(rectangleName.equals("Cook"))
                 {
                     Body body = makeBody(rectangle, false);
-                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
+                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
                     continue;
                 }
 
