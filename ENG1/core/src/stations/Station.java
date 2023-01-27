@@ -29,6 +29,11 @@ public class Station extends CookInteractable {
 
     public void interact(Cook cook) {
         System.out.println(stationID);
+        // If Cook is not holding any food, stop here.
+        if (cook.foodStack.peekStack() == null) {
+            System.out.println("No FoodItem held.");
+            return;
+        }
         // Add the new proccessed item onto the stack.
         FoodID newFood = interactions.Interactions.interaction(cook.foodStack.peekStack(), stationID);
         if (newFood != null) {
