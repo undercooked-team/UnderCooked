@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import helper.Constants;
+import helper.Util;
 
 public class GameOverScreen extends ScreenAdapter {
     private Viewport viewport;
@@ -23,7 +24,9 @@ public class GameOverScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private Stage stage;
 
+    private int hoursTaken, minutesTaken, secondsTaken;
 
+    private Label timeLabel;
 
 
     public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera)
@@ -34,6 +37,7 @@ public class GameOverScreen extends ScreenAdapter {
         this.screenController = screenController;
         this.camera = orthographicCamera;
         this.batch = screenController.getSpriteBatch();
+
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
 
@@ -45,6 +49,12 @@ public class GameOverScreen extends ScreenAdapter {
         Label gameOverLabel = new Label("GAME OVER", font);
         gameOverLabel.setFontScale(3);
         table.add(gameOverLabel).expandX();
+
+        table.row();
+
+        timeLabel = new Label("0:00", font);
+        timeLabel.setFontScale(1);
+        table.add(timeLabel);
 
         stage.addActor(table);
 
@@ -86,5 +96,9 @@ public class GameOverScreen extends ScreenAdapter {
     @Override
     public void dispose() {
 
+    }
+
+    public void setTime(int hours, int minutes, int seconds) {
+        timeLabel.setText(Util.formatTime(hours,minutes,seconds));
     }
 }

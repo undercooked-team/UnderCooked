@@ -29,7 +29,7 @@ import static helper.Constants.PPM;
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private long startTime = 0;
-    private int secondsPassed = 0, minutesPassed = 0;
+    private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
     private SpriteBatch batch;
     private ScreenController screenController;
@@ -81,10 +81,14 @@ public class GameScreen extends ScreenAdapter {
             if (secondsPassed >= 60) {
                 secondsPassed = 0;
                 minutesPassed += 1;
+                if (minutesPassed >= 60) {
+                    minutesPassed = 0;
+                    hoursPassed += 1;
+                }
             }
         }
 
-        gameHud.updateTime(minutesPassed, secondsPassed);
+        gameHud.updateTime(hoursPassed, minutesPassed, secondsPassed);
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
@@ -140,6 +144,7 @@ public class GameScreen extends ScreenAdapter {
         if(gameHud.GetCustomers()<1)
         {
             screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
+            ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
         }
     }
 
