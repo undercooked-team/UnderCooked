@@ -1,24 +1,24 @@
 package game;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.TimeUtils;
-import helper.CollisionHelper;
-import helper.Hud;
-import helper.MapHelper;
-import cooks.Cook;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.TimeUtils;
+import cooks.Cook;
+import helper.CollisionHelper;
+import helper.Hud;
+import helper.MapHelper;
 import stations.CookInteractable;
 
 import static helper.Constants.PPM;
@@ -30,6 +30,7 @@ public class GameScreen extends ScreenAdapter {
     private int secondsPassed = 0, minutesPassed = 0;
     private Hud hud;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
 

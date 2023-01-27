@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
 import stations.CookInteractable;
-import stations.Station;
 
 import static helper.Constants.PPM;
 
@@ -51,8 +50,8 @@ public class CookInteractor extends GameEntity {
         this.x = x + relX;
         this.y = y + relY;
 
-        this.collision.x = this.x * PPM;
-        this.collision.y = this.y * PPM;
+        this.collision.x = this.x * PPM - collision.width/2;
+        this.collision.y = this.y * PPM - collision.height/2;
 
         this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
@@ -76,4 +75,5 @@ public class CookInteractor extends GameEntity {
     public void render(SpriteBatch batch) {
 
     }
+
 }
