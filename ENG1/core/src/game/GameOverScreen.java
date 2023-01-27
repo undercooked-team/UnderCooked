@@ -34,7 +34,7 @@ public class GameOverScreen extends ScreenAdapter {
         this.screenController = screenController;
         this.camera = orthographicCamera;
         this.batch = screenController.getSpriteBatch();
-        viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
+        viewport = new FitViewport(Constants.V_Width  , Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
