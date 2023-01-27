@@ -8,7 +8,6 @@ import cooks.GameEntity;
 
 import food.FoodItem.FoodID;
 import java.util.HashMap;
-import interactions.InteractionKey;
 
 import static helper.Constants.PPM;
 
