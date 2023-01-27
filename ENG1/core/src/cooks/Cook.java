@@ -40,7 +40,14 @@ public class Cook extends GameEntity {
         super(width, height, body);
         this.dir = Facing.DOWN;
         this.speed = 10f;
+
+        // Initialize FoodStack
+        this.foodStack = new FoodStack();
+
+        // Get the sprites
         this.textureAtlas = new TextureAtlas("cooks/cook.atlas");
+
+        // Set the sprite
         setSprite();
 
         float cookInteractorSize = 32;
@@ -51,8 +58,6 @@ public class Cook extends GameEntity {
         interactorBody.setActive(false);
 
         this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, ch);
-        // Initialize FoodStack
-        this.foodStack = new FoodStack();
     }
 
     public void userInput() {
@@ -67,14 +72,22 @@ public class Cook extends GameEntity {
     }
 
     private void setSprite() {
-
+        // Set up sprite string
+        String spriteName = "";
+        // If holding something, add "h" to the start of the sprite name.
+        if (foodStack.size() > 0) {
+            spriteName += "h";
+        }
+        sprite = this.textureAtlas.createSprite(spriteName + dir);
     }
 
     @Override
     public void render(SpriteBatch batch) {
         setSprite();
-        sprite.setPosition(x*PPM-width/2,y*PPM-height/2);
-        this.sprite.setSize(width+200,height); // +200 as the sprite is 190x280, but the collision box is 170x280
+        sprite.setPosition(x*PPM-width/2-2.5F,y*PPM-height/2); // -2.5 for a similar reason to the below one
+        this.sprite.setSize(width+5,height); // + 2 * 2.5 (5) as the sprite is 19x28, but the collision box is 42.5x70 (17 * 2.5 x 28 * 2.5)
+        // The reason is that when the sprite is in the holding sprite, it uses an extra pixel on either side depending on which direction
+        // the cook is looking
         sprite.draw(batch);
     }
 

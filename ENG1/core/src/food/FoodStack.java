@@ -11,6 +11,14 @@ public class FoodStack {
     /// #################################################################################
     /// foodStack and methods
 
+    public FoodStack() {
+        this(new ArrayList<FoodID>());
+    }
+
+    public FoodStack(ArrayList<FoodID> foodStack) {
+        this.foodStack = foodStack;
+    }
+
     public FoodID peekStack() {
         try {
             return foodStack.get(0);
@@ -34,4 +42,5 @@ public class FoodStack {
     public void setStack(ArrayList<FoodID> newStack) {
         foodStack = newStack;
     }
+    public int size() { return foodStack.size(); }
 }
