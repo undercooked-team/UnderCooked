@@ -1,48 +1,90 @@
 
 food.png
-size: 78, 43
+size: 150, 30
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+bottomBun
+  rotate: false
+  xy: 30, 2
+  size: 24, 6
+  orig: 24, 6
+  offset: 0, 0
+  index: -1
 bun
   rotate: false
-  xy: 52, 28
+  xy: 52, 15
   size: 24, 13
   orig: 24, 13
   offset: 0, 0
   index: -1
 burger
   rotate: false
-  xy: 2, 20
+  xy: 2, 7
   size: 26, 21
   orig: 26, 21
   offset: 0, 0
   index: -1
 lettuce
   rotate: false
-  xy: 2, 2
+  xy: 78, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+lettuceChop
+  rotate: false
+  xy: 130, 10
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: -1
 meat
   rotate: false
-  xy: 52, 20
+  xy: 127, 22
+  size: 21, 6
+  orig: 21, 6
+  offset: 0, 0
+  index: -1
+meatFried
+  rotate: false
+  xy: 104, 22
   size: 21, 6
   orig: 21, 6
   offset: 0, 0
   index: -1
 onion
   rotate: false
-  xy: 30, 20
-  size: 20, 21
-  orig: 20, 21
+  xy: 30, 10
+  size: 20, 18
+  orig: 20, 18
+  offset: 0, 0
+  index: -1
+onionChop
+  rotate: false
+  xy: 56, 2
+  size: 20, 11
+  orig: 20, 11
   offset: 0, 0
   index: -1
 tomato
   rotate: false
-  xy: 20, 2
+  xy: 96, 2
   size: 15, 16
   orig: 15, 16
+  offset: 0, 0
+  index: -1
+tomatoChop
+  rotate: false
+  xy: 113, 9
+  size: 15, 11
+  orig: 15, 11
+  offset: 0, 0
+  index: -1
+topBun
+  rotate: false
+  xy: 78, 20
+  size: 24, 8
+  orig: 24, 8
   offset: 0, 0
   index: -1
