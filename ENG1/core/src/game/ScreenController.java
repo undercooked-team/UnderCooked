@@ -14,6 +14,7 @@ public class ScreenController {
     private Boot boot;
     private GameScreen gameScreen;
     private MenuScreen menuScreen;
+    private GameOverScreen gameOverScreen;
     private HashMap<ScreenID, ScreenAdapter> screens;
     // private PauseScreen pauseScreen;
 
@@ -21,10 +22,12 @@ public class ScreenController {
         this.boot = boot;
         this.gameScreen = new GameScreen(this,camera);
         this.menuScreen = new MenuScreen(this,camera);
+        this.gameOverScreen = new GameOverScreen(this,camera);
 
         this.screens = new HashMap<>();
         this.screens.put(ScreenID.MENU,menuScreen);
         this.screens.put(ScreenID.GAME,gameScreen);
+        this.screens.put(ScreenID.GAMEOVER, gameOverScreen);
     }
 
     public void setScreen(ScreenID screenID) {
@@ -38,7 +41,8 @@ public class ScreenController {
     enum ScreenID {
         MENU,
         GAME,
-        PAUSE
+        PAUSE,
+        GAMEOVER,
     }
 
     public ScreenAdapter getScreen(ScreenID screenID) {

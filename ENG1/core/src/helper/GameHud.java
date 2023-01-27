@@ -81,4 +81,8 @@ public class GameHud extends Hud {
         CustomerCount--;
         CustomerScore.setText(String.format("%1d",CustomerCount));
     }
+    public int GetCustomers()
+    {
+        return CustomerCount;
+    }
 }

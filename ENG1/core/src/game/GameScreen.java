@@ -138,6 +138,10 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
+        if(gameHud.GetCustomers()<1)
+        {
+            screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
+        }
     }
 
     public class DrawQueueComparator implements Comparator<GameEntity> {
