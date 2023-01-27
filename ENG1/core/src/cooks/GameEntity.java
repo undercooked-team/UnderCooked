@@ -30,5 +30,13 @@ public abstract class GameEntity {
     {
         return body;
     }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
 }
 

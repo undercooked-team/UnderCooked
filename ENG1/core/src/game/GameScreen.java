@@ -1,5 +1,6 @@
 package game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -16,10 +17,15 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import cooks.Cook;
+import cooks.GameEntity;
 import helper.CollisionHelper;
 import helper.Hud;
 import helper.MapHelper;
 import stations.CookInteractable;
+
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
 
@@ -39,6 +45,8 @@ public class GameScreen extends ScreenAdapter {
     private Array<CookInteractable> interactables;
     private CollisionHelper collisionHelper;
     private GameSprites gameSprites;
+    private Array<GameEntity> drawQueue;
+    private DrawQueueComparator drawQueueComparator;
     private int xOffset = 480;
     private int yOffset = 320;
 
@@ -46,6 +54,7 @@ public class GameScreen extends ScreenAdapter {
     private Array<Cook> cooks;
     private Cook cook;
     private int cookIndex;
+
     public GameScreen(OrthographicCamera camera)
     {
         this.startTime = TimeUtils.millis();
@@ -56,6 +65,9 @@ public class GameScreen extends ScreenAdapter {
         this.cookIndex = -1;
         this.camera = camera;
         this.batch = new SpriteBatch();
+        this.drawQueue = new Array<>();
+        this.drawQueueComparator = new DrawQueueComparator();
+
         this.world = new World(new Vector2(0,0), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         this.mapHelper = new MapHelper(this);
@@ -97,8 +109,8 @@ public class GameScreen extends ScreenAdapter {
             Gdx.app.exit();
         }
         world.step(1/60f,6,2);
-        for (Cook thisCook : cooks) {
-            thisCook.update();
+        for (Cook cook : cooks) {
+            cook.update();
         }
     }
 
@@ -119,13 +131,31 @@ public class GameScreen extends ScreenAdapter {
         orthogonalTiledMapRenderer.render();
         batch.begin();
 
-        for (Cook thisCook : cooks) {
-            thisCook.render(batch);
+        drawQueue.sort(drawQueueComparator);
+
+        for (GameEntity entity : drawQueue) {
+            entity.render(batch);
+            System.out.println(entity.getY());
         }
 
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         hud.stage.draw();
+    }
+
+    public class DrawQueueComparator implements Comparator<GameEntity> {
+
+        @Override
+        public int compare(GameEntity o1, GameEntity o2) {
+            float o1Y = o1.getY(),
+                  o2Y = o2.getY();
+            if (o1Y > o2Y) {
+                return -1;
+            } else if (o2Y > o1Y) {
+                return 1;
+            }
+            return 0;
+        }
     }
 
     public World getWorld()
@@ -144,6 +174,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public int addCook(Cook newCook) {
+        drawQueue.add(newCook);
         cooks.add(newCook);
         return cooks.size-1;
     }

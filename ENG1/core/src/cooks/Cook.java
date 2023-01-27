@@ -259,6 +259,5 @@ public class Cook extends GameEntity {
         }
 
         body.setLinearVelocity(velX * speed,velY * speed);
-
     }
 }
