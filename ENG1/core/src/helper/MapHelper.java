@@ -17,7 +17,6 @@ import food.FoodItem;
 import game.GameScreen;
 import stations.Pantry;
 import stations.Station;
-import stations.Stations;
 
 import static helper.Constants.PPM;
 
@@ -86,7 +85,7 @@ public class MapHelper {
                 if(rectangleName.equals("CookStart"))
                 {
                     Body body = makeBody(rectangle, false);
-                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    int cookInd = gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
                     gameScreen.setCook(cookInd);
                     continue;
                 }
@@ -94,7 +93,7 @@ public class MapHelper {
                 if(rectangleName.equals("Cook"))
                 {
                     Body body = makeBody(rectangle, false);
-                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen));
+                    gameScreen.addCook(new Cook(rectangle.getWidth(), rectangle.getHeight(), body, gameScreen.getCollisionHelper()));
                     continue;
                 }
 
@@ -104,49 +103,49 @@ public class MapHelper {
 
                 if(rectangleName.startsWith("Station")) {
                     // Stations
-                    rectangleName = rectangleName.substring("Station".length()).toLowerCase();
+                    rectangleName = rectangleName.substring("Station".length());
                     Body body = makeBody(rectangle, true);
                     Station station = new Station(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
                     gameScreen.addInteractable(station);
                     switch(rectangleName) {
-                        case "cut":
-                            station.setID(Stations.StationID.cut);
+                        case "Cut":
+                            station.setID(Station.StationID.cut);
                             break;
-                        case "fry":
-                            station.setID(Stations.StationID.fry);
+                        case "Fry":
+                            station.setID(Station.StationID.fry);
                             break;
-                        case "counter":
-                            station.setID(Stations.StationID.counter);
+                        case "Counter":
+                            station.setID(Station.StationID.counter);
                             break;
-                        case "bin":
-                            station.setID(Stations.StationID.bin);
+                        case "Bin":
+                            station.setID(Station.StationID.bin);
                             break;
                         default:
-                            station.setID(Stations.StationID.none);
+                            station.setID(Station.StationID.none);
                             break;
                     }
                 }
 
                 if (rectangleName.startsWith("Pantry")) {
                     // Pantries
-                    rectangleName = rectangleName.substring("Pantry".length()).toLowerCase();
+                    rectangleName = rectangleName.substring("Pantry".length());
                     Body body = makeBody(rectangle, true);
                     Pantry pantry = new Pantry(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
                     gameScreen.addInteractable(pantry);
                     switch(rectangleName) {
-                        case "lettuce":
+                        case "Lettuce":
                             pantry.setItem(FoodItem.FoodID.lettuce);
                             break;
-                        case "tomato":
+                        case "Tomato":
                             pantry.setItem(FoodItem.FoodID.tomato);
                             break;
-                        case "onion":
+                        case "Onion":
                             pantry.setItem(FoodItem.FoodID.onion);
                             break;
-                        case "meat":
+                        case "Meat":
                             pantry.setItem(FoodItem.FoodID.meat);
                             break;
-                        case "bun":
+                        case "Bun":
                             pantry.setItem(FoodItem.FoodID.bun);
                             break;
                         default:

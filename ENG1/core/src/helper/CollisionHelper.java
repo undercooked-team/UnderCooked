@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import game.GameScreen;
 import stations.CookInteractable;
-import stations.Stations;
+import stations.Station;
 
 import static helper.Constants.PPM;
 
