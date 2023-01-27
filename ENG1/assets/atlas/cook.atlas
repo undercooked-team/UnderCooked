@@ -6,7 +6,28 @@ filter: Nearest, Nearest
 repeat: none
 DOWN
   rotate: false
-  xy: 386, 2
+  xy: 194, 2
+  size: 190, 280
+  orig: 190, 280
+  offset: 0, 0
+  index: -1
+LEFT
+  rotate: false
+  xy: 1154, 2
+  size: 190, 280
+  orig: 190, 280
+  offset: 0, 0
+  index: -1
+RIGHT
+  rotate: false
+  xy: 770, 2
+  size: 190, 280
+  orig: 190, 280
+  offset: 0, 0
+  index: -1
+UP
+  rotate: false
+  xy: 1346, 2
   size: 190, 280
   orig: 190, 280
   offset: 0, 0
@@ -20,42 +41,21 @@ hDOWN
   index: -1
 hLEFT
   rotate: false
-  xy: 1346, 2
+  xy: 2, 2
   size: 190, 280
   orig: 190, 280
   offset: 0, 0
   index: -1
 hRIGHT
   rotate: false
-  xy: 2, 2
+  xy: 386, 2
   size: 190, 280
   orig: 190, 280
   offset: 0, 0
   index: -1
 hUP
   rotate: false
-  xy: 770, 2
-  size: 190, 280
-  orig: 190, 280
-  offset: 0, 0
-  index: -1
-LEFT
-  rotate: false
   xy: 962, 2
-  size: 190, 280
-  orig: 190, 280
-  offset: 0, 0
-  index: -1
-RIGHT
-  rotate: false
-  xy: 194, 2
-  size: 190, 280
-  orig: 190, 280
-  offset: 0, 0
-  index: -1
-UP
-  rotate: false
-  xy: 1154, 2
   size: 190, 280
   orig: 190, 280
   offset: 0, 0
