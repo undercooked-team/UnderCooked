@@ -206,4 +206,13 @@ public class GameScreen extends ScreenAdapter {
         return output;
     }
 
+    public void reset() {
+        secondsPassed = 0;
+        minutesPassed = 0;
+        hoursPassed = 0;
+        for (int i = cooks.size-1 ; i >= 0 ; i--) {
+            cooks.removeIndex(i);
+        }
+    }
+
 }
