@@ -1,6 +1,9 @@
 package game;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,19 +16,24 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import helper.Constants;
 
-public class MenuScreen extends ScreenAdapter {
-
+public class GameOverScreen extends ScreenAdapter {
+    private Viewport viewport;
     private ScreenController screenController;
     private OrthographicCamera camera;
     private SpriteBatch batch;
-
-    private Viewport viewport;
     private Stage stage;
-    public MenuScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
+
+
+
+
+    public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera)
+    {
+
+
+
         this.screenController = screenController;
         this.camera = orthographicCamera;
         this.batch = screenController.getSpriteBatch();
-
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
 
@@ -34,23 +42,18 @@ public class MenuScreen extends ScreenAdapter {
         table.center();
         table.setFillParent(true);
 
-        Label welcomeLabel = new Label("UNDERCOOKED", font);
-        table.add(welcomeLabel).expandX();
-        table.row();
-
-        Label StartLabel = new Label("PRESS ENTER TO START", font);
-        table.add(StartLabel).expandX();
-
-        welcomeLabel.setFontScale(4);
+        Label gameOverLabel = new Label("GAME OVER", font);
+        gameOverLabel.setFontScale(3);
+        table.add(gameOverLabel).expandX();
 
         stage.addActor(table);
 
+
     }
 
-    public void update() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            screenController.setScreen(ScreenController.ScreenID.GAME);
-        }
+    @Override
+    public void show() {
+
     }
 
     @Override
@@ -58,6 +61,30 @@ public class MenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        this.update();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+
     }
 }
