@@ -1,48 +1,48 @@
 
 food.png
-size: 53, 44
+size: 78, 43
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 bun
   rotate: false
-  xy: 28, 31
-  size: 22, 11
-  orig: 22, 11
+  xy: 52, 28
+  size: 24, 13
+  orig: 24, 13
   offset: 0, 0
   index: -1
 burger
   rotate: false
-  xy: 2, 23
-  size: 24, 19
-  orig: 24, 19
+  xy: 2, 20
+  size: 26, 21
+  orig: 26, 21
   offset: 0, 0
   index: -1
 lettuce
   rotate: false
-  xy: 37, 9
-  size: 14, 14
-  orig: 14, 14
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 meat
   rotate: false
-  xy: 28, 25
-  size: 19, 4
-  orig: 19, 4
+  xy: 52, 20
+  size: 21, 6
+  orig: 21, 6
   offset: 0, 0
   index: -1
 onion
   rotate: false
-  xy: 2, 2
-  size: 18, 19
-  orig: 18, 19
+  xy: 30, 20
+  size: 20, 21
+  orig: 20, 21
   offset: 0, 0
   index: -1
 tomato
   rotate: false
-  xy: 22, 7
-  size: 13, 14
-  orig: 13, 14
+  xy: 20, 2
+  size: 15, 16
+  orig: 15, 16
   offset: 0, 0
   index: -1

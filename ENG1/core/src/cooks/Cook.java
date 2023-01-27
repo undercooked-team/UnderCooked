@@ -17,6 +17,8 @@ import static helper.Constants.PPM;
 import food.FoodStack;
 import food.FoodItem.FoodID;
 
+import java.util.ArrayList;
+
 public class Cook extends GameEntity {
 
     private Sprite sprite;
@@ -90,7 +92,65 @@ public class Cook extends GameEntity {
         this.sprite.setSize(width+5,height); // + 2 * 2.5 (5) as the sprite is 19x28, but the collision box is 42.5x70 (17 * 2.5 x 28 * 2.5)
         // The reason is that when the sprite is in the holding sprite, it uses an extra pixel on either side depending on which direction
         // the cook is looking
-        sprite.draw(batch);
+
+        // If the cook is looking anywhere but down, draw the food first
+        if (dir != Facing.DOWN) {
+            renderFood(batch);
+            sprite.draw(batch);
+        } else {
+            sprite.draw(batch);
+            renderFood(batch);
+        }
+    }
+
+    private float foodRelativeX(Cook.Facing dir) {
+        switch (dir) {
+            case RIGHT:
+                return 30F;
+            case LEFT:
+                return -30F;
+            default:
+                return 0F;
+        }
+    }
+
+    private float foodRelativeY(Cook.Facing dir) {
+        switch (dir) {
+            case UP:
+                return 0F;
+            case DOWN:
+                return -11F;
+            case LEFT:
+            case RIGHT:
+                return -8F;
+            default:
+                return 0F;
+        }
+    }
+
+    private void renderFood(SpriteBatch batch) {
+        // Loop through the items in the food stack.
+        // It is done from the end of the stack to the start because the stack's top is
+        // at 0, and the bottom at the end.
+        ArrayList<FoodID> foodList = foodStack.getStack();
+        float xOffset = foodRelativeX(dir), yOffset = foodRelativeY(dir);
+        // Get offset based on direction.
+
+        float drawX = x*PPM, drawY = y*PPM;
+        /*if (foodStack.size() > 0) {
+            foodStack.popStack();
+        }*/
+        for (int i = foodList.size()-1 ; i >= 0 ; i--) {
+            Sprite foodSprite = gameSprites.getSprite(GameSprites.SpriteID.FOOD, String.valueOf(foodList.get(i)));
+            if (foodSprite == null) {
+                drawY += 5F;
+                continue;
+            }
+            foodSprite.setScale(2F);
+            foodSprite.setPosition(drawX-foodSprite.getWidth()/2+xOffset,drawY-foodSprite.getHeight()/2+yOffset);
+            foodSprite.draw(batch);
+            drawY += foodSprite.getHeight();
+        }
     }
 
     private Facing opposite(Facing direction) {
