@@ -34,7 +34,7 @@ prettyPrint=false
 legacyOutput=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:Tomato.png,type:Input,regionName:tomato},{path:Onion.png,type:Input,regionName:onion},{path:Burger_Buns.png,type:Input,regionName:bun},{path:Meat.png,type:Input,regionName:meat},{path:Lettuce.png,type:Input,regionName:lettuce},{path:Burger.png,type:Input,regionName:burger}]
+inputFiles=[{path:Tomato.png,type:Input,regionName:tomato},{path:Onion.png,type:Input,regionName:onion},{path:Burger_Buns.png,type:Input,regionName:bun},{path:Meat.png,type:Input,regionName:meat},{path:Lettuce.png,type:Input,regionName:lettuce},{path:Burger.png,type:Input,regionName:burger},{path:LettuceChop.png,type:Input,regionName:lettuceChop},{path:OnionChop.png,type:Input,regionName:onionChop},{path:TopBun.png,type:Input,regionName:topBun},{path:TomatoChop.png,type:Input,regionName:tomatoChop},{path:BottomBun.png,type:Input,regionName:bottomBun},{path:MeatFried.png,type:Input,regionName:meatFried}]
 keepInputFileExtensions=false
 
 
