@@ -60,10 +60,26 @@ public class Hud {
 
     }
 
-    public void update(int secondsPassed)
-    {
+    public void updateTime(int secondsPassed) {
+        updateTime(0,0,secondsPassed);
+    }
 
-        timeLabel.setText(String.format("%03d", secondsPassed));
+    public void updateTime(int minutesPassed, int secondsPassed) {
+        updateTime(0,minutesPassed,secondsPassed);
+    }
+
+    public void updateTime(int hoursPassed, int minutesPassed, int secondsPassed)
+    {
+        String timeString = "";
+        if (hoursPassed > 0) {
+            timeString += hoursPassed + ":";
+        }
+        timeString += minutesPassed + ":";
+        if (secondsPassed < 10) {
+            timeString += "0";
+        }
+        timeString += secondsPassed;
+        timeLabel.setText(String.format(timeString));
     }
     public void UpdateCustomers()
     {

@@ -26,7 +26,7 @@ import static helper.Constants.PPM;
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private long startTime = 0;
-    private int secondsPassed = 0;
+    private int secondsPassed = 0, minutesPassed = 0;
     private Hud hud;
     private SpriteBatch batch;
     private World world;
@@ -46,7 +46,6 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(OrthographicCamera camera)
     {
         this.startTime = TimeUtils.millis();
-        this.secondsPassed = 0;
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = new CollisionHelper(this);
@@ -66,9 +65,13 @@ public class GameScreen extends ScreenAdapter {
         if (diffInMillis >= 1000) {
             startTime += 1000;
             secondsPassed += 1;
+            if (secondsPassed >= 60) {
+                secondsPassed = 0;
+                minutesPassed += 1;
+            }
         }
 
-        hud.update(secondsPassed);
+        hud.updateTime(minutesPassed, secondsPassed);
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
