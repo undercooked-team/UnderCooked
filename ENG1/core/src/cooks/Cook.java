@@ -118,12 +118,12 @@ public class Cook extends GameEntity {
     private float foodRelativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
-                return 0F;
+                return -14F;
             case DOWN:
-                return -11F;
+                return -25F;
             case LEFT:
             case RIGHT:
-                return -8F;
+                return -24F;
             default:
                 return 0F;
         }
@@ -143,14 +143,15 @@ public class Cook extends GameEntity {
         }*/
         for (int i = foodList.size()-1 ; i >= 0 ; i--) {
             Sprite foodSprite = gameSprites.getSprite(GameSprites.SpriteID.FOOD, String.valueOf(foodList.get(i)));
-            if (foodSprite == null) {
+            Float drawInc = FoodItem.foodHeights.get(foodList.get(i));
+            if (drawInc == null) {
                 drawY += 5F;
                 continue;
             }
             foodSprite.setScale(2F);
-            foodSprite.setPosition(drawX-foodSprite.getWidth()/2+xOffset,drawY-foodSprite.getHeight()/2+yOffset);
+            foodSprite.setPosition(drawX-foodSprite.getWidth()/2+xOffset,drawY+foodSprite.getHeight()/2F+yOffset);
             foodSprite.draw(batch);
-            drawY += foodSprite.getHeight();
+            drawY += drawInc;
         }
     }
 
