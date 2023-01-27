@@ -1,13 +1,11 @@
 package game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,13 +17,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 import cooks.Cook;
 import cooks.GameEntity;
 import helper.CollisionHelper;
-import helper.Hud;
+import helper.GameHud;
 import helper.MapHelper;
 import stations.CookInteractable;
 
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
 
@@ -34,9 +30,10 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private long startTime = 0;
     private int secondsPassed = 0, minutesPassed = 0;
-    private Hud hud;
+    private GameHud gameHud;
     private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
+    private ScreenController screenController;
+    // private ShapeRenderer shapeRenderer;
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
 
@@ -55,7 +52,7 @@ public class GameScreen extends ScreenAdapter {
     private Cook cook;
     private int cookIndex;
 
-    public GameScreen(OrthographicCamera camera)
+    public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
         this.startTime = TimeUtils.millis();
         this.cooks = new Array<>();
@@ -64,7 +61,8 @@ public class GameScreen extends ScreenAdapter {
         this.gameSprites = new GameSprites();
         this.cookIndex = -1;
         this.camera = camera;
-        this.batch = new SpriteBatch();
+        this.screenController = screenController;
+        this.batch = screenController.getSpriteBatch();
         this.drawQueue = new Array<>();
         this.drawQueueComparator = new DrawQueueComparator();
 
@@ -72,7 +70,7 @@ public class GameScreen extends ScreenAdapter {
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         this.mapHelper = new MapHelper(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
-        this.hud = new Hud(batch);
+        this.gameHud = new GameHud(batch);
     }
 
     private void update()
@@ -87,7 +85,7 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
-        hud.updateTime(minutesPassed, secondsPassed);
+        gameHud.updateTime(minutesPassed, secondsPassed);
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
@@ -101,7 +99,7 @@ public class GameScreen extends ScreenAdapter {
             setCook((cookIndex + 1) % cooks.size);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            hud.UpdateCustomers();
+            gameHud.UpdateCustomers();
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
@@ -139,7 +137,7 @@ public class GameScreen extends ScreenAdapter {
 
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
-        hud.stage.draw();
+        gameHud.render();
     }
 
     public class DrawQueueComparator implements Comparator<GameEntity> {
