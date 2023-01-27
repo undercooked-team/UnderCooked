@@ -135,7 +135,6 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : drawQueue) {
             entity.render(batch);
-            System.out.println(entity.getY());
         }
 
         batch.end();
