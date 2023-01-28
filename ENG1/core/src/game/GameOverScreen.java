@@ -27,9 +27,7 @@ public class GameOverScreen extends ScreenAdapter {
     private Label timeLabel;
 
 
-    public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera)
-    {
-
+    public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
 
 
         this.screenController = screenController;
@@ -51,8 +49,14 @@ public class GameOverScreen extends ScreenAdapter {
         table.row();
 
         timeLabel = new Label("0:00", font);
-        timeLabel.setFontScale(1);
+        timeLabel.setFontScale(2);
         table.add(timeLabel);
+
+        table.row();
+
+        Label extraText = new Label("To restart, press R.", font);
+        extraText.setFontScale(1);
+        table.add(extraText);
 
         stage.addActor(table);
 
