@@ -1,7 +1,3 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "code-runner.cwd": "core/src",
-    "code-runner.executorMap": {
-        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt.java",
-    }
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
