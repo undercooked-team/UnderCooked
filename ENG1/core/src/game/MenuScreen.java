@@ -40,11 +40,11 @@ public class MenuScreen extends ScreenAdapter {
         table.add(welcomeLabel).expandX();
         table.row();
 
-        Label StartLabel = new Label("PRESS ENTER TO START", font);
+        Label StartLabel = new Label(String.format("PRESS %s TO START",Interactions.getKeyString(InputKey.InputTypes.START_GAME).toUpperCase()), font);
         table.add(StartLabel).expandX();
         table.row();
 
-        Label InstructionLabel = new Label("PRESS I FOR INSTRUCTIONS", font);
+        Label InstructionLabel = new Label(String.format("PRESS %s FOR INSTRUCTIONS",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS).toUpperCase()), font);
         table.add(InstructionLabel).expandX();
 
         welcomeLabel.setFontScale(4);
@@ -54,7 +54,7 @@ public class MenuScreen extends ScreenAdapter {
 
     public void update() {
         Interactions.updateKeys();
-        if (Interactions.isJustPressed(InputKey.InputTypes.PLAY_GAME)) {
+        if (Interactions.isJustPressed(InputKey.InputTypes.START_GAME)) {
             screenController.setScreen(ScreenController.ScreenID.GAME);
             ((GameScreen) screenController.getScreen(ScreenController.ScreenID.GAME)).startGame(5);
         }

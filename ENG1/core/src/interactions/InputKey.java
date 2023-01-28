@@ -3,19 +3,26 @@ package interactions;
 public class InputKey {
 
     public enum InputTypes {
+        // MENU
+        START_GAME,
+        RESET_GAME,
+        INSTRUCTIONS,
+        PAUSE,
+        UNPAUSE,
+
+        // COOK_INTERACT
         PUT_DOWN,
         PICK_UP,
         USE,
-        RESET_GAME,
-        INSTRUCTIONS,
-        PLAY_GAME,
+
+        // COOK_MOVEMENT
         COOK_UP,
         COOK_RIGHT,
         COOK_DOWN,
         COOK_LEFT,
-        COOK_SWAP,
-        PAUSE,
-        UNPAUSE
+
+        // COOK_MISC
+        COOK_SWAP
     }
 
     private int key;

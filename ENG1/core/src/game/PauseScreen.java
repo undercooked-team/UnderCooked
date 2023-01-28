@@ -47,11 +47,11 @@ public class PauseScreen extends ScreenAdapter {
         table.add(pauseLabel).expandX();
         table.row();
 
-        Label continueLabel = new Label("Press ESCAPE to continue", font);
+        Label continueLabel = new Label(String.format("Press %s to continue",Interactions.getKeyString(InputKey.InputTypes.UNPAUSE)), font);
         table.add(continueLabel).expandX();
         table.row();
 
-        Label resetLabel = new Label("Press R to reset", font);
+        Label resetLabel = new Label(String.format("Press %s to reset",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)), font);
         table.add(resetLabel).expandX();
         table.row();
 

@@ -55,7 +55,7 @@ public class GameOverScreen extends ScreenAdapter {
 
         table.row();
 
-        Label extraText = new Label("To restart, press R.", font);
+        Label extraText = new Label(String.format("To restart, press %s.",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)), font);
         extraText.setFontScale(1);
         table.add(extraText);
 

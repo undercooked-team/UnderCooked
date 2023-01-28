@@ -66,7 +66,7 @@ public class Interactions {
         inputs.put(InputID.MENU, new Array<>(new InputKey[]{
                 new InputKey(InputKey.InputTypes.INSTRUCTIONS, Input.Keys.I),
                 new InputKey(InputKey.InputTypes.RESET_GAME, Input.Keys.R),
-                new InputKey(InputKey.InputTypes.PLAY_GAME, Input.Keys.ENTER),
+                new InputKey(InputKey.InputTypes.START_GAME, Input.Keys.ENTER),
                 new InputKey(InputKey.InputTypes.PAUSE, Input.Keys.ESCAPE),
                 new InputKey(InputKey.InputTypes.UNPAUSE, Input.Keys.ESCAPE)
         }));
