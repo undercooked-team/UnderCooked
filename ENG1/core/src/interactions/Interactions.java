@@ -93,6 +93,9 @@ public class Interactions {
                 if (Gdx.input.isKeyPressed(inputKey.getKey())) {
                     keysPressed.add(inputKey.getType());
                 }
+                if (Gdx.input.isKeyJustPressed(inputKey.getKey())) {
+                    keysJustPressed.add(inputKey.getType());
+                }
             }
         }
     }

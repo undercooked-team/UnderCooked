@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import helper.Constants;
+import interactions.InputKey;
+import interactions.Interactions;
 
 public class MenuScreen extends ScreenAdapter {
 
@@ -51,8 +53,13 @@ public class MenuScreen extends ScreenAdapter {
     }
 
     public void update() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+        Interactions.updateKeys();
+        if (Interactions.isJustPressed(InputKey.InputTypes.PLAY_GAME)) {
             screenController.setScreen(ScreenController.ScreenID.GAME);
+            ((GameScreen) screenController.getScreen(ScreenController.ScreenID.GAME)).startGame();
+        }
+        if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
+            screenController.setScreen(ScreenController.ScreenID.INSTRUCTIONS);
         }
     }
 
