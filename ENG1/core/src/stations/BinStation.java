@@ -13,6 +13,9 @@ public class BinStation extends Station {
 
     @Override
     public void interact(Cook cook, InputKey.InputTypes inputType) {
-        cook.foodStack.popStack();
+        // Only bin if user inputs USE or PUT_DOWN
+        if (inputType == InputKey.InputTypes.USE || inputType == InputKey.InputTypes.PUT_DOWN) {
+            cook.foodStack.popStack();
+        }
     }
 }
