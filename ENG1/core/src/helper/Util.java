@@ -20,8 +20,4 @@ public class Util {
         return timeString;
     }
 
-    public static void clearArray(Array array) {
-        array.clear();
-    }
-
 }

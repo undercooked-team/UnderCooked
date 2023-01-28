@@ -22,7 +22,7 @@ import cooks.GameEntity;
 import helper.CollisionHelper;
 import helper.GameHud;
 import helper.MapHelper;
-import helper.Util;
+import interactions.InputKey;
 import interactions.Interactions;
 import stations.CookInteractable;
 
@@ -60,6 +60,7 @@ public class GameScreen extends ScreenAdapter {
     private Array<Cook> cooks;
     private Cook cook;
     private int cookIndex;
+    private int customerCount;
 
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
@@ -79,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
         this.box2DDebugRenderer = new Box2DDebugRenderer();
         this.mapHelper = new MapHelper(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
-        this.gameHud = new GameHud(batch);
+        this.gameHud = new GameHud(batch, this);
 
         customerToSpawn = new PriorityQueue<CustomerDef>();
         customers = new Array<Customer>();
@@ -136,11 +137,12 @@ public class GameScreen extends ScreenAdapter {
                 thisCook.userInput();
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+        if(Interactions.isJustPressed(InputKey.InputTypes.COOK_SWAP)) {
             setCook((cookIndex + 1) % cooks.size);
         }
+        // Not using new input system as it's for testing
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            gameHud.UpdateCustomers();
+            updateCustomers();
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
@@ -191,7 +193,7 @@ public class GameScreen extends ScreenAdapter {
         shape.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
-        if(gameHud.GetCustomers()<1)
+        if(customerCount<1)
         {
             screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
             ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
@@ -234,6 +236,19 @@ public class GameScreen extends ScreenAdapter {
         return cooks.size-1;
     }
 
+    public int getCustomerCount() {
+        return this.customerCount;
+    }
+    public void updateCustomers()
+    {
+        if(customerCount<1)
+        {
+            throw new RuntimeException("Customer count should not go below 0.");
+        }
+        customerCount--;
+        gameHud.setCustomerCount(customerCount);
+    }
+
     public void addInteractable(CookInteractable cookInteractable) {
         interactables.add(cookInteractable);
     }
@@ -261,20 +276,24 @@ public class GameScreen extends ScreenAdapter {
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
-        Util.clearArray(cooks);
-        Util.clearArray(gameEntities);
+        cooks.clear();
+        gameEntities.clear();
+        interactables.clear();
         mapHelper.dispose();
-
-        // Reload the map
-        mapHelper.setupMap();
+        mapHelper = new MapHelper(this);
+        world.dispose();
+        this.world = new World(new Vector2(0,0), false);
+        this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         cookIndex = -1;
     }
 
-    public void startGame() {
+    public void startGame(int customers) {
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
         startTime = TimeUtils.millis();
+        customerCount = customers;
+        gameHud.setCustomerCount(customers);
     }
 
     public void SpawnCustomer()

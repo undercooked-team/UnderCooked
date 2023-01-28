@@ -45,8 +45,9 @@ public class Interactions {
 
     /** The different IDs of interaction. Used to get the Arrays. */
     public enum InputID {
-        INTERACT,
-        MENU
+        COOK_INTERACT,
+        MENU,
+        COOK_MISC, COOK_MOVEMENT
     }
 
 
@@ -62,15 +63,28 @@ public class Interactions {
      * */
     private static final HashMap<InputID, Array<InputKey>> inputs = new HashMap<>();
     static {
-        inputs.put(InputID.INTERACT, new Array<>(new InputKey[]{
-                new InputKey(InputKey.InputTypes.USE, Input.Keys.K),
-                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.J),
-                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
-        }));
         inputs.put(InputID.MENU, new Array<>(new InputKey[]{
                 new InputKey(InputKey.InputTypes.INSTRUCTIONS, Input.Keys.I),
                 new InputKey(InputKey.InputTypes.RESET_GAME, Input.Keys.R),
                 new InputKey(InputKey.InputTypes.PLAY_GAME, Input.Keys.ENTER)
+        }));
+        inputs.put(InputID.COOK_MOVEMENT, new Array<>(new InputKey[] {
+                new InputKey(InputKey.InputTypes.COOK_UP,Input.Keys.W),
+                new InputKey(InputKey.InputTypes.COOK_LEFT,Input.Keys.A),
+                new InputKey(InputKey.InputTypes.COOK_DOWN,Input.Keys.S),
+                new InputKey(InputKey.InputTypes.COOK_RIGHT,Input.Keys.D),
+                new InputKey(InputKey.InputTypes.COOK_UP,Input.Keys.UP),
+                new InputKey(InputKey.InputTypes.COOK_LEFT,Input.Keys.LEFT),
+                new InputKey(InputKey.InputTypes.COOK_DOWN,Input.Keys.DOWN),
+                new InputKey(InputKey.InputTypes.COOK_RIGHT,Input.Keys.RIGHT)
+        }));
+        inputs.put(InputID.COOK_INTERACT, new Array<>(new InputKey[]{
+                new InputKey(InputKey.InputTypes.USE, Input.Keys.K),
+                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.J),
+                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
+        }));
+        inputs.put(InputID.COOK_MISC, new Array<>(new InputKey[] {
+                new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.ENTER)
         }));
     }
 

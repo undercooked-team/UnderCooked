@@ -13,6 +13,7 @@ public class GameSprites {
         COOK,
         FOOD,
         STATION,
+        CUSTOMER
 
     }
 
@@ -21,7 +22,7 @@ public class GameSprites {
         textureAtlases.put(SpriteID.COOK, new TextureAtlas("atlas/cook.atlas"));
         textureAtlases.put(SpriteID.FOOD, new TextureAtlas("atlas/food.atlas"));
         textureAtlases.put(SpriteID.STATION, new TextureAtlas("atlas/station.atlas"));
-        //textureAtlases.put(SpriteID.CUSTOMER, new TextureAtlas("atlas/Customer.atlas"));
+        textureAtlases.put(SpriteID.CUSTOMER, new TextureAtlas("atlas/customer.atlas"));
     }
 
     private HashMap<String, Sprite> spriteMap;
