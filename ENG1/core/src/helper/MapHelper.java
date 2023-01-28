@@ -15,10 +15,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import food.FoodItem;
 import game.GameScreen;
-import stations.CounterStation;
-import stations.PreperationStation;
-import stations.Pantry;
-import stations.Station;
+import stations.*;
 
 import static helper.Constants.PPM;
 
@@ -110,12 +107,14 @@ public class MapHelper {
                     Station station;
                     switch(rectangleName) {
                         case "Cut":
-                            station = new PreperationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.cut);
+                            gameScreen.addRenderGameEntity(station);
                             break;
                         case "Fry":
-                            station = new PreperationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.fry);
+                            gameScreen.addRenderGameEntity(station);
                             break;
                         case "Counter":
                             station = new CounterStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
@@ -123,7 +122,7 @@ public class MapHelper {
                             gameScreen.addRenderGameEntity(station);
                             break;
                         case "Bin":
-                            station = new PreperationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new BinStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.bin);
                             break;
                         default:

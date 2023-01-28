@@ -5,8 +5,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import food.FoodItem;
 
-public class PreperationStation extends Station {
-    public PreperationStation(float width, float height, Body body, Rectangle rectangle) {
+public class PreparationStation extends Station {
+    public PreparationStation(float width, float height, Body body, Rectangle rectangle) {
         super(width, height, body, rectangle);
     }
 
