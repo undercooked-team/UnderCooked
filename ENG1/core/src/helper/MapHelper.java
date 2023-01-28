@@ -168,4 +168,8 @@ public class MapHelper {
             }
         }
     }
+
+    public void dispose() {
+        tiledMap.dispose();
+    }
 }

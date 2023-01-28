@@ -20,6 +20,8 @@ import cooks.GameEntity;
 import helper.CollisionHelper;
 import helper.GameHud;
 import helper.MapHelper;
+import helper.Util;
+import interactions.Interactions;
 import stations.CookInteractable;
 
 import java.util.Comparator;
@@ -77,6 +79,10 @@ public class GameScreen extends ScreenAdapter {
 
     private void update(float delta)
     {
+
+        // First thing, update all inputs
+        Interactions.updateKeys();
+
         long diffInMillis = TimeUtils.timeSinceMillis(startTime);
         if (diffInMillis >= 1000) {
             startTime += 1000;
@@ -218,12 +224,24 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void reset() {
+        // Reset all variables
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
-        for (int i = cooks.size-1 ; i >= 0 ; i--) {
-            cooks.removeIndex(i);
-        }
+        Util.clearArray(cooks);
+        Util.clearArray(gameEntities);
+        mapHelper.dispose();
+
+        // Reload the map
+        mapHelper.setupMap();
+        cookIndex = -1;
+    }
+
+    public void startGame() {
+        secondsPassed = 0;
+        minutesPassed = 0;
+        hoursPassed = 0;
+        startTime = TimeUtils.millis();
     }
 
 }
