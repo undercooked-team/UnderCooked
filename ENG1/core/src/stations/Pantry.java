@@ -23,7 +23,7 @@ public class Pantry extends CookInteractable {
 
     public void interact(Cook cook, InputKey.InputTypes inputType) {
         // If the input is to pick up:
-        if (inputType == InputKey.InputTypes.PICK_UP) {
+        if (inputType == InputKey.InputTypes.PICK_UP || inputType == InputKey.InputTypes.USE) {
             // Add the new FoodItem onto the stack.
             FoodItem.FoodID addedFood = foodID;
             // If the foodID is "bun", check which bun it should add.
