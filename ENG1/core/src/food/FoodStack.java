@@ -63,6 +63,16 @@ public class FoodStack {
     public Array<FoodID> getStack() {
         return foodStack;
     }
+
+    /**
+     * Removes all items from the stack
+     */
+    public void clearStack() {
+        for (int i = foodStack.size-1 ; i >= 0 ; i--) {
+            foodStack.removeIndex(i);
+        }
+    }
+
     /**
     * foodStack setter
     * @param newStack The new foodStack
