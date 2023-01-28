@@ -5,7 +5,10 @@ public class InputKey {
     public enum InputTypes {
         PUT_DOWN,
         PICK_UP,
-        USE
+        USE,
+        RESET_GAME,
+        INSTRUCTIONS,
+        PLAY_GAME
     }
 
     private int key;
@@ -23,5 +26,4 @@ public class InputKey {
     public InputTypes getType() {
         return inputType;
     }
-
 }

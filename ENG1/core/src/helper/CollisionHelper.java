@@ -42,8 +42,4 @@ public class CollisionHelper {
         return closest;
     }
 
-    /*public void setStations(Stations stations) {
-        this.stations = stations;
-    }*/
-
 }

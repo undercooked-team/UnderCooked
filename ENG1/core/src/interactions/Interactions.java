@@ -2,6 +2,7 @@ package interactions;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 import food.FoodItem.FoodID;
@@ -44,7 +45,8 @@ public class Interactions {
 
     /** The different IDs of interaction. Used to get the Arrays. */
     public enum InputID {
-        INTERACT
+        INTERACT,
+        MENU
     }
 
 
@@ -65,11 +67,44 @@ public class Interactions {
                 new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.J),
                 new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
         }));
+        inputs.put(InputID.MENU, new Array<>(new InputKey[]{
+                new InputKey(InputKey.InputTypes.INSTRUCTIONS, Input.Keys.I),
+                new InputKey(InputKey.InputTypes.RESET_GAME, Input.Keys.R),
+                new InputKey(InputKey.InputTypes.PLAY_GAME, Input.Keys.ENTER)
+        }));
     }
+
+    public static Array<InputKey.InputTypes> keysPressed = new Array<>();
+    public static Array<InputKey.InputTypes> keysJustPressed = new Array<>();
 
     public static Array<InputKey> getInputKeys(InputID inputID) {
         return inputs.get(inputID);
     }
+
+    public static void resetKeys() {
+        keysPressed.clear();
+        keysJustPressed.clear();
+    }
+
+    public static void updateKeys() {
+        resetKeys();
+        for (InputID inputID : InputID.values()) {
+            for (InputKey inputKey : inputs.get(inputID)) {
+                if (Gdx.input.isKeyPressed(inputKey.getKey())) {
+                    keysPressed.add(inputKey.getType());
+                }
+            }
+        }
+    }
+
+    public static boolean isPressed(InputKey.InputTypes inputID) {
+        return keysPressed.contains(inputID, true);
+    }
+
+    public static boolean isJustPressed(InputKey.InputTypes inputID) {
+        return keysJustPressed.contains(inputID, true);
+    }
+
 
     /**
     * Convert a FoodItem's foodID into another foodID using station of stationID.
