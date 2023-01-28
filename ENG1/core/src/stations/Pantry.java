@@ -44,7 +44,6 @@ public class Pantry extends CookInteractable {
                 addedFood = bottom ? FoodItem.FoodID.bottomBun : FoodItem.FoodID.topBun;
             }
             cook.foodStack.addStack(addedFood);
-            System.out.println(cook.foodStack);
         }
     }
 

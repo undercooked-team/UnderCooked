@@ -35,9 +35,8 @@ public class Station extends CookInteractable {
     }
 
     public void interact(Cook cook, InputKey.InputTypes inputType) {
-        System.out.println(stationID);
-
-        System.out.println(cook.foodStack);
+        // System.out.println(stationID);
+        // System.out.println(cook.foodStack);
     }
 
     public void update(float delta) { }

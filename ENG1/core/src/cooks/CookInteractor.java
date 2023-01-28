@@ -66,13 +66,12 @@ public class CookInteractor extends GameEntity {
     }
 
     public void checkCollisions(Cook cook, InputKey.InputTypes inputType) {
-        System.out.println("Attempting to interact...");
         CookInteractable interactStation = ch.getInteract(cook, collision);
         if (interactStation != null) {
             interactStation.interact(cook, inputType);
-        } else {
-            System.out.println("Failed!");
-        }
+        } /*else {
+            System.out.println("Failed");
+        }*/
     }
 
     @Override
