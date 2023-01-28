@@ -163,10 +163,10 @@ public class Recipe {
 	}
 
 	// vscode debugging
-	public static void main(String[] args) {
-		String[] myRecipes = recipes.get("Tomato Onion Burger");
-		for (String myRecipe : myRecipes) {
-			System.out.println(myRecipe);
-		}
-	}
+	// public static void main(String[] args) {
+	// 	String[] myRecipes = recipes.get("Tomato Onion Burger");
+	// 	for (String myRecipe : myRecipes) {
+	// 		System.out.println(myRecipe);
+	// 	}
+	// }
 }
