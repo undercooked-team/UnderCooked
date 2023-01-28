@@ -1,6 +1,5 @@
 package stations;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,8 +9,7 @@ import cooks.Cook;
 import food.FoodItem;
 import food.FoodStack;
 import game.GameSprites;
-
-import static helper.Constants.PPM;
+import interactions.InputKey;
 
 public class CounterStation extends Station {
 
@@ -24,7 +22,7 @@ public class CounterStation extends Station {
     }
 
     @Override
-    public void interact(Cook cook) {
+    public void interact(Cook cook, InputKey.InputTypes inputType) {
         // If the Cook is holding something, add the top thing to the counter's stack.
         if (cook.foodStack.size() > 0) {
             // Take it from the cook, and add it to this counter's stack.

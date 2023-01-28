@@ -17,6 +17,8 @@ import static helper.Constants.PPM;
 
 import food.FoodStack;
 import food.FoodItem.FoodID;
+import interactions.InputKey;
+import interactions.Interactions;
 
 import java.util.ArrayList;
 
@@ -256,8 +258,10 @@ public class Cook extends GameEntity {
 
         setDir();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            cookInteractor.checkCollisions(this);
+        for (InputKey inputKey : Interactions.getInputKeys(Interactions.InputID.INTERACT)) {
+            if (Gdx.input.isKeyJustPressed(inputKey.getKey())) {
+                cookInteractor.checkCollisions(this, inputKey.getType());
+            }
         }
         /*if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             ArrayList<FoodID> foodItems = foodStack.getStack();

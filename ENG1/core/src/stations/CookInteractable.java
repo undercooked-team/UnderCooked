@@ -6,8 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import cooks.GameEntity;
 
-import food.FoodItem.FoodID;
-import java.util.HashMap;
+import interactions.InputKey;
 
 import static helper.Constants.PPM;
 
@@ -23,7 +22,7 @@ public class CookInteractable extends GameEntity {
         return this.interactRect;
     }
 
-    public void interact(Cook cook) {
+    public void interact(Cook cook, InputKey.InputTypes inputType) {
 
         System.out.println("Ping! Interacted with station at x=" + body.getPosition().x*PPM +
                 ", y=" + body.getPosition().x*PPM);

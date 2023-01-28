@@ -5,8 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import cooks.Cook;
 import food.FoodItem;
-
-import java.util.ArrayList;
+import interactions.InputKey;
 
 public class Pantry extends CookInteractable {
 
@@ -20,7 +19,7 @@ public class Pantry extends CookInteractable {
         this.foodID = foodID;
     }
 
-    public void interact(Cook cook) {
+    public void interact(Cook cook, InputKey.InputTypes inputType) {
         System.out.println(foodID);
         // Add the new FoodItem onto the stack.
         FoodItem.FoodID addedFood = foodID;

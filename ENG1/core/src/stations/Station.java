@@ -1,14 +1,12 @@
 package stations;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
-import food.FoodItem.FoodID;
 import game.GameSprites;
-import interactions.Interactions;
+import interactions.InputKey;
 
 public class Station extends CookInteractable {
 
@@ -33,7 +31,7 @@ public class Station extends CookInteractable {
         this.stationID = stationID;
     }
 
-    public void interact(Cook cook) {
+    public void interact(Cook cook, InputKey.InputTypes inputType) {
         System.out.println(stationID);
 
         System.out.println(cook.foodStack);

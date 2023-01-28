@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
+import interactions.InputKey;
 import stations.CookInteractable;
 
 import static cooks.Cook.OFFSET_Y;
@@ -63,11 +64,11 @@ public class CookInteractor extends GameEntity {
         this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
 
-    public void checkCollisions(Cook cook) {
+    public void checkCollisions(Cook cook, InputKey.InputTypes inputType) {
         System.out.println("Attempting to interact...");
         CookInteractable interactStation = ch.getInteract(cook, collision);
         if (interactStation != null) {
-            interactStation.interact(cook);
+            interactStation.interact(cook, inputType);
         } else {
             System.out.println("Failed!");
         }

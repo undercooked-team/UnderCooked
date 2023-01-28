@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import food.FoodItem;
+import interactions.InputKey;
 
 public class PreparationStation extends Station {
     public PreparationStation(float width, float height, Body body, Rectangle rectangle) {
@@ -11,7 +12,7 @@ public class PreparationStation extends Station {
     }
 
     @Override
-    public void interact(Cook cook) {
+    public void interact(Cook cook, InputKey.InputTypes inputType) {
         // If Cook is not holding any food, stop here.
         if (cook.foodStack.peekStack() == null) {
             System.out.println("No FoodItem held.");
