@@ -36,7 +36,7 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private Array<Customer> customers;
     private PriorityQueue<CustomerDef> customerToSpawn;
-    private long startTime = 0;
+    private long previousSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
     private SpriteBatch batch;
@@ -64,7 +64,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
-        this.startTime = TimeUtils.millis();
+        this.previousSecond = TimeUtils.millis();
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = new CollisionHelper(this);
@@ -108,9 +108,9 @@ public class GameScreen extends ScreenAdapter {
         // First thing, update all inputs
         Interactions.updateKeys();
 
-        long diffInMillis = TimeUtils.timeSinceMillis(startTime);
+        long diffInMillis = TimeUtils.timeSinceMillis(previousSecond);
         if (diffInMillis >= 1000) {
-            startTime += 1000;
+            previousSecond += 1000;
             secondsPassed += 1;
             if (secondsPassed >= 60) {
                 secondsPassed = 0;
@@ -291,7 +291,7 @@ public class GameScreen extends ScreenAdapter {
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
-        startTime = TimeUtils.millis();
+        previousSecond = TimeUtils.millis();
         customerCount = customers;
         gameHud.setCustomerCount(customers);
     }
