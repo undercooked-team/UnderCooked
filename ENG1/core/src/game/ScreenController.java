@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import food.FoodItem;
 import stations.Station;
 
@@ -34,9 +35,8 @@ public class ScreenController {
         this.boot.setScreen(this.screens.get(screenID));
     }
 
-    public SpriteBatch getSpriteBatch() {
-        return boot.getSpriteBatch();
-    }
+    public SpriteBatch getSpriteBatch() { return boot.getSpriteBatch(); }
+    public ShapeRenderer getShapeRenderer() { return boot.getShapeRenderer(); }
 
     enum ScreenID {
         MENU,

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -74,7 +75,7 @@ public class Cook extends GameEntity {
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
         x = body.getPosition().x*PPM;
         y = body.getPosition().y*PPM;
         this.cookInteractor.updatePosition(x,y,dir);
@@ -105,6 +106,9 @@ public class Cook extends GameEntity {
             renderFood(batch);
         }
     }
+
+    @Override
+    public void renderShape(ShapeRenderer shape) { }
 
     private float foodRelativeX(Cook.Facing dir) {
         switch (dir) {

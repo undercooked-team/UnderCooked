@@ -109,17 +109,17 @@ public class MapHelper {
                         case "Cut":
                             station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.cut);
-                            gameScreen.addRenderGameEntity(station);
+                            gameScreen.addGameEntity(station);
                             break;
                         case "Fry":
                             station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.fry);
-                            gameScreen.addRenderGameEntity(station);
+                            gameScreen.addGameEntity(station);
                             break;
                         case "Counter":
                             station = new CounterStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.counter);
-                            gameScreen.addRenderGameEntity(station);
+                            gameScreen.addGameEntity(station);
                             break;
                         case "Bin":
                             station = new BinStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);

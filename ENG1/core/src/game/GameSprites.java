@@ -52,7 +52,8 @@ public class GameSprites {
     }
 
     public Sprite getSprite(SpriteID spriteID, String spriteName) {
-        return spriteMap.get(spriteKey(spriteID,spriteName));
+        Sprite returnSprite = spriteMap.get(spriteKey(spriteID,spriteName));
+        return returnSprite;
     }
 
     public void dispose() {
