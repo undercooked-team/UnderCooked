@@ -37,10 +37,10 @@ public class Interactions {
      * */
     private static final HashMap<InputID, Array<InputKey>> inputs = new HashMap<>();
     static {
-        inputs.put(InputID.INTERACT,new Array<InputKey>(new InputKey[]{
-                new InputKey(InputKey.InputTypes.USE,Input.Keys.J),
-                new InputKey(InputKey.InputTypes.PICK_UP,Input.Keys.U),
-                new InputKey(InputKey.InputTypes.PUT_DOWN,Input.Keys.M)
+        inputs.put(InputID.INTERACT, new Array<>(new InputKey[]{
+                new InputKey(InputKey.InputTypes.USE, Input.Keys.K),
+                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.J),
+                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
         }));
     }
 

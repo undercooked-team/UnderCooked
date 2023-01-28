@@ -23,16 +23,25 @@ public class CounterStation extends Station {
 
     @Override
     public void interact(Cook cook, InputKey.InputTypes inputType) {
-        // If the Cook is holding something, add the top thing to the counter's stack.
-        if (cook.foodStack.size() > 0) {
+        // If Cook is using the put down input, put down the item in the top of their stack
+        if (cook.foodStack.size() > 0 && inputType == InputKey.InputTypes.PUT_DOWN) {
             // Take it from the cook, and add it to this counter's stack.
             foodStack.addStack(cook.foodStack.popStack());
             return;
         }
-        FoodStack tempStack = foodStack;
-        // If the above doesn't apply, then just swap the stacks.
-        foodStack = cook.foodStack;
-        cook.foodStack = tempStack;
+        // If Cook is using the pick up input, pick up the item on the top of this stack
+        if (foodStack.size() > 0 && inputType == InputKey.InputTypes.PICK_UP) {
+            // Take it from the cook, and add it to this counter's stack.
+            cook.foodStack.addStack(foodStack.popStack());
+            return;
+        }
+        // Otherwise swap the items on the use input
+        if (inputType == InputKey.InputTypes.USE) {
+            FoodStack tempStack = foodStack;
+            // If the above doesn't apply, then just swap the stacks.
+            foodStack = cook.foodStack;
+            cook.foodStack = tempStack;
+        }
     }
 
     @Override
