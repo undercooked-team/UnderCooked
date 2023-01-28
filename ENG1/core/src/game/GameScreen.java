@@ -81,7 +81,6 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper = new MapHelper(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
-        this.gameHud = new GameHud(batch);
 
         customerToSpawn = new PriorityQueue<CustomerDef>();
         customers = new Array<Customer>();

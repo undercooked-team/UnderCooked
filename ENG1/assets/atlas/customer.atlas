@@ -1,0 +1,13 @@
+
+customer.png
+size: 174, 284
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+0
+  rotate: false
+  xy: 2, 2
+  size: 170, 280
+  orig: 170, 280
+  offset: 0, 0
+  index: -1
