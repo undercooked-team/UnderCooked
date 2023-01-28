@@ -145,9 +145,9 @@ public class GameScreen extends ScreenAdapter {
             updateCustomers();
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        if(Interactions.isJustPressed(InputKey.InputTypes.PAUSE))
         {
-            Gdx.app.exit();
+            screenController.pauseGameScreen();
         }
         world.step(1/60f,6,2);
         for (GameEntity entity : gameEntities) {
@@ -166,9 +166,20 @@ public class GameScreen extends ScreenAdapter {
     {
 
         this.update(delta);
+
+        renderGame(delta);
+
+        if(customerCount<1)
+        {
+            screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
+            ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
+        }
+    }
+
+    public void renderGame(float delta) {
+
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         orthogonalTiledMapRenderer.render();
         batch.begin();
 
@@ -193,11 +204,7 @@ public class GameScreen extends ScreenAdapter {
         shape.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
-        if(customerCount<1)
-        {
-            screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
-            ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
-        }
+
     }
 
     public class DrawQueueComparator implements Comparator<GameEntity> {
@@ -239,6 +246,14 @@ public class GameScreen extends ScreenAdapter {
     public int getCustomerCount() {
         return this.customerCount;
     }
+    public long getPreviousSecond() {
+        return previousSecond;
+    }
+
+    public void setPreviousSecond(long newSecond) {
+        previousSecond = newSecond;
+    }
+
     public void updateCustomers()
     {
         if(customerCount<1)

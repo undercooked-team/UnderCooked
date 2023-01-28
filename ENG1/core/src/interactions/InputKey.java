@@ -13,7 +13,9 @@ public class InputKey {
         COOK_RIGHT,
         COOK_DOWN,
         COOK_LEFT,
-        COOK_SWAP
+        COOK_SWAP,
+        PAUSE,
+        UNPAUSE
     }
 
     private int key;

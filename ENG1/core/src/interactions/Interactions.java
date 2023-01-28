@@ -66,13 +66,16 @@ public class Interactions {
         inputs.put(InputID.MENU, new Array<>(new InputKey[]{
                 new InputKey(InputKey.InputTypes.INSTRUCTIONS, Input.Keys.I),
                 new InputKey(InputKey.InputTypes.RESET_GAME, Input.Keys.R),
-                new InputKey(InputKey.InputTypes.PLAY_GAME, Input.Keys.ENTER)
+                new InputKey(InputKey.InputTypes.PLAY_GAME, Input.Keys.ENTER),
+                new InputKey(InputKey.InputTypes.PAUSE, Input.Keys.ESCAPE),
+                new InputKey(InputKey.InputTypes.UNPAUSE, Input.Keys.ESCAPE)
         }));
         inputs.put(InputID.COOK_MOVEMENT, new Array<>(new InputKey[] {
                 new InputKey(InputKey.InputTypes.COOK_UP,Input.Keys.W),
                 new InputKey(InputKey.InputTypes.COOK_LEFT,Input.Keys.A),
                 new InputKey(InputKey.InputTypes.COOK_DOWN,Input.Keys.S),
                 new InputKey(InputKey.InputTypes.COOK_RIGHT,Input.Keys.D),
+
                 new InputKey(InputKey.InputTypes.COOK_UP,Input.Keys.UP),
                 new InputKey(InputKey.InputTypes.COOK_LEFT,Input.Keys.LEFT),
                 new InputKey(InputKey.InputTypes.COOK_DOWN,Input.Keys.DOWN),

@@ -1,12 +1,11 @@
 package game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import food.FoodItem;
-import stations.Station;
+import com.badlogic.gdx.utils.TimeUtils;
+import interactions.Interactions;
 
 import java.util.HashMap;
 
@@ -17,7 +16,9 @@ public class ScreenController {
     private MenuScreen menuScreen;
     private GameOverScreen gameOverScreen;
     private InstructionScreen instructionScreen;
+    private PauseScreen pauseScreen;
     private HashMap<ScreenID, ScreenAdapter> screens;
+    private long timeDiff;
     // private PauseScreen pauseScreen;
 
     public ScreenController(Boot boot, OrthographicCamera camera) {
@@ -32,6 +33,9 @@ public class ScreenController {
         this.screens.put(ScreenID.GAME,gameScreen);
         this.screens.put(ScreenID.GAMEOVER, gameOverScreen);
         this.screens.put(ScreenID.INSTRUCTIONS,instructionScreen);
+
+        this.pauseScreen = new PauseScreen(this,camera);
+        this.screens.put(ScreenID.PAUSE,pauseScreen);
     }
 
     public void setScreen(ScreenID screenID) {
@@ -55,6 +59,16 @@ public class ScreenController {
 
     public void resetGameScreen() {
         gameScreen.reset();
+    }
+
+    public void pauseGameScreen() {
+        timeDiff = TimeUtils.millis() - gameScreen.getPreviousSecond();
+        setScreen(ScreenID.PAUSE);
+    }
+
+    public void playGameScreen() {
+        gameScreen.setPreviousSecond(TimeUtils.millis()-timeDiff);
+        setScreen(ScreenID.GAME);
     }
 
 }
