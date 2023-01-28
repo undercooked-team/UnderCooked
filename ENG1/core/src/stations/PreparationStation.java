@@ -18,6 +18,7 @@ public class PreparationStation extends Station {
     private Interactions.InteractionResult interaction;
     private float progress;
     private int stepNum;
+    private StationState state;
 
     public PreparationStation(float width, float height, Body body, Rectangle rectangle) {
         super(width, height, body, rectangle);
@@ -28,24 +29,30 @@ public class PreparationStation extends Station {
         if (inUse) {
             if (progress < 100) {
                 float[] steps = interaction.getSteps();
-                progress = Math.min(progress + interaction.getSpeed(), 100);
+                progress = Math.min(progress + interaction.getSpeed() * delta, 100);
                 if (stepNum < steps.length) {
                     // -1 instant case
                     if (interaction.getSpeed() == -1) {
                         progress = steps[stepNum];
+                        state = StationState.NEED_USE;
                     } else {
                         if (progress >= steps[stepNum]) {
                             progress = steps[stepNum];
+                            state = StationState.NEED_USE;
+                        } else {
+                            state = StationState.PREPARING;
                         }
-                        progress += interaction.getSpeed() * delta;
                     }
                 } else {
                     if (interaction.getSpeed() == -1) {
                         progress = 100;
+                        state = StationState.FINISHED;
                     } else {
-                        progress += interaction.getSpeed() * delta;
+                        state = StationState.PREPARING;
                     }
                 }
+            } else {
+                state = StationState.FINISHED;
             }
         }
     }
@@ -67,6 +74,12 @@ public class PreparationStation extends Station {
         }
     }
 
+    private enum StationState {
+        PREPARING,
+        NEED_USE,
+        FINISHED
+    }
+
     @Override
     public void renderShape(ShapeRenderer shape) {
         // Render the progress bar when inUse
@@ -79,8 +92,16 @@ public class PreparationStation extends Station {
             shape.rect(rectX, rectY, rectWidth, rectHeight, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK);
             // Now the progress bar.
             float progressWidth = rectWidth-4;
-            Color progressColor;
-            progressColor = Color.GREEN;
+            Color progressColor = Color.SKY;
+            // If preparation is done, show as green.
+            switch (state) {
+                case NEED_USE:
+                    progressColor = Color.YELLOW;
+                    break;
+                case FINISHED:
+                    progressColor = Color.GREEN;
+                    break;
+            }
             shape.rect(rectX+2,rectY+2,progress/100*progressWidth,rectHeight-4,progressColor,progressColor,progressColor,progressColor);
         }
     }
@@ -105,12 +126,14 @@ public class PreparationStation extends Station {
                 stepNum = 0;
                 progress = 0;
                 inUse = true;
+                state = StationState.PREPARING;
 
                 // If the speed is -1, immediately set the progress to the first step.
                 float[] steps = interaction.getSteps();
                 if (steps.length > 0) {
                     if (interaction.getSpeed() == -1) {
                         progress = steps[0];
+                        state = StationState.NEED_USE;
                     }
                 }
             }

@@ -16,7 +16,7 @@ public class Interactions {
         interactions.put(InteractionKey(FoodID.lettuce, StationID.cut), new InteractionResult(FoodID.lettuceChop,new float[] {25,50,75},-1));
         interactions.put(InteractionKey(FoodID.tomato, StationID.cut), new InteractionResult(FoodID.tomatoChop,new float[] {25,50,75},-1));
         interactions.put(InteractionKey(FoodID.onion, StationID.cut), new InteractionResult(FoodID.onionChop,new float[] {25,50,75},-1));
-        interactions.put(InteractionKey(FoodID.meat, StationID.fry), new InteractionResult(FoodID.meatCook,new float[] {50},0.5F));
+        interactions.put(InteractionKey(FoodID.meat, StationID.fry), new InteractionResult(FoodID.meatCook,new float[] {50},20F));
     }
 
     public static class InteractionResult {
@@ -26,7 +26,7 @@ public class Interactions {
          * @param steps -
          *              The steps in a range of 0 - 100 of the process where input is required
          * @param speed -
-         *              The speed of which the progress bar fills up for a station. -1 is instant.
+         *              The speed of which the progress bar fills up for a station per second. -1 is instant.
          */
         private FoodID result;
         private float[] steps;
