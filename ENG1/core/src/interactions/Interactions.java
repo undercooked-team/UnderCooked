@@ -1,6 +1,9 @@
 package interactions;
 
 import java.util.HashMap;
+
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.utils.Array;
 import food.FoodItem.FoodID;
 import stations.Station.StationID;
 
@@ -14,6 +17,35 @@ public class Interactions {
         interactions.put(InteractionKey(FoodID.tomato, StationID.cut), FoodID.tomatoChop);
         interactions.put(InteractionKey(FoodID.onion, StationID.cut), FoodID.onionChop);
         interactions.put(InteractionKey(FoodID.meat, StationID.fry), FoodID.meatCook);
+    }
+
+    /** The different IDs of interaction. Used to get the Arrays. */
+    public enum InputID {
+        INTERACT
+    }
+
+
+    /** A HashMap containing all different forms of user inputs. These can easily
+     * be changed / modified as needed from here, instead of searching through the
+     * code.
+     *
+     * The InputKeys returned can then be looped through, and checked using the appropriate
+     * Gdx.input.isKeyPressed function.
+     *
+     * This means dynamic key changing can be added, if you change this function from static,
+     * and multiple keys can be assigned to one control.
+     * */
+    private static final HashMap<InputID, Array<InputKey>> inputs = new HashMap<>();
+    static {
+        inputs.put(InputID.INTERACT, new Array<>(new InputKey[]{
+                new InputKey(InputKey.InputTypes.USE, Input.Keys.K),
+                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.J),
+                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
+        }));
+    }
+
+    public static Array<InputKey> getInputKeys(InputID inputID) {
+        return inputs.get(inputID);
     }
 
     /**

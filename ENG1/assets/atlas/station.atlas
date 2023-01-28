@@ -1,0 +1,20 @@
+
+station.png
+size: 53, 31
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+cut
+  rotate: false
+  xy: 2, 2
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+fry
+  rotate: false
+  xy: 31, 11
+  size: 20, 18
+  orig: 20, 18
+  offset: 0, 0
+  index: -1

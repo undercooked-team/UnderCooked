@@ -1,10 +1,12 @@
 package stations;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
-import food.FoodItem.FoodID;
-import interactions.Interactions;
+import game.GameSprites;
+import interactions.InputKey;
 
 public class Station extends CookInteractable {
 
@@ -18,31 +20,28 @@ public class Station extends CookInteractable {
     }
 
     StationID stationID;
+    boolean inUse;
 
     public Station(float width, float height, Body body, Rectangle rectangle) {
         super(width,height,body,rectangle);
+        inUse = false;
     }
 
     public void setID(StationID stationID) {
         this.stationID = stationID;
     }
 
-    public void interact(Cook cook) {
+    public void interact(Cook cook, InputKey.InputTypes inputType) {
         System.out.println(stationID);
-        // If Cook is not holding any food, stop here.
-        if (cook.foodStack.peekStack() == null) {
-            System.out.println("No FoodItem held.");
-            return;
-        }
-        // Add the new proccessed item onto the stack.
-        FoodID newFood = interactions.Interactions.interaction(cook.foodStack.peekStack(), stationID);
-        if (newFood != null) {
-            cook.foodStack.popStack();
-            cook.foodStack.addStack(newFood);
-        }
-        else {
-            // Code to run when top FoodItem cannot interact with the station.
-        }
+
         System.out.println(cook.foodStack);
+    }
+
+    public void render(SpriteBatch batch) {
+        // Render the station's item on top, when inUse is false.
+        if (!inUse) {
+            Sprite stationSprite = GameSprites.getInstance().getSprite(GameSprites.SpriteID.STATION,String.valueOf(stationID));
+            batch.draw(stationSprite,x-35F/2,y-10F,35F,35F);
+        }
     }
 }

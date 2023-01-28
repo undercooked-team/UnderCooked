@@ -29,7 +29,7 @@ import static helper.Constants.PPM;
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private long startTime = 0;
-    private int secondsPassed = 0, minutesPassed = 0;
+    private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
     private SpriteBatch batch;
     private ScreenController screenController;
@@ -58,7 +58,6 @@ public class GameScreen extends ScreenAdapter {
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = new CollisionHelper(this);
-        this.gameSprites = new GameSprites();
         this.cookIndex = -1;
         this.camera = camera;
         this.screenController = screenController;
@@ -82,10 +81,14 @@ public class GameScreen extends ScreenAdapter {
             if (secondsPassed >= 60) {
                 secondsPassed = 0;
                 minutesPassed += 1;
+                if (minutesPassed >= 60) {
+                    minutesPassed = 0;
+                    hoursPassed += 1;
+                }
             }
         }
 
-        gameHud.updateTime(minutesPassed, secondsPassed);
+        gameHud.updateTime(hoursPassed, minutesPassed, secondsPassed);
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
@@ -138,6 +141,11 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
+        if(gameHud.GetCustomers()<1)
+        {
+            screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
+            ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
+        }
     }
 
     public class DrawQueueComparator implements Comparator<GameEntity> {
@@ -180,10 +188,13 @@ public class GameScreen extends ScreenAdapter {
         interactables.add(cookInteractable);
     }
 
+    public void addRenderGameEntity(GameEntity entity) {
+        drawQueue.add(entity);
+    }
+
     public CollisionHelper getCollisionHelper() {
         return collisionHelper;
     }
-    public GameSprites getGameSprites() { return gameSprites; }
 
     public Array<CookInteractable> stationCollisions(Rectangle collision) {
         Array<CookInteractable> output = new Array<>();
@@ -193,6 +204,15 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         return output;
+    }
+
+    public void reset() {
+        secondsPassed = 0;
+        minutesPassed = 0;
+        hoursPassed = 0;
+        for (int i = cooks.size-1 ; i >= 0 ; i--) {
+            cooks.removeIndex(i);
+        }
     }
 
 }

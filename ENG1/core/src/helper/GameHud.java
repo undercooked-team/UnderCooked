@@ -61,16 +61,7 @@ public class GameHud extends Hud {
 
     public void updateTime(int hoursPassed, int minutesPassed, int secondsPassed)
     {
-        String timeString = "";
-        if (hoursPassed > 0) {
-            timeString += hoursPassed + ":";
-        }
-        timeString += minutesPassed + ":";
-        if (secondsPassed < 10) {
-            timeString += "0";
-        }
-        timeString += secondsPassed;
-        timeLabel.setText(String.format(timeString));
+        timeLabel.setText(String.format(Util.formatTime(hoursPassed,minutesPassed,secondsPassed)));
     }
     public void UpdateCustomers()
     {
@@ -80,5 +71,9 @@ public class GameHud extends Hud {
         }
         CustomerCount--;
         CustomerScore.setText(String.format("%1d",CustomerCount));
+    }
+    public int GetCustomers()
+    {
+        return CustomerCount;
     }
 }

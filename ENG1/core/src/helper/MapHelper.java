@@ -15,8 +15,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import food.FoodItem;
 import game.GameScreen;
-import stations.Pantry;
-import stations.Station;
+import stations.*;
 
 import static helper.Constants.PPM;
 
@@ -105,25 +104,33 @@ public class MapHelper {
                     // Stations
                     rectangleName = rectangleName.substring("Station".length());
                     Body body = makeBody(rectangle, true);
-                    Station station = new Station(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
-                    gameScreen.addInteractable(station);
+                    Station station;
                     switch(rectangleName) {
                         case "Cut":
+                            station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.cut);
+                            gameScreen.addRenderGameEntity(station);
                             break;
                         case "Fry":
+                            station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.fry);
+                            gameScreen.addRenderGameEntity(station);
                             break;
                         case "Counter":
+                            station = new CounterStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.counter);
+                            gameScreen.addRenderGameEntity(station);
                             break;
                         case "Bin":
+                            station = new BinStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.bin);
                             break;
                         default:
+                            station = new Station(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.none);
                             break;
                     }
+                    gameScreen.addInteractable(station);
                 }
 
                 if (rectangleName.startsWith("Pantry")) {

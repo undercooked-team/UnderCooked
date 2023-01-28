@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
+import interactions.InputKey;
 import stations.CookInteractable;
 
 import static cooks.Cook.OFFSET_Y;
@@ -25,9 +26,9 @@ public class CookInteractor extends GameEntity {
     private float relativeX(Cook.Facing dir) {
         switch (dir) {
             case RIGHT:
-                return 1.2F;
+                return 38.4F;
             case LEFT:
-                return -1.2F;
+                return -38.4F;
             default:
                 return 0F;
         }
@@ -36,12 +37,12 @@ public class CookInteractor extends GameEntity {
     private float relativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
-                return 0.8F;
+                return 25.6F;
             case DOWN:
-                return -0.8F;
+                return -25.6F;
             case RIGHT:
             case LEFT:
-                return 0.4F;
+                return 12.8F;
             default:
                 return 0F;
         }
@@ -54,17 +55,20 @@ public class CookInteractor extends GameEntity {
         this.x = x + relX;
         this.y = y + relY;
 
-        this.collision.x = this.x * PPM - collision.width/2;
-        this.collision.y = this.y * PPM - collision.height/2;
+        this.collision.x = this.x - collision.width/2;
+        this.collision.y = this.y - collision.height/2;
+
+        this.x /= PPM;
+        this.y /= PPM;
 
         this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
 
-    public void checkCollisions(Cook cook) {
+    public void checkCollisions(Cook cook, InputKey.InputTypes inputType) {
         System.out.println("Attempting to interact...");
-        CookInteractable interactStation = ch.getInteract(collision);
+        CookInteractable interactStation = ch.getInteract(cook, collision);
         if (interactStation != null) {
-            interactStation.interact(cook);
+            interactStation.interact(cook, inputType);
         } else {
             System.out.println("Failed!");
         }

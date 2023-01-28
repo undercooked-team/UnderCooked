@@ -17,6 +17,8 @@ import static helper.Constants.PPM;
 
 import food.FoodStack;
 import food.FoodItem.FoodID;
+import interactions.InputKey;
+import interactions.Interactions;
 
 import java.util.ArrayList;
 
@@ -46,7 +48,7 @@ public class Cook extends GameEntity {
         this.dir = Facing.DOWN;
         this.speed = 10f;
         this.gameScreen = gameScreen;
-        this.gameSprites = gameScreen.getGameSprites();
+        this.gameSprites = GameSprites.getInstance();
 
         // Initialize FoodStack
         this.foodStack = new FoodStack();
@@ -73,8 +75,8 @@ public class Cook extends GameEntity {
 
     @Override
     public void update() {
-        x = body.getPosition().x;
-        y = body.getPosition().y;
+        x = body.getPosition().x*PPM;
+        y = body.getPosition().y*PPM;
         this.cookInteractor.updatePosition(x,y,dir);
     }
 
@@ -91,7 +93,7 @@ public class Cook extends GameEntity {
     @Override
     public void render(SpriteBatch batch) {
         setSprite();
-        sprite.setPosition(x*PPM-width/2-2.5F,y*PPM-height/2); // -2.5 for a similar reason to the below one
+        sprite.setPosition(x-width/2-2.5F,y-height/2); // -2.5 for a similar reason to the below one
         this.sprite.setSize(47.5F,70);
 
         // If the cook is looking anywhere but down, draw the food first
@@ -133,15 +135,15 @@ public class Cook extends GameEntity {
         // Loop through the items in the food stack.
         // It is done from the end of the stack to the start because the stack's top is
         // at 0, and the bottom at the end.
-        ArrayList<FoodID> foodList = foodStack.getStack();
+        Array<FoodID> foodList = foodStack.getStack();
         float xOffset = foodRelativeX(dir), yOffset = foodRelativeY(dir);
         // Get offset based on direction.
 
-        float drawX = x*PPM, drawY = (y*PPM) + OFFSET_Y;
+        float drawX = x, drawY = y + OFFSET_Y;
         /*if (foodStack.size() > 0) {
             foodStack.popStack();
         }*/
-        for (int i = foodList.size()-1 ; i >= 0 ; i--) {
+        for (int i = foodList.size-1 ; i >= 0 ; i--) {
             Sprite foodSprite = gameSprites.getSprite(GameSprites.SpriteID.FOOD, String.valueOf(foodList.get(i)));
             Float drawInc = FoodItem.foodHeights.get(foodList.get(i));
             if (drawInc == null) {
@@ -256,15 +258,17 @@ public class Cook extends GameEntity {
 
         setDir();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            cookInteractor.checkCollisions(this);
+        for (InputKey inputKey : Interactions.getInputKeys(Interactions.InputID.INTERACT)) {
+            if (Gdx.input.isKeyJustPressed(inputKey.getKey())) {
+                cookInteractor.checkCollisions(this, inputKey.getType());
+            }
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+        /*if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             ArrayList<FoodID> foodItems = foodStack.getStack();
             for (int i = foodStack.size()-1 ; i >= 0 ; i--) {
                 foodItems.remove(i);
             }
-        }
+        }*/
 
         body.setLinearVelocity(velX * speed,velY * speed);
     }

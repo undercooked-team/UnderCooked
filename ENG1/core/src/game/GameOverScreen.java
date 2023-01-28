@@ -1,6 +1,9 @@
 package game;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,16 +15,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import helper.Constants;
+import helper.Util;
 
-public class MenuScreen extends ScreenAdapter {
-
+public class GameOverScreen extends ScreenAdapter {
+    private Viewport viewport;
     private ScreenController screenController;
     private OrthographicCamera camera;
     private SpriteBatch batch;
-
-    private Viewport viewport;
     private Stage stage;
-    public MenuScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
+
+    private Label timeLabel;
+
+
+    public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera)
+    {
+
+
+
         this.screenController = screenController;
         this.camera = orthographicCamera;
         this.batch = screenController.getSpriteBatch();
@@ -34,26 +44,24 @@ public class MenuScreen extends ScreenAdapter {
         table.center();
         table.setFillParent(true);
 
-        Label welcomeLabel = new Label("UNDERCOOKED", font);
-        table.add(welcomeLabel).expandX();
+        Label gameOverLabel = new Label("GAME OVER", font);
+        gameOverLabel.setFontScale(3);
+        table.add(gameOverLabel).expandX();
+
         table.row();
 
-        Label StartLabel = new Label("PRESS ENTER TO START", font);
-        table.add(StartLabel).expandX();
-        table.row();
+        timeLabel = new Label("0:00", font);
+        timeLabel.setFontScale(1);
+        table.add(timeLabel);
 
-        Label InstructionLabel = new Label("PRESS I FOR INSTRUCTIONS", font);
-        table.add(InstructionLabel).expandX();
-
-        welcomeLabel.setFontScale(4);
         stage.addActor(table);
+
 
     }
 
-    public void update() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            screenController.setScreen(ScreenController.ScreenID.GAME);
-        }
+    @Override
+    public void show() {
+
     }
 
     @Override
@@ -61,6 +69,34 @@ public class MenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        this.update();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
+    public void setTime(int hours, int minutes, int seconds) {
+        timeLabel.setText(Util.formatTime(hours,minutes,seconds));
     }
 }

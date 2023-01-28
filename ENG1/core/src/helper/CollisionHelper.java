@@ -2,6 +2,7 @@ package helper;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import cooks.Cook;
 import game.GameScreen;
 import stations.CookInteractable;
 import stations.Station;
@@ -23,15 +24,16 @@ public class CollisionHelper {
                 station.getBody().getPosition().y*PPM);
     }
 
-    public CookInteractable getInteract(Rectangle rectangle) {
+    public CookInteractable getInteract(Cook cook, Rectangle rectangle) {
         Array<CookInteractable> intStations = gameScreen.stationCollisions(rectangle);
         if (intStations.size == 0) {
             return null;
         }
-        float closestDist = distRectToInteractable(rectangle, intStations.get(0));
+        Rectangle cookRect = new Rectangle(cook.getX()*PPM, cook.getY()*PPM,0,0);
+        float closestDist = distRectToInteractable(cookRect, intStations.get(0));
         CookInteractable closest = intStations.get(0);
         for (int i = 1 ; i < intStations.size ; i++) {
-            float dist = distRectToInteractable(rectangle, intStations.get(i));
+            float dist = distRectToInteractable(cookRect, intStations.get(i));
             if (dist < closestDist) {
                 closestDist = dist;
                 closest = intStations.get(i);
