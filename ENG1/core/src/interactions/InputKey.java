@@ -8,7 +8,12 @@ public class InputKey {
         USE,
         RESET_GAME,
         INSTRUCTIONS,
-        PLAY_GAME
+        PLAY_GAME,
+        COOK_UP,
+        COOK_RIGHT,
+        COOK_DOWN,
+        COOK_LEFT,
+        COOK_SWAP
     }
 
     private int key;

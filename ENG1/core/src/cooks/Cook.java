@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import food.FoodItem;
 import game.GameScreen;
@@ -20,8 +19,6 @@ import food.FoodStack;
 import food.FoodItem.FoodID;
 import interactions.InputKey;
 import interactions.Interactions;
-
-import java.util.ArrayList;
 
 public class Cook extends GameEntity {
 
@@ -223,7 +220,7 @@ public class Cook extends GameEntity {
     {
         velX = 0F;
         velY = 0F;
-        if(Gdx.input.isKeyPressed(Input.Keys.D))
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_RIGHT))
         {
             velX += 1;
             if (!inputs.contains(Facing.RIGHT, true)) {
@@ -232,7 +229,7 @@ public class Cook extends GameEntity {
         } else {
             inputs.removeValue(Facing.RIGHT,true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A))
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_LEFT))
         {
             velX += -1;
             if (!inputs.contains(Facing.LEFT, true)) {
@@ -241,7 +238,7 @@ public class Cook extends GameEntity {
         } else {
             inputs.removeValue(Facing.LEFT,true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_UP))
         {
             velY += 1;
             if (!inputs.contains(Facing.UP, true)) {
@@ -250,7 +247,7 @@ public class Cook extends GameEntity {
         } else {
             inputs.removeValue(Facing.UP,true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_DOWN))
         {
             velY += -1;
             if (!inputs.contains(Facing.DOWN, true)) {
@@ -262,17 +259,11 @@ public class Cook extends GameEntity {
 
         setDir();
 
-        for (InputKey inputKey : Interactions.getInputKeys(Interactions.InputID.INTERACT)) {
+        for (InputKey inputKey : Interactions.getInputKeys(Interactions.InputID.COOK_INTERACT)) {
             if (Gdx.input.isKeyJustPressed(inputKey.getKey())) {
                 cookInteractor.checkCollisions(this, inputKey.getType());
             }
         }
-        /*if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            ArrayList<FoodID> foodItems = foodStack.getStack();
-            for (int i = foodStack.size()-1 ; i >= 0 ; i--) {
-                foodItems.remove(i);
-            }
-        }*/
 
         body.setLinearVelocity(velX * speed,velY * speed);
     }

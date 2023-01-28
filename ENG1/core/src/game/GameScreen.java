@@ -20,7 +20,7 @@ import cooks.GameEntity;
 import helper.CollisionHelper;
 import helper.GameHud;
 import helper.MapHelper;
-import helper.Util;
+import interactions.InputKey;
 import interactions.Interactions;
 import stations.CookInteractable;
 
@@ -109,9 +109,10 @@ public class GameScreen extends ScreenAdapter {
                 thisCook.userInput();
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+        if(Interactions.isJustPressed(InputKey.InputTypes.COOK_SWAP)) {
             setCook((cookIndex + 1) % cooks.size);
         }
+        // Not using new input system as it's for testing
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             updateCustomers();
         }
