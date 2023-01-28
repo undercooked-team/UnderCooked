@@ -46,7 +46,7 @@ meat
   orig: 21, 6
   offset: 0, 0
   index: -1
-meatFried
+meatCook
   rotate: false
   xy: 104, 22
   size: 21, 6

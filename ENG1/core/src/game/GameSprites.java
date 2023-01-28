@@ -11,13 +11,15 @@ public class GameSprites {
 
     public enum SpriteID {
         COOK,
-        FOOD
+        FOOD,
+        STATION
     }
 
     public static final HashMap<SpriteID, TextureAtlas> textureAtlases = new HashMap<>();
     static {
         textureAtlases.put(SpriteID.COOK, new TextureAtlas("atlas/cook.atlas"));
         textureAtlases.put(SpriteID.FOOD, new TextureAtlas("atlas/food.atlas"));
+        textureAtlases.put(SpriteID.STATION, new TextureAtlas("atlas/station.atlas"));
     }
 
     private HashMap<String, Sprite> spriteMap;
@@ -36,7 +38,6 @@ public class GameSprites {
                 spriteMap.put(spriteKey(spriteID,spriteRegion.name),thisAtlas.createSprite(spriteRegion.name));
             }
         }
-        System.out.println(spriteMap);
     }
 
     public String spriteKey(SpriteID spriteID, String spriteName) {
