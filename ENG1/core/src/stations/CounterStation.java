@@ -25,8 +25,14 @@ public class CounterStation extends Station {
 
     @Override
     public void interact(Cook cook) {
-        // Swap what the Cook and the counter are holding.
+        // If the Cook is holding something, add the top thing to the counter's stack.
+        if (cook.foodStack.size() > 0) {
+            // Take it from the cook, and add it to this counter's stack.
+            foodStack.addStack(cook.foodStack.popStack());
+            return;
+        }
         FoodStack tempStack = foodStack;
+        // If the above doesn't apply, then just swap the stacks.
         foodStack = cook.foodStack;
         cook.foodStack = tempStack;
     }
