@@ -1,5 +1,7 @@
 package game;
 
+import Customers.Customer;
+import Customers.CustomerDef;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -25,12 +27,15 @@ import interactions.Interactions;
 import stations.CookInteractable;
 
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
 
 
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
+    private Array<Customer> customers;
+    private PriorityQueue<CustomerDef> customerToSpawn;
     private long startTime = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
@@ -76,6 +81,26 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper = new MapHelper(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
+        this.gameHud = new GameHud(batch);
+
+        customerToSpawn = new PriorityQueue<CustomerDef>();
+        customers = new Array<Customer>();
+    }
+
+    public void spawnCustomer(CustomerDef cDef)
+    {
+        customerToSpawn.add(cDef);
+    }
+    public void handleCustomers()
+    {
+        if(!customerToSpawn.isEmpty())
+        {
+            CustomerDef cDef = customerToSpawn.poll();
+            if(cDef.type == Customer.class)
+            {
+                customers.add(new Customer(this, cDef.position.x,cDef.position.y));
+            }
+        }
     }
 
     private void update(float delta)
@@ -97,6 +122,10 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
         }
+        SpawnCustomer();
+        handleCustomers();
+        for(Customer customer: customers)
+            customer.update(delta);
 
         gameHud.updateTime(hoursPassed, minutesPassed, secondsPassed);
         cameraUpdate();
@@ -155,6 +184,11 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.renderShape(shape);
+        }
+
+        for (Customer customer: customers)
+        {
+            customer.draw(batch);
         }
 
         shape.end();
@@ -261,6 +295,14 @@ public class GameScreen extends ScreenAdapter {
         startTime = TimeUtils.millis();
         customerCount = customers;
         gameHud.setCustomerCount(customers);
+    }
+
+    public void SpawnCustomer()
+    {
+        if(gameHud.GetTime() == 10)
+        {
+            spawnCustomer(new CustomerDef(new Vector2(mapHelper.getServingStationPosition()),Customer.class));
+        }
     }
 
 }

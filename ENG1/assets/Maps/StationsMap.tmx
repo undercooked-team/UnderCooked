@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="15" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="63">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="15" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="69">
  <tileset firstgid="1" source="Stations.tsx"/>
+ <tileset firstgid="101" source="Stations.tsx"/>
  <layer id="1" name="Tile Layer 1" width="15" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -8,7 +9,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 7,0,0,0,0,0,16,16,16,16,0,0,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+107,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 16,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -22,7 +23,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 7,0,0,0,0,0,5,7,7,0,0,0,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,17,7,7,0,0,7,7,7,7,16,16,7,7,7
+7,17,7,7,107,107,7,7,7,7,16,16,7,7,7
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
@@ -30,9 +31,6 @@
   <object id="32" name="Cook" x="640" y="288" width="42.5" height="20"/>
   <object id="15" x="64" y="0">
    <polygon points="0,0 320,0 320,64 0,64"/>
-  </object>
-  <object id="16" x="0" y="64">
-   <polygon points="0,0 0,64 64,64 64,0"/>
   </object>
   <object id="17" x="0" y="256">
    <polygon points="0,0 0,128 64,128 64,0"/>
@@ -85,5 +83,11 @@
   <object id="60" name="StationServing" x="448" y="64" width="64" height="64.0909"/>
   <object id="61" name="StationServing" x="512" y="64" width="64" height="64.0909"/>
   <object id="62" name="StationServing" x="576" y="64" width="64" height="64.0909"/>
+  <object id="63" x="255.198" y="576.396">
+   <polygon points="0,0 126.866,0.733328 126.866,61.5996 1.46666,62.3329"/>
+  </object>
+  <object id="68" x="2.93331" y="64.5329">
+   <polygon points="0,0 58.6663,0.733328 59.3996,125.399 -0.733328,126.866"/>
+  </object>
  </objectgroup>
 </map>
