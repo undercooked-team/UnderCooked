@@ -56,7 +56,7 @@ public class MenuScreen extends ScreenAdapter {
         Interactions.updateKeys();
         if (Interactions.isJustPressed(InputKey.InputTypes.PLAY_GAME)) {
             screenController.setScreen(ScreenController.ScreenID.GAME);
-            ((GameScreen) screenController.getScreen(ScreenController.ScreenID.GAME)).startGame();
+            ((GameScreen) screenController.getScreen(ScreenController.ScreenID.GAME)).startGame(5);
         }
         if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
             screenController.setScreen(ScreenController.ScreenID.INSTRUCTIONS);

@@ -16,6 +16,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import helper.Constants;
 import helper.Util;
+import interactions.InputKey;
+import interactions.Interactions;
 
 public class GameOverScreen extends ScreenAdapter {
     private Viewport viewport;
@@ -28,7 +30,6 @@ public class GameOverScreen extends ScreenAdapter {
 
 
     public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
-
 
         this.screenController = screenController;
         this.camera = orthographicCamera;
@@ -60,7 +61,6 @@ public class GameOverScreen extends ScreenAdapter {
 
         stage.addActor(table);
 
-
     }
 
     @Override
@@ -71,6 +71,11 @@ public class GameOverScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         // Check for input.
+        Interactions.updateKeys();
+        if (Interactions.isJustPressed(InputKey.InputTypes.RESET_GAME)) {
+            screenController.resetGameScreen();
+            screenController.setScreen(ScreenController.ScreenID.MENU);
+        }
 
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
