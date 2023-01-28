@@ -117,12 +117,41 @@ public class Interactions {
         }
     }
 
-    public static boolean isPressed(InputKey.InputTypes inputID) {
-        return keysPressed.contains(inputID, true);
+    public static String getKeyString(InputKey.InputTypes inputType) {
+        Array<String> validKeys = new Array<>();
+        for (Array<InputKey> inputKeys : inputs.values()) {
+            for (InputKey inputKey : inputKeys) {
+                if (inputKey.getType() == inputType) {
+                    validKeys.add(getKeyString(inputKey));
+                }
+            }
+        }
+        // If there are no results, return "undefined"
+        if (validKeys.size == 0) {
+            return "undefined";
+        // If there is 1 result, output that result alone
+        } else if (validKeys.size == 1) {
+            return validKeys.first();
+        }
+
+        // Otherwise, return them in an array format.
+        String output = "[";
+        for (int i = 0 ; i < validKeys.size ; i++) {
+            output += validKeys.get(i) + (i == validKeys.size-1 ? "" : ",");
+        }
+        return output + "]";
     }
 
-    public static boolean isJustPressed(InputKey.InputTypes inputID) {
-        return keysJustPressed.contains(inputID, true);
+    public static String getKeyString(InputKey inputKey) {
+        return Input.Keys.toString(inputKey.getKey());
+    }
+
+    public static boolean isPressed(InputKey.InputTypes inputType) {
+        return keysPressed.contains(inputType, true);
+    }
+
+    public static boolean isJustPressed(InputKey.InputTypes inputType) {
+        return keysJustPressed.contains(inputType, true);
     }
 
 

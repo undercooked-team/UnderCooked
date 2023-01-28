@@ -1,6 +1,7 @@
 package game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -41,9 +42,44 @@ public class InstructionScreen extends ScreenAdapter {
 
         table.row();
 
-        table.row();
+        String[] instructions = new String[] {
+                "Move using the WASD keys, or the arrow keys.",
+                "",
+                String.format("To use a station, press %s while facing it.", Interactions.getKeyString(InputKey.InputTypes.USE)),
+                String.format("Take items from the Pantries (tables with ingredients on them) or a Station by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PICK_UP)),
+                "Pantries have an infinite number of resources, and the Cook has no carry limit.",
+                "",
+                String.format("You can put an item down on a table by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
+                "Counters can do this for any item, but preparation stations require valid ingredients.",
+                "",
+                String.format("You progress ingredient preparation by using (%s) the station when the bar is yellow.", Interactions.getKeyString(InputKey.InputTypes.USE)),
+                "",
+                "Buns are added to the stack by giving you the opposite of the highest bun,",
+                "This means if your highest bun is a bottom bun, then you'll get a top bun.",
+                "",
+                String.format("The bin allows you to dispose of items you no longer need. (%s or %s)",
+                        Interactions.getKeyString(InputKey.InputTypes.USE),
+                        Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
+                "",
+                "Each customer has a range of different foods they can request from.",
+                String.format("The recipe of their request will be display if you interact with the station in any way. (%s, %s or %s)",
+                        Interactions.getKeyString(InputKey.InputTypes.USE),
+                        Interactions.getKeyString(InputKey.InputTypes.PICK_UP),
+                        Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
+                "",
+                "Your goal is to successfully give every customer the food they request, and the game will end once you do.",
+                "",
+                String.format("You can pause the game by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PAUSE)),
+                ""
+        };
 
-        Label extraText = new Label("To exit, press I", font);
+        for (String instruction : instructions) {
+            Label instLabel = new Label(instruction, font);
+            table.add(instLabel).expandX();
+            table.row();
+        }
+
+        Label extraText = new Label("To go back to the Main Menu, press I", font);
         extraText.setFontScale(1.5F);
         table.add(extraText);
 
