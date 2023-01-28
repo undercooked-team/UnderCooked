@@ -14,11 +14,9 @@ import interactions.InputKey;
 public class CounterStation extends Station {
 
     FoodStack foodStack;
-    GameSprites gameSprites;
     public CounterStation(float width, float height, Body body, Rectangle rectangle) {
         super(width, height, body, rectangle);
         foodStack = new FoodStack();
-        this.gameSprites = GameSprites.getInstance();
     }
 
     @Override

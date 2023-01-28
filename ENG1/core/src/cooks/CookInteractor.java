@@ -1,6 +1,7 @@
 package cooks;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import helper.CollisionHelper;
@@ -75,12 +76,17 @@ public class CookInteractor extends GameEntity {
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
 
     }
 
     @Override
     public void render(SpriteBatch batch) {
+
+    }
+
+    @Override
+    public void renderShape(ShapeRenderer shape) {
 
     }
 

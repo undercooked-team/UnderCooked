@@ -1,5 +1,7 @@
 package stations;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
@@ -43,4 +45,13 @@ public class Pantry extends CookInteractable {
         cook.foodStack.addStack(addedFood);
         System.out.println(cook.foodStack);
     }
+
+    @Override
+    public void update(float delta) { }
+
+    @Override
+    public void render(SpriteBatch batch) { }
+
+    @Override
+    public void renderShape(ShapeRenderer shape) { }
 }

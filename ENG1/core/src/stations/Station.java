@@ -2,6 +2,7 @@ package stations;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
@@ -21,10 +22,12 @@ public class Station extends CookInteractable {
 
     StationID stationID;
     boolean inUse;
+    GameSprites gameSprites;
 
     public Station(float width, float height, Body body, Rectangle rectangle) {
         super(width,height,body,rectangle);
         inUse = false;
+        this.gameSprites = GameSprites.getInstance();
     }
 
     public void setID(StationID stationID) {
@@ -37,6 +40,8 @@ public class Station extends CookInteractable {
         System.out.println(cook.foodStack);
     }
 
+    public void update(float delta) { }
+
     public void render(SpriteBatch batch) {
         // Render the station's item on top, when inUse is false.
         if (!inUse) {
@@ -44,4 +49,7 @@ public class Station extends CookInteractable {
             batch.draw(stationSprite,x-35F/2,y-10F,35F,35F);
         }
     }
+
+    @Override
+    public void renderShape(ShapeRenderer shape) { }
 }

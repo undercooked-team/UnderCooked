@@ -6,6 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -32,6 +33,7 @@ public class GameScreen extends ScreenAdapter {
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
     private SpriteBatch batch;
+    private ShapeRenderer shape;
     private ScreenController screenController;
     // private ShapeRenderer shapeRenderer;
     private World world;
@@ -42,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
     private Array<CookInteractable> interactables;
     private CollisionHelper collisionHelper;
     private GameSprites gameSprites;
-    private Array<GameEntity> drawQueue;
+    private Array<GameEntity> gameEntities;
     private DrawQueueComparator drawQueueComparator;
     private int xOffset = 480;
     private int yOffset = 320;
@@ -62,7 +64,8 @@ public class GameScreen extends ScreenAdapter {
         this.camera = camera;
         this.screenController = screenController;
         this.batch = screenController.getSpriteBatch();
-        this.drawQueue = new Array<>();
+        this.shape = screenController.getShapeRenderer();
+        this.gameEntities = new Array<>();
         this.drawQueueComparator = new DrawQueueComparator();
 
         this.world = new World(new Vector2(0,0), false);
@@ -72,7 +75,7 @@ public class GameScreen extends ScreenAdapter {
         this.gameHud = new GameHud(batch);
     }
 
-    private void update()
+    private void update(float delta)
     {
         long diffInMillis = TimeUtils.timeSinceMillis(startTime);
         if (diffInMillis >= 1000) {
@@ -92,6 +95,7 @@ public class GameScreen extends ScreenAdapter {
         cameraUpdate();
         orthogonalTiledMapRenderer.setView(camera);
         batch.setProjectionMatrix(camera.combined);
+        shape.setProjectionMatrix(camera.combined);
         for (Cook thisCook : cooks) {
             thisCook.getBody().setLinearVelocity(0F,0F);
             if (thisCook == cook) {
@@ -110,8 +114,8 @@ public class GameScreen extends ScreenAdapter {
             Gdx.app.exit();
         }
         world.step(1/60f,6,2);
-        for (Cook cook : cooks) {
-            cook.update();
+        for (GameEntity entity : gameEntities) {
+            entity.update(delta);
         }
     }
 
@@ -125,20 +129,27 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta)
     {
 
-        this.update();
+        this.update(delta);
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         orthogonalTiledMapRenderer.render();
         batch.begin();
 
-        drawQueue.sort(drawQueueComparator);
+        gameEntities.sort(drawQueueComparator);
 
-        for (GameEntity entity : drawQueue) {
+        for (GameEntity entity : gameEntities) {
             entity.render(batch);
         }
 
         batch.end();
+        shape.begin(ShapeRenderer.ShapeType.Filled);
+
+        for (GameEntity entity : gameEntities) {
+            entity.renderShape(shape);
+        }
+
+        shape.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
         if(gameHud.GetCustomers()<1)
@@ -179,7 +190,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public int addCook(Cook newCook) {
-        drawQueue.add(newCook);
+        gameEntities.add(newCook);
         cooks.add(newCook);
         return cooks.size-1;
     }
@@ -188,8 +199,8 @@ public class GameScreen extends ScreenAdapter {
         interactables.add(cookInteractable);
     }
 
-    public void addRenderGameEntity(GameEntity entity) {
-        drawQueue.add(entity);
+    public void addGameEntity(GameEntity entity) {
+        gameEntities.add(entity);
     }
 
     public CollisionHelper getCollisionHelper() {
