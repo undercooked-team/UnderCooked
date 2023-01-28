@@ -102,28 +102,33 @@ public class MapHelper {
 
                 if(rectangleName.startsWith("Station")) {
                     // Stations
-                    rectangleName = rectangleName.substring("Station".length());
+                    rectangleName = rectangleName.substring("Station".length()).toLowerCase();
                     Body body = makeBody(rectangle, true);
                     Station station;
                     switch(rectangleName) {
-                        case "Cut":
+                        case "cut":
                             station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.cut);
                             gameScreen.addGameEntity(station);
                             break;
-                        case "Fry":
+                        case "fry":
                             station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.fry);
                             gameScreen.addGameEntity(station);
                             break;
-                        case "Counter":
+                        case "counter":
                             station = new CounterStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.counter);
                             gameScreen.addGameEntity(station);
                             break;
-                        case "Bin":
+                        case "bin":
                             station = new BinStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.bin);
+                            break;
+                        case "serving":
+                            station = new ServingStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station.setID(Station.StationID.serving);
+                            gameScreen.addGameEntity(station);
                             break;
                         default:
                             station = new Station(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);

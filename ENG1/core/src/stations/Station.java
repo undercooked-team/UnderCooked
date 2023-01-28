@@ -17,7 +17,7 @@ public class Station extends CookInteractable {
         cut,
         counter,
         bin,
-        none
+        serving, none
     }
 
     StationID stationID;
