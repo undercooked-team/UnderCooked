@@ -22,28 +22,30 @@ public class Pantry extends CookInteractable {
     }
 
     public void interact(Cook cook, InputKey.InputTypes inputType) {
-        System.out.println(foodID);
-        // Add the new FoodItem onto the stack.
-        FoodItem.FoodID addedFood = foodID;
-        // If the foodID is "bun", check which bun it should add.
-        if (foodID == FoodItem.FoodID.bun) {
-            boolean bottom = true;
-            // Look through the stack, and alternate between top bun or bottom bun.
-            Array<FoodItem.FoodID> foodItems = cook.foodStack.getStack();
-            for (FoodItem.FoodID foodItem : foodItems) {
-                if (foodItem == FoodItem.FoodID.bottomBun) {
-                    bottom = false;
-                    break;
+        // If the input is to pick up:
+        if (inputType == InputKey.InputTypes.PICK_UP) {
+            // Add the new FoodItem onto the stack.
+            FoodItem.FoodID addedFood = foodID;
+            // If the foodID is "bun", check which bun it should add.
+            if (foodID == FoodItem.FoodID.bun) {
+                boolean bottom = true;
+                // Look through the stack, and alternate between top bun or bottom bun.
+                Array<FoodItem.FoodID> foodItems = cook.foodStack.getStack();
+                for (FoodItem.FoodID foodItem : foodItems) {
+                    if (foodItem == FoodItem.FoodID.bottomBun) {
+                        bottom = false;
+                        break;
+                    }
+                    if (foodItem == FoodItem.FoodID.topBun) {
+                        bottom = true;
+                        break;
+                    }
                 }
-                if (foodItem == FoodItem.FoodID.topBun) {
-                    bottom = true;
-                    break;
-                }
+                addedFood = bottom ? FoodItem.FoodID.bottomBun : FoodItem.FoodID.topBun;
             }
-            addedFood = bottom ? FoodItem.FoodID.bottomBun : FoodItem.FoodID.topBun;
+            cook.foodStack.addStack(addedFood);
+            System.out.println(cook.foodStack);
         }
-        cook.foodStack.addStack(addedFood);
-        System.out.println(cook.foodStack);
     }
 
     @Override
