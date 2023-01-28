@@ -22,6 +22,7 @@ import static helper.Constants.PPM;
 public class MapHelper {
     private GameScreen gameScreen;
     private TiledMap tiledMap;
+    private Vector2 ServingStationPosition;
 
     public MapHelper(GameScreen gameScreen)
     {
@@ -129,6 +130,8 @@ public class MapHelper {
                             station = new ServingStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
                             station.setID(Station.StationID.serving);
                             gameScreen.addGameEntity(station);
+                            this.SetServingStationPosition(station.getBody().getPosition());
+
                             break;
                         default:
                             station = new Station(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
@@ -171,5 +174,14 @@ public class MapHelper {
 
     public void dispose() {
         tiledMap.dispose();
+    }
+
+    public Vector2 getServingStationPosition()
+    {
+        return ServingStationPosition;
+    }
+    private void SetServingStationPosition(Vector2 position)
+    {
+        this.ServingStationPosition = position;
     }
 }

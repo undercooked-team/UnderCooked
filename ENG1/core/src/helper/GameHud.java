@@ -43,6 +43,7 @@ public class GameHud extends Hud {
 
 
         table.add(CustomerLabel).expandX().padTop(60);
+
         table.add(CustomerScore).expandX().padTop(60);
 
 
@@ -76,4 +77,5 @@ public class GameHud extends Hud {
     {
         return CustomerCount;
     }
+    public float GetTime(){return WorldTimer;}
 }

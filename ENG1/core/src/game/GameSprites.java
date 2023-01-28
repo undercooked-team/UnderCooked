@@ -12,7 +12,8 @@ public class GameSprites {
     public enum SpriteID {
         COOK,
         FOOD,
-        STATION
+        STATION,
+
     }
 
     public static final HashMap<SpriteID, TextureAtlas> textureAtlases = new HashMap<>();
@@ -20,6 +21,7 @@ public class GameSprites {
         textureAtlases.put(SpriteID.COOK, new TextureAtlas("atlas/cook.atlas"));
         textureAtlases.put(SpriteID.FOOD, new TextureAtlas("atlas/food.atlas"));
         textureAtlases.put(SpriteID.STATION, new TextureAtlas("atlas/station.atlas"));
+        //textureAtlases.put(SpriteID.CUSTOMER, new TextureAtlas("atlas/Customer.atlas"));
     }
 
     private HashMap<String, Sprite> spriteMap;
