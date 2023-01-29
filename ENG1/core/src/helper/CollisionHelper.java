@@ -3,17 +3,28 @@ package helper;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import cooks.Cook;
+import game.Boot;
 import game.GameScreen;
+import game.ScreenController;
 import stations.CookInteractable;
-import stations.Station;
+// import stations.Station;
 
 import static helper.Constants.PPM;
 
 public class CollisionHelper {
 
     protected GameScreen gameScreen;
+    private static CollisionHelper INSTANCE;
 
-    public CollisionHelper(GameScreen gameScreen) {
+    public CollisionHelper() { }
+    public static CollisionHelper getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new CollisionHelper();
+        }
+        return INSTANCE;
+    }
+
+    public void setGameScreen(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
 

@@ -4,11 +4,13 @@ import com.badlogic.gdx.utils.Array;
 import food.FoodItem.FoodID;
 
 public class FoodStack {
-    /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
+    /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item.
+     * Has a public getter and setter.
+    */
     private Array<FoodID> foodStack;
 
     /**
-     * Constructor for FoodStack. Can accept multiple FoodID parameters to
+     * FoodStack Constructor. Can accept multiple FoodID parameters to
      * initialize the foodStack with.
      * @param foods A list of ingredients to add to the foodStack. Index 0 = Top.
      */
@@ -19,17 +21,22 @@ public class FoodStack {
         }
     }
 
+    /** FoodStack Constructor. Creates a blank foodStack.*/
     public FoodStack() {
         this(new Array<FoodID>());
     }
 
+    /**
+     * FoodStack Constructor. Creates a foodStack out of the argument.
+     * @param foodStack The LibGDX Array<FoodID> which will become a FoodStack.
+     */
     public FoodStack(Array<FoodID> foodStack) {
         this.foodStack = foodStack;
     }
 
     /**
     * Get the item at the top of the stack without removing it.
-    * @return The item at the top of the foodstack OR `null` if there's no items in it.
+    * @return The item at the top of the foodStack OR `null` if there's no items in it.
     */
     public FoodID peekStack() {
         try {
@@ -40,7 +47,7 @@ public class FoodStack {
     }
     /**
     * Get the item at the top of the stack and remove it if there is an item in the foodStack.
-    * @return The item at the top of the foodstack OR `null` if there's no items in it.
+    * @return The item at the top of the foodStack OR `null` if there's no items in it.
     */
     public FoodID popStack() {
       try {
@@ -51,7 +58,7 @@ public class FoodStack {
     }
     /**
     * Add an item to the top of the stack.
-    * @param newFood The item to add to the top of the foodstack.
+    * @param newFood The item to add to the top of the foodStack.
     */
     public void addStack(FoodID newFood) {
         foodStack.insert(0, newFood);

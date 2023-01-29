@@ -1,29 +1,51 @@
 package cooks;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
+import game.Boot;
+import game.ScreenController;
+import helper.BodyHelper;
 import helper.CollisionHelper;
 import interactions.InputKey;
 import stations.CookInteractable;
 
-import static cooks.Cook.OFFSET_Y;
+// import static cooks.Cook.OFFSET_Y;
 import static helper.Constants.PPM;
 
-public class CookInteractor extends GameEntity {
+/**
+ * The Cook's in-game Collision and Detection Class
+ */
+public class CookInteractor {
 
+    /** The X and Y Coordinates of this {@link CookInteractor}. */
     protected float x,y;
+    /** The size of this {@link CookInteractor}. */
     protected float size;
+    /** The rectangle responsible for collision in {@link CookInteractor}. */
     protected Rectangle collision;
+    /** The Collision Helper Singleton. */
     protected CollisionHelper ch;
-    public CookInteractor(float size, Rectangle collision, Body body, CollisionHelper ch) {
-        super(size,size,body);
+    /**
+     * CookInteractor Constructor.
+     * @param size The size of CookInteractor's {@link GameEntity}.
+     */
+    public CookInteractor(float x, float y, float size) {
         this.size = size;
-        this.collision = collision;
-        this.ch = ch;
+        this.x = x;
+        this.y = y;
+        this.collision = new Rectangle(x,y,size,size);
+        this.ch = CollisionHelper.getInstance();
     }
 
+    /**
+     * Returns an X offset depending on the cook's direction.
+     * Used during collision detection between the cook and other interactables.
+     * @param dir The direction the cook can face
+     * @return An X offset in pixels.
+     */
     private float relativeX(Cook.Facing dir) {
         switch (dir) {
             case RIGHT:
@@ -35,6 +57,12 @@ public class CookInteractor extends GameEntity {
         }
     }
 
+    /**
+     * Returns an Y offset depending on the cook's direction.
+     * Used during collision detection between the cook and other interactables.
+     * @param dir The direction the cook can face
+     * @return An Y offset in pixels.
+     */
     private float relativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
@@ -49,6 +77,13 @@ public class CookInteractor extends GameEntity {
         }
     }
 
+    /**
+     * Update the Position of the CookInteractor to the next x, y position
+     * and given direction
+     * @param x New X position
+     * @param y New Y position
+     * @param dir New direction
+     */
     protected void updatePosition(float x, float y, Cook.Facing dir) {
         float relX = relativeX(dir);
         float relY = relativeY(dir);
@@ -58,13 +93,13 @@ public class CookInteractor extends GameEntity {
 
         this.collision.x = this.x - collision.width/2;
         this.collision.y = this.y - collision.height/2;
-
-        this.x /= PPM;
-        this.y /= PPM;
-
-        this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
 
+    /**
+     * Check for any collisions the CookInteractor has made
+     * @param cook The cook
+     * @param inputType The enum constant of the input made
+     */
     public void checkCollisions(Cook cook, InputKey.InputTypes inputType) {
         CookInteractable interactStation = ch.getInteract(cook, collision);
         if (interactStation != null) {
@@ -74,19 +109,12 @@ public class CookInteractor extends GameEntity {
         }*/
     }
 
-    @Override
-    public void update(float delta) {
-
-    }
-
-    @Override
-    public void render(SpriteBatch batch) {
-
-    }
-
-    @Override
-    public void renderShape(ShapeRenderer shape) {
-
+    public void renderDebug(ShapeRenderer shape) {
+        shape.set(ShapeRenderer.ShapeType.Line);
+        shape.setColor(Color.BLACK);
+        shape.rect(collision.x,collision.y,size,size);
+        shape.setColor(Color.WHITE);
+        shape.set(ShapeRenderer.ShapeType.Filled);
     }
 
 }

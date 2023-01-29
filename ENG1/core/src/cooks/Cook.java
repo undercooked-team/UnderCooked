@@ -1,7 +1,7 @@
 package cooks;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+// import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -22,17 +22,25 @@ import interactions.Interactions;
 
 public class Cook extends GameEntity {
 
+    /** The cook's current sprite. */
     private Sprite sprite;
-    private float spriteHeight, spriteWidth;
+    // private float spriteHeight, spriteWidth;
     private GameSprites gameSprites;
     private CookInteractor cookInteractor;
-    private GameScreen gameScreen;
+    // private GameScreen gameScreen;
+    /** The direction this cook is facing. */
     private Facing dir;
     /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item */
     public FoodStack foodStack;
+    /** The WASD/movement inputs currently being made.
+     * Note that if S and D are being input at the same time, then
+     * inputs = { Facing.RIGHT, Facing.DOWN }
+     */
     private Array<Facing> inputs;
-    protected static final float OFFSET_Y = 27F; // Offset for the sprites after changing the collision of the Cook
+    /** Offset for the sprites after changing the collision of the Cook */
+    protected static final float OFFSET_Y = 27F;
 
+    /** All possible directions the cook can be facing. */
     enum Facing {
         RIGHT,
         LEFT,
@@ -41,11 +49,18 @@ public class Cook extends GameEntity {
         NONE
     }
 
+    /**
+     * Cook Constructor.
+     * @param width Pixel Width of the Cook
+     * @param height Pixel Height of the Cook
+     * @param body The World.Body which will become the Cook
+     * @param gameScreen The GameScreen that creates the Cook.
+     */
     public Cook(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
         this.dir = Facing.DOWN;
         this.speed = 10f;
-        this.gameScreen = gameScreen;
+        // this.gameScreen = gameScreen;
         this.gameSprites = GameSprites.getInstance();
 
         // Initialize FoodStack
@@ -59,12 +74,12 @@ public class Cook extends GameEntity {
         this.setSprite();
 
         float cookInteractorSize = 32;
-        Rectangle interactorCollision = BodyHelper.createRectangle(this.x, this.y, cookInteractorSize, cookInteractorSize);
-        // The below is just to visualise the debug square
+        Rectangle interactorCollision = new Rectangle(this.x, this.y, cookInteractorSize, cookInteractorSize);
+        // The below is just to visualize the debug square
         Body interactorBody = BodyHelper.createBody(this.x,this.y,cookInteractorSize,cookInteractorSize,true,body.getWorld());
         interactorBody.setActive(false);
 
-        this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, gameScreen.getCollisionHelper());
+        this.cookInteractor = new CookInteractor(x,y,cookInteractorSize);
     }
 
     public void userInput() {
@@ -105,8 +120,19 @@ public class Cook extends GameEntity {
     }
 
     @Override
+    public void renderDebug(SpriteBatch batch) {
+
+    }
+
+    @Override
     public void renderShape(ShapeRenderer shape) { }
 
+    @Override
+    public void renderShapeDebug(ShapeRenderer shape) {
+        cookInteractor.renderDebug(shape);
+    }
+
+    /** Return the X pixel offset from the cook's position that the cook's FoodStack requires for rendering.*/
     private float foodRelativeX(Cook.Facing dir) {
         switch (dir) {
             case RIGHT:
@@ -118,6 +144,7 @@ public class Cook extends GameEntity {
         }
     }
 
+    /** Return the Y pixel offset from the cook's position that the cook's FoodStack requires for rendering.*/
     private float foodRelativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
@@ -158,6 +185,11 @@ public class Cook extends GameEntity {
         }
     }
 
+    /**
+     * Return the opposite direction to the input direction.
+     * @param direction The input direction you want an opposite for.
+     * @return The opposite direction to the input.
+     */
     private Facing opposite(Facing direction) {
         switch(direction) {
             case UP:
@@ -173,6 +205,11 @@ public class Cook extends GameEntity {
         }
     }
 
+    /**
+     * Return the direction 90 degrees clockwise to the input direction.
+     * @param direction The input direction you want a 90c rotation for.
+     * @return The 90c rotation direction to the input.
+     */
     private Facing rotate90c(Facing direction) {
         switch(direction) {
             case UP:
@@ -215,7 +252,7 @@ public class Cook extends GameEntity {
         }
     }
 
-    /** Responsible for detecting user input.*/
+    /** Responsible for processing user input information into {@link this.inputs}, {@link this.velX} and {@link this.velY}. */
     private void checkUserInput()
     {
         velX = 0F;

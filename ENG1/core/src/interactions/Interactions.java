@@ -17,7 +17,7 @@ public class Interactions {
         interactions.put(InteractionKey(FoodID.lettuce, StationID.cut), new InteractionResult(FoodID.lettuceChop,new float[] {25,50,75},-1));
         interactions.put(InteractionKey(FoodID.tomato, StationID.cut), new InteractionResult(FoodID.tomatoChop,new float[] {25,50,75},-1));
         interactions.put(InteractionKey(FoodID.onion, StationID.cut), new InteractionResult(FoodID.onionChop,new float[] {25,50,75},-1));
-        interactions.put(InteractionKey(FoodID.meat, StationID.fry), new InteractionResult(FoodID.meatCook,new float[] {50},20F));
+        interactions.put(InteractionKey(FoodID.meat, StationID.fry), new InteractionResult(FoodID.meatCook,new float[] {50},13F));
     }
 
     public static class InteractionResult {
@@ -66,13 +66,18 @@ public class Interactions {
         inputs.put(InputID.MENU, new Array<>(new InputKey[]{
                 new InputKey(InputKey.InputTypes.INSTRUCTIONS, Input.Keys.I),
                 new InputKey(InputKey.InputTypes.RESET_GAME, Input.Keys.R),
-                new InputKey(InputKey.InputTypes.PLAY_GAME, Input.Keys.ENTER)
+                new InputKey(InputKey.InputTypes.START_GAME, Input.Keys.ENTER),
+                new InputKey(InputKey.InputTypes.PAUSE, Input.Keys.ESCAPE),
+                new InputKey(InputKey.InputTypes.UNPAUSE, Input.Keys.ESCAPE),
+                new InputKey(InputKey.InputTypes.CREDITS, Input.Keys.C),
+                new InputKey(InputKey.InputTypes.QUIT, Input.Keys.Q),
         }));
         inputs.put(InputID.COOK_MOVEMENT, new Array<>(new InputKey[] {
                 new InputKey(InputKey.InputTypes.COOK_UP,Input.Keys.W),
                 new InputKey(InputKey.InputTypes.COOK_LEFT,Input.Keys.A),
                 new InputKey(InputKey.InputTypes.COOK_DOWN,Input.Keys.S),
                 new InputKey(InputKey.InputTypes.COOK_RIGHT,Input.Keys.D),
+
                 new InputKey(InputKey.InputTypes.COOK_UP,Input.Keys.UP),
                 new InputKey(InputKey.InputTypes.COOK_LEFT,Input.Keys.LEFT),
                 new InputKey(InputKey.InputTypes.COOK_DOWN,Input.Keys.DOWN),
@@ -84,7 +89,7 @@ public class Interactions {
                 new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
         }));
         inputs.put(InputID.COOK_MISC, new Array<>(new InputKey[] {
-                new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.ENTER)
+                new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.SPACE)
         }));
     }
 
@@ -114,12 +119,41 @@ public class Interactions {
         }
     }
 
-    public static boolean isPressed(InputKey.InputTypes inputID) {
-        return keysPressed.contains(inputID, true);
+    public static String getKeyString(InputKey.InputTypes inputType) {
+        Array<String> validKeys = new Array<>();
+        for (Array<InputKey> inputKeys : inputs.values()) {
+            for (InputKey inputKey : inputKeys) {
+                if (inputKey.getType() == inputType) {
+                    validKeys.add(getKeyString(inputKey));
+                }
+            }
+        }
+        // If there are no results, return "undefined"
+        if (validKeys.size == 0) {
+            return "undefined";
+        // If there is 1 result, output that result alone
+        } else if (validKeys.size == 1) {
+            return validKeys.first();
+        }
+
+        // Otherwise, return them in an array format.
+        String output = "[";
+        for (int i = 0 ; i < validKeys.size ; i++) {
+            output += validKeys.get(i) + (i == validKeys.size-1 ? "" : ",");
+        }
+        return output + "]";
     }
 
-    public static boolean isJustPressed(InputKey.InputTypes inputID) {
-        return keysJustPressed.contains(inputID, true);
+    public static String getKeyString(InputKey inputKey) {
+        return Input.Keys.toString(inputKey.getKey());
+    }
+
+    public static boolean isPressed(InputKey.InputTypes inputType) {
+        return keysPressed.contains(inputType, true);
+    }
+
+    public static boolean isJustPressed(InputKey.InputTypes inputType) {
+        return keysJustPressed.contains(inputType, true);
     }
 
 

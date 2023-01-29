@@ -1,8 +1,6 @@
 package game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -55,7 +53,7 @@ public class GameOverScreen extends ScreenAdapter {
 
         table.row();
 
-        Label extraText = new Label("To restart, press R.", font);
+        Label extraText = new Label(String.format("To restart, press %s.",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)), font);
         extraText.setFontScale(1);
         table.add(extraText);
 

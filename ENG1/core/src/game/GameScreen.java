@@ -31,12 +31,12 @@ import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
 
-
+/** A screen containing certain elements of the game. Can switch between GameScreens. */
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private Array<Customer> customers;
     private PriorityQueue<CustomerDef> customerToSpawn;
-    private long startTime = 0;
+    private long previousSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
     private SpriteBatch batch;
@@ -50,7 +50,7 @@ public class GameScreen extends ScreenAdapter {
     private MapHelper mapHelper;
     private Array<CookInteractable> interactables;
     private CollisionHelper collisionHelper;
-    private GameSprites gameSprites;
+    // private GameSprites gameSprites;
     private Array<GameEntity> gameEntities;
     private DrawQueueComparator drawQueueComparator;
     private int xOffset = 480;
@@ -64,10 +64,11 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
-        this.startTime = TimeUtils.millis();
+        this.previousSecond = TimeUtils.millis();
         this.cooks = new Array<>();
         this.interactables = new Array<>();
-        this.collisionHelper = new CollisionHelper(this);
+        this.collisionHelper = CollisionHelper.getInstance();
+        this.collisionHelper.setGameScreen(this);
         this.cookIndex = -1;
         this.camera = camera;
         this.screenController = screenController;
@@ -108,9 +109,9 @@ public class GameScreen extends ScreenAdapter {
         // First thing, update all inputs
         Interactions.updateKeys();
 
-        long diffInMillis = TimeUtils.timeSinceMillis(startTime);
+        long diffInMillis = TimeUtils.timeSinceMillis(previousSecond);
         if (diffInMillis >= 1000) {
-            startTime += 1000;
+            previousSecond += 1000;
             secondsPassed += 1;
             if (secondsPassed >= 60) {
                 secondsPassed = 0;
@@ -145,9 +146,9 @@ public class GameScreen extends ScreenAdapter {
             updateCustomers();
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        if(Interactions.isJustPressed(InputKey.InputTypes.PAUSE))
         {
-            Gdx.app.exit();
+            screenController.pauseGameScreen();
         }
         world.step(1/60f,6,2);
         for (GameEntity entity : gameEntities) {
@@ -166,9 +167,20 @@ public class GameScreen extends ScreenAdapter {
     {
 
         this.update(delta);
+
+        renderGame(delta);
+
+        if(customerCount<1)
+        {
+            screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
+            ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
+        }
+    }
+
+    public void renderGame(float delta) {
+
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         orthogonalTiledMapRenderer.render();
         batch.begin();
 
@@ -176,6 +188,11 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.render(batch);
+            entity.renderDebug(batch);
+        }
+        for (Customer customer: customers)
+        {
+            customer.draw(batch);
         }
 
         batch.end();
@@ -183,21 +200,13 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.renderShape(shape);
-        }
-
-        for (Customer customer: customers)
-        {
-            customer.draw(batch);
+            entity.renderShapeDebug(shape);
         }
 
         shape.end();
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
-        if(customerCount<1)
-        {
-            screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
-            ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
-        }
+
     }
 
     public class DrawQueueComparator implements Comparator<GameEntity> {
@@ -239,6 +248,14 @@ public class GameScreen extends ScreenAdapter {
     public int getCustomerCount() {
         return this.customerCount;
     }
+    public long getPreviousSecond() {
+        return previousSecond;
+    }
+
+    public void setPreviousSecond(long newSecond) {
+        previousSecond = newSecond;
+    }
+
     public void updateCustomers()
     {
         if(customerCount<1)
@@ -271,6 +288,7 @@ public class GameScreen extends ScreenAdapter {
         return output;
     }
 
+    /** Reset the game variables. */
     public void reset() {
         // Reset all variables
         secondsPassed = 0;
@@ -291,7 +309,7 @@ public class GameScreen extends ScreenAdapter {
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
-        startTime = TimeUtils.millis();
+        previousSecond = TimeUtils.millis();
         customerCount = customers;
         gameHud.setCustomerCount(customers);
     }

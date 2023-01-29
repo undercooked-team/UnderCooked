@@ -3,16 +3,27 @@ package interactions;
 public class InputKey {
 
     public enum InputTypes {
+        // MENU
+        START_GAME,
+        RESET_GAME,
+        INSTRUCTIONS,
+        PAUSE,
+        UNPAUSE,
+        CREDITS,
+        QUIT,
+
+        // COOK_INTERACT
         PUT_DOWN,
         PICK_UP,
         USE,
-        RESET_GAME,
-        INSTRUCTIONS,
-        PLAY_GAME,
+
+        // COOK_MOVEMENT
         COOK_UP,
         COOK_RIGHT,
         COOK_DOWN,
         COOK_LEFT,
+
+        // COOK_MISC
         COOK_SWAP
     }
 
@@ -28,6 +39,10 @@ public class InputKey {
         return key;
     }
 
+    /**
+     * Get the enum constant for what this input is.
+     * @return The enum constant for this input.
+     */
     public InputTypes getType() {
         return inputType;
     }
