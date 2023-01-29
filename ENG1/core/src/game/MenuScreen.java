@@ -42,12 +42,20 @@ public class MenuScreen extends ScreenAdapter {
         table.add(welcomeLabel).expandX();
         table.row();
 
-        Label StartLabel = new Label(String.format("PRESS %s TO START",Interactions.getKeyString(InputKey.InputTypes.START_GAME).toUpperCase()), font);
-        table.add(StartLabel).expandX();
+        Label startLabel = new Label(String.format("PRESS %s TO START",Interactions.getKeyString(InputKey.InputTypes.START_GAME).toUpperCase()), font);
+        table.add(startLabel).expandX();
         table.row();
 
-        Label InstructionLabel = new Label(String.format("PRESS %s FOR INSTRUCTIONS",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS).toUpperCase()), font);
-        table.add(InstructionLabel).expandX();
+        Label instructionLabel = new Label(String.format("PRESS %s FOR INSTRUCTIONS",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS).toUpperCase()), font);
+        table.add(instructionLabel).expandX();
+        table.row();
+
+        Label creditLabel = new Label(String.format("PRESS %s TO VIEW CREDITS",Interactions.getKeyString(InputKey.InputTypes.CREDITS).toUpperCase()), font);
+        table.add(creditLabel).expandX();
+        table.row();
+
+        Label quitLabel = new Label(String.format("PRESS %s TO QUIT",Interactions.getKeyString(InputKey.InputTypes.QUIT).toUpperCase()), font);
+        table.add(quitLabel).expandX();
 
         welcomeLabel.setFontScale(4);
         stage.addActor(table);
@@ -66,6 +74,13 @@ public class MenuScreen extends ScreenAdapter {
         // Set the screen to the instructions screen
         else if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
             screenController.setScreen(ScreenID.INSTRUCTIONS);
+        }
+        else if (Interactions.isJustPressed(InputKey.InputTypes.CREDITS)) {
+            ((CreditsScreen)screenController.getScreen(ScreenID.CREDITS)).setPrevScreenID(ScreenID.MENU);
+            screenController.setScreen(ScreenID.CREDITS);
+        }
+        else if (Interactions.isJustPressed(InputKey.InputTypes.QUIT)) {
+            Gdx.app.exit();
         }
     }
 

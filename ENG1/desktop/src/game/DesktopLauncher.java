@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("UnderCooked");
 		config.setWindowedMode(Constants.V_Width,Constants.V_Height);
-		new Lwjgl3Application(new Boot(), config);
+		new Lwjgl3Application(Boot.getInstance(), config);
 	}
 }

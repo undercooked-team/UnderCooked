@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="15" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="69">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="15" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="71">
  <tileset firstgid="1" source="Stations.tsx"/>
  <layer id="1" name="Tile Layer 1" width="15" height="20">
   <data encoding="csv">
@@ -8,21 +8,21 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 7,0,0,0,0,0,16,16,16,16,0,0,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+7,16,0,0,0,0,0,0,0,0,0,0,0,0,7,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+7,16,0,0,0,0,0,0,0,0,0,0,0,12,7,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 7,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+7,0,0,0,0,0,0,0,0,0,0,0,0,13,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+7,15,0,0,0,0,0,16,16,0,0,0,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,0,0,0,0,0,0,0,0,0,0,0,0,0,13,
+7,0,0,0,0,0,0,7,7,0,0,0,0,14,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-15,0,0,0,0,0,0,16,16,0,0,0,0,0,7,
+7,0,0,17,0,0,18,7,7,0,16,16,0,0,7,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,0,0,0,0,0,0,7,7,0,0,0,0,0,14,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,0,0,0,0,0,18,7,7,0,0,0,0,0,7,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,17,7,7,7,7,7,7,7,7,16,16,7,7,7
+7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
@@ -31,53 +31,36 @@
   <object id="15" x="64" y="0">
    <polygon points="0,0 832,0 832,64 0,64"/>
   </object>
-  <object id="17" x="0" y="256">
-   <polygon points="0,0 0,128 64,128 64,0"/>
-  </object>
-  <object id="19" x="0" y="448">
-   <polygon points="0,0 0,192 64,192 64,0"/>
-  </object>
-  <object id="21" x="384" y="576">
-   <polygon points="-256,0 64,0 64,64 -256,64"/>
+  <object id="21" x="371.2" y="576">
+   <polygon points="-307.2,0 76.8,0 76.8,64 -307.2,64"/>
   </object>
   <object id="22" x="448" y="472">
    <polygon points="0,0 0,-24 0,168 128,168 128,-24 0,-24"/>
   </object>
-  <object id="25" x="576" y="576">
-   <polygon points="0,0 64,0 64,64 0,64"/>
+  <object id="26" x="576" y="576">
+   <polygon points="0,0 0,64 320,64 320,0"/>
   </object>
-  <object id="26" x="768" y="576">
-   <polygon points="0,0 0,64 192,64 192,0"/>
+  <object id="31" x="896" y="213.333">
+   <polygon points="0,-213.333 0,426.667 64,426.667 64,-213.333"/>
   </object>
-  <object id="27" x="896" y="512">
-   <polygon points="0,0 0,64 64,64 64,0"/>
-  </object>
-  <object id="28" x="896" y="384">
-   <polygon points="0,0 0,64 64,64 64,0"/>
-  </object>
-  <object id="29" x="896" y="256">
-   <polygon points="0,0 0,64 64,64 64,0"/>
-  </object>
-  <object id="31" x="896" y="64">
-   <polygon points="0,-64 0,128 64,128 64,-64"/>
-  </object>
-  <object id="46" name="StationCut" x="640" y="576" width="64" height="64"/>
-  <object id="47" name="StationCut" x="704" y="576" width="64" height="64"/>
-  <object id="48" name="PantryTomato" x="896" y="448" width="64" height="64"/>
-  <object id="50" name="PantryOnion" x="896" y="320" width="64" height="64"/>
-  <object id="51" name="PantryLettuce" x="896" y="192" width="64" height="64"/>
-  <object id="52" name="PantryBun" x="0" y="384" width="64" height="64"/>
+  <object id="46" name="StationCut" x="640" y="512" width="64" height="64"/>
+  <object id="47" name="StationCut" x="704" y="512" width="64" height="64"/>
+  <object id="48" name="PantryTomato" x="832" y="448" width="64" height="64"/>
+  <object id="50" name="PantryOnion" x="832" y="320" width="64" height="64"/>
+  <object id="51" name="PantryLettuce" x="832" y="192" width="64" height="64"/>
+  <object id="52" name="PantryBun" x="64" y="384" width="64" height="64"/>
   <object id="53" name="StationCounter" x="448" y="384" width="64" height="64"/>
   <object id="54" name="StationCounter" x="512" y="384" width="64" height="64"/>
-  <object id="55" name="PantryMeat" x="64" y="576" width="64" height="64"/>
+  <object id="55" name="PantryMeat" x="192" y="512" width="64" height="64"/>
   <object id="56" name="StationBin" x="383.909" y="512" width="64" height="64"/>
-  <object id="58" name="StationFry" x="0" y="192" width="64" height="64"/>
+  <object id="58" name="StationFry" x="64" y="192" width="64" height="64"/>
   <object id="59" name="StationServing" x="384" y="64" width="64" height="64.0909"/>
   <object id="60" name="StationServing" x="448" y="64" width="64" height="64.0909"/>
   <object id="61" name="StationServing" x="512" y="64" width="64" height="64.0909"/>
   <object id="62" name="StationServing" x="576" y="64" width="64" height="64.0909"/>
-  <object id="68" x="2.94957" y="64.5329">
-   <polygon points="-2.94957,-64.5329 61.0504,-64.5329 61.0504,127.467 -2.94957,127.467"/>
+  <object id="68" x="2.94957" y="215.11">
+   <polygon points="-2.94957,-215.11 61.0504,-215.11 61.0504,424.89 -2.94957,424.89"/>
   </object>
+  <object id="70" name="StationFry" x="64" y="128" width="64" height="64"/>
  </objectgroup>
 </map>

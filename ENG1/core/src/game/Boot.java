@@ -22,10 +22,21 @@ public class Boot extends Game {
     /** The camera for the game. */
     private OrthographicCamera orthographicCamera;
     /** Boot Singleton Constructor */
-    public Boot()
+    private Boot()
     {
         INSTANCE = this;
     }
+    /**
+     * Returns the Singleton Boot instance
+     * @return The Boot INSTANCE
+     */
+    public static Boot getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Boot();
+        }
+        return INSTANCE;
+    }
+
     /** The Viewport for the game. */
     private Viewport gamePort;
     /** The spriteBatch for the game. */
@@ -64,5 +75,6 @@ public class Boot extends Game {
      * @return shapeRenderer
      */
     public ShapeRenderer getShapeRenderer() { return shapeRenderer; }
+    public ScreenController getScreenController() { return screenController; }
 
 }

@@ -1,9 +1,13 @@
 package cooks;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
+import game.Boot;
+import game.ScreenController;
+import helper.BodyHelper;
 import helper.CollisionHelper;
 import interactions.InputKey;
 import stations.CookInteractable;
@@ -14,7 +18,7 @@ import static helper.Constants.PPM;
 /**
  * The Cook's in-game Collision and Detection Class
  */
-public class CookInteractor extends GameEntity {
+public class CookInteractor {
 
     /** The X and Y Coordinates of this {@link CookInteractor}. */
     protected float x,y;
@@ -27,15 +31,13 @@ public class CookInteractor extends GameEntity {
     /**
      * CookInteractor Constructor.
      * @param size The size of CookInteractor's {@link GameEntity}.
-     * @param collision The rectangle responsible for this CookInteractor's collision.
-     * @param body The body for this CookInteractor's collision.
-     * @param ch The collision helper singleton.
      */
-    public CookInteractor(float size, Rectangle collision, Body body, CollisionHelper ch) {
-        super(size,size,body);
+    public CookInteractor(float x, float y, float size) {
         this.size = size;
-        this.collision = collision;
-        this.ch = ch;
+        this.x = x;
+        this.y = y;
+        this.collision = BodyHelper.createRectangle(x,y,size,size);
+        this.ch = CollisionHelper.getInstance();
     }
 
     /**
@@ -91,11 +93,6 @@ public class CookInteractor extends GameEntity {
 
         this.collision.x = this.x - collision.width/2;
         this.collision.y = this.y - collision.height/2;
-
-        this.x /= PPM;
-        this.y /= PPM;
-
-        this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
 
     /**
@@ -112,13 +109,12 @@ public class CookInteractor extends GameEntity {
         }*/
     }
 
-    @Override
-    public void update(float delta) { }
-
-    @Override
-    public void render(SpriteBatch batch) { }
-
-    @Override
-    public void renderShape(ShapeRenderer shape) { }
+    public void renderDebug(ShapeRenderer shape) {
+        shape.set(ShapeRenderer.ShapeType.Line);
+        shape.setColor(Color.BLACK);
+        shape.rect(collision.x,collision.y,size,size);
+        shape.setColor(Color.WHITE);
+        shape.set(ShapeRenderer.ShapeType.Filled);
+    }
 
 }
