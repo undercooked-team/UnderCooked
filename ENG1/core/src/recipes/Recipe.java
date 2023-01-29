@@ -1,7 +1,6 @@
 package recipes;
 
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 import com.badlogic.gdx.utils.Array;
 
@@ -10,16 +9,14 @@ import food.FoodItem.FoodID;
 
 public class Recipe {
 	/** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
-	private static final HashMap<String, String[]> recipes = new HashMap<>();
+	private static final HashMap<String, Array<String>> recipes = new HashMap<>();
 		static {
 			generateRecipes("Onion Tomato Salad", allCombos(FoodID.onionChop, FoodID.tomatoChop));
 			generateRecipes("Lettuce Tomato Salad", allCombos(FoodID.lettuceChop, FoodID.tomatoChop));
 			generateRecipes("Lettuce Onion Salad", allCombos(FoodID.lettuceChop, FoodID.onionChop));
-			recipes.put("Plain Burger",
-				new String[] {
-					new FoodStack(FoodID.topBun, FoodID.meatCook, FoodID.bottomBun).toString()
-				}
-			);
+			Array<String> plainBurger = new Array<String>();
+			plainBurger.add(new FoodStack(FoodID.topBun, FoodID.meatCook, FoodID.bottomBun).toString());
+			recipes.put("Plain Burger", plainBurger);
 
 			Array<FoodID> topBunArray = new Array<FoodID>();
 			topBunArray.add(FoodID.topBun);
@@ -117,10 +114,10 @@ public class Recipe {
 	}
 
 	private static void generateRecipes(String recipeName, Array<Array<FoodID>> listOfFoodStacks) {
-		String[] allValidRecipes = new String[listOfFoodStacks.size];
+		Array<String> allValidRecipes = new Array<String>();
 		for (int i = 0; i < listOfFoodStacks.size; i++) {
 			Array<FoodID> recipe = listOfFoodStacks.get(i);
-			allValidRecipes[i] = new FoodStack((Array)recipe).toString();
+			allValidRecipes.add(new FoodStack(recipe).toString());
 		}
 		recipes.put(recipeName, allValidRecipes);
 	}
