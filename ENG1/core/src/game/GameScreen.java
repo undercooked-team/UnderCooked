@@ -266,6 +266,14 @@ public class GameScreen extends ScreenAdapter {
         gameHud.setCustomerCount(customerCount);
     }
 
+    /**
+     * interactables getter. Contains all the interactables in the gameScreen.
+     * @return interactables
+     */
+    public Array<CookInteractable> getInteractables() {
+        return interactables;
+    }
+
     public void addInteractable(CookInteractable cookInteractable) {
         interactables.add(cookInteractable);
     }
@@ -276,16 +284,6 @@ public class GameScreen extends ScreenAdapter {
 
     public CollisionHelper getCollisionHelper() {
         return collisionHelper;
-    }
-
-    public Array<CookInteractable> stationCollisions(Rectangle collision) {
-        Array<CookInteractable> output = new Array<>();
-        for (CookInteractable cookInteractable : interactables) {
-            if (collision.overlaps(cookInteractable.getRectangle())) {
-                output.add(cookInteractable);
-            }
-        }
-        return output;
     }
 
     /** Reset the game variables. */
