@@ -89,7 +89,7 @@ public class Interactions {
                 new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
         }));
         inputs.put(InputID.COOK_MISC, new Array<>(new InputKey[] {
-                new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.ENTER)
+                new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.SPACE)
         }));
     }
 
