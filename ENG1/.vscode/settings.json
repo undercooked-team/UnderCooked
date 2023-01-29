@@ -1,6 +1,8 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
     "cSpell.words": [
-        "badlogic"
+        "badlogic",
+        "bdef",
+        "fdef"
     ]
 }

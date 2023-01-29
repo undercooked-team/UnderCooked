@@ -15,7 +15,6 @@ public class Customer extends Sprite {
 
     public Customer(GameScreen gameScreen, float x, float y)
     {
-        this.screen = screen;
         this.world = screen.getWorld();
         setPosition(x,y);
         setBounds(getX(), getY(), 16/ Constants.PPM, 16/Constants.PPM);
