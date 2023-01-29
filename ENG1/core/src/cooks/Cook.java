@@ -1,18 +1,14 @@
 package cooks;
 
 import com.badlogic.gdx.Gdx;
-// import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import food.FoodItem;
 import game.GameScreen;
 import game.GameSprites;
-import helper.BodyHelper;
-
 import static helper.Constants.PPM;
 
 import food.FoodStack;
