@@ -74,7 +74,7 @@ public class Cook extends GameEntity {
         this.setSprite();
 
         float cookInteractorSize = 32;
-        Rectangle interactorCollision = BodyHelper.createRectangle(this.x, this.y, cookInteractorSize, cookInteractorSize);
+        Rectangle interactorCollision = new Rectangle(this.x, this.y, cookInteractorSize, cookInteractorSize);
         // The below is just to visualize the debug square
         Body interactorBody = BodyHelper.createBody(this.x,this.y,cookInteractorSize,cookInteractorSize,true,body.getWorld());
         interactorBody.setActive(false);

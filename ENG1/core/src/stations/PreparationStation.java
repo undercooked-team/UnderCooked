@@ -101,6 +101,8 @@ public class PreparationStation extends Station {
                 case FINISHED:
                     progressColor = Color.GREEN;
                     break;
+                default:
+                    break;
             }
             shape.rect(rectX+2,rectY+2,progress/100*progressWidth,rectHeight-4,progressColor,progressColor,progressColor,progressColor);
         }

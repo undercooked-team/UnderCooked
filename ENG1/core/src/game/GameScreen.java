@@ -31,7 +31,7 @@ import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
 
-
+/** A screen containing certain elements of the game. Can switch between GameScreens. */
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private Array<Customer> customers;
@@ -286,6 +286,7 @@ public class GameScreen extends ScreenAdapter {
         return output;
     }
 
+    /** Reset the game variables. */
     public void reset() {
         // Reset all variables
         secondsPassed = 0;

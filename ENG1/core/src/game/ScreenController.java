@@ -65,20 +65,28 @@ public class ScreenController {
         CREDITS
     }
 
+    /**
+     * Get the desired screen from the ScreenController.
+     * @param screenID The ID of the screen you want.
+     * @return The desired screen.
+     */
     public ScreenAdapter getScreen(ScreenID screenID) {
         return this.screens.get(screenID);
     }
 
+    /** Reset the game to the initial state. */
     public void resetGameScreen() {
         gameScreen.reset();
         instructionScreen.setPrevScreenID(ScreenID.MENU);
     }
 
+    /** Pause the game. */
     public void pauseGameScreen() {
         timeDiff = TimeUtils.millis() - gameScreen.getPreviousSecond();
         setScreen(ScreenID.PAUSE);
     }
 
+    /** Resume the game from pause. */
     public void playGameScreen() {
         gameScreen.setPreviousSecond(TimeUtils.millis()-timeDiff);
         setScreen(ScreenID.GAME);

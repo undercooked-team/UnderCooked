@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static helper.Constants.PPM;
 
+/** The class to help with body collision. Also contains static methods for creating rectangles and checking rectangle collision. */
 public class BodyHelper {
     public static Body createBody(float x, float y, float width, float height, boolean isStatic, World world)
     {
@@ -23,11 +24,12 @@ public class BodyHelper {
         return body;
     }
 
-    public static Rectangle createRectangle(float x, float y, float width, float height)
-    {
-        return new Rectangle(x,y,width,height);
-    }
-
+    /**
+     * Is rect1 overlapping with rect2?
+     * @param rect1 Rectangle 1
+     * @param rect2 Rectangle 2
+     * @return Boolean, stating whether the rectangles overlap or not
+     */
     public static boolean checkCollision(Rectangle rect1, Rectangle rect2) {
         return rect1.overlaps(rect2);
     }
