@@ -8,9 +8,11 @@ import com.badlogic.gdx.utils.Array;
 import food.FoodItem.FoodID;
 import stations.Station.StationID;
 
+/** A static class containing all information relating to interactions, including:
+ * - The cook and station interactions.
+ * - Keys being pressed information.
+ */
 public class Interactions {
-    /// Since interactions and interaction() don't need to be in FoodItem.java or Station.java to work, it may not be very suitable there
-
     /** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
     private static final HashMap<String, InteractionResult> interactions = new HashMap<>();
     static {
@@ -21,7 +23,11 @@ public class Interactions {
     }
 
     public static class InteractionResult {
+        private FoodID result;
+        private float[] steps;
+        private float speed;
         /**
+         * InteractionResult Constructor
          * @param result -
          *               The resulting FoodID
          * @param steps -
@@ -29,9 +35,6 @@ public class Interactions {
          * @param speed -
          *              The speed of which the progress bar fills up for a station per second. -1 is instant.
          */
-        private FoodID result;
-        private float[] steps;
-        private float speed;
         public InteractionResult(FoodID result, float[] steps, float speed) {
             this.result = result;
             this.steps = steps;
@@ -49,7 +52,6 @@ public class Interactions {
         MENU,
         COOK_MISC, COOK_MOVEMENT
     }
-
 
     /** A HashMap containing all different forms of user inputs. These can easily
      * be changed / modified as needed from here, instead of searching through the
@@ -96,15 +98,22 @@ public class Interactions {
     public static Array<InputKey.InputTypes> keysPressed = new Array<>();
     public static Array<InputKey.InputTypes> keysJustPressed = new Array<>();
 
+    /**
+     * Get the input key assigned to the enum constant inputID
+     * @param inputID Enum Constant
+     * @return The key on the keyboard correlated to it.
+     */
     public static Array<InputKey> getInputKeys(InputID inputID) {
         return inputs.get(inputID);
     }
 
+    /** Remove all current keyPressed info.*/
     public static void resetKeys() {
         keysPressed.clear();
         keysJustPressed.clear();
     }
 
+    /** Get all the keys that are currently being pressed into {@link keysPressed} and {@link keysJustPressed}.*/
     public static void updateKeys() {
         resetKeys();
         for (InputID inputID : InputID.values()) {
@@ -119,6 +128,11 @@ public class Interactions {
         }
     }
 
+    /**
+     * Returns the Keys assigned to the enum constant inputType as a string
+     * @param inputType {@link InputTypes} enum constant
+     * @return String of keys used to trigger the given inputType
+     */
     public static String getKeyString(InputKey.InputTypes inputType) {
         Array<String> validKeys = new Array<>();
         for (Array<InputKey> inputKeys : inputs.values()) {
@@ -144,14 +158,33 @@ public class Interactions {
         return output + "]";
     }
 
+    /**
+     * Turn an inputKey into string format.
+     * @param inputKey Desired InputKey
+     * @return String version of the input key.
+     */
     public static String getKeyString(InputKey inputKey) {
         return Input.Keys.toString(inputKey.getKey());
     }
 
+    /**
+     * Checks to see if a inputType has been triggered.
+     * Eg. Has COOK_RIGHT been triggered?
+     * Use this function to detect when to remove changes induced from {@link isJustPressed()}
+     * @param inputType The inputType to check for.
+     * @return boolean : true if inputType has been triggered.
+     */
     public static boolean isPressed(InputKey.InputTypes inputType) {
         return keysPressed.contains(inputType, true);
     }
 
+    /**
+     * Checks to see if a inputType has just been triggered.
+     * Eg. Has COOK_RIGHT been JUST triggered?
+     * Use this function to trigger the initial changes that occur with this trigger.
+     * @param inputType The inputType to check for.
+     * @return boolean : true if inputType has been triggered.
+     */
     public static boolean isJustPressed(InputKey.InputTypes inputType) {
         return keysJustPressed.contains(inputType, true);
     }
@@ -168,6 +201,10 @@ public class Interactions {
         return newResult;
     };
 
+    /**
+     * Creates an interaction key out of foodID and stationID.
+     * @return The key made out of both arguments.
+     */
     private static String InteractionKey(FoodID foodID, StationID stationID) {
         return String.format("%s-%s", foodID.ordinal(), stationID.ordinal());
     }
