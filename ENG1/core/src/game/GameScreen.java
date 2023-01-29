@@ -67,7 +67,8 @@ public class GameScreen extends ScreenAdapter {
         this.previousSecond = TimeUtils.millis();
         this.cooks = new Array<>();
         this.interactables = new Array<>();
-        this.collisionHelper = new CollisionHelper(this);
+        this.collisionHelper = CollisionHelper.getInstance();
+        this.collisionHelper.setGameScreen(this);
         this.cookIndex = -1;
         this.camera = camera;
         this.screenController = screenController;
@@ -187,6 +188,11 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.render(batch);
+            entity.renderDebug(batch);
+        }
+        for (Customer customer: customers)
+        {
+            customer.draw(batch);
         }
 
         batch.end();
@@ -194,11 +200,7 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.renderShape(shape);
-        }
-
-        for (Customer customer: customers)
-        {
-            customer.draw(batch);
+            entity.renderShapeDebug(shape);
         }
 
         shape.end();

@@ -74,12 +74,8 @@ public class Cook extends GameEntity {
         this.setSprite();
 
         float cookInteractorSize = 32;
-        Rectangle interactorCollision = BodyHelper.createRectangle(this.x, this.y, cookInteractorSize, cookInteractorSize);
-        // The below is just to visualize the debug square
-        Body interactorBody = BodyHelper.createBody(this.x,this.y,cookInteractorSize,cookInteractorSize,true,body.getWorld());
-        interactorBody.setActive(false);
 
-        this.cookInteractor = new CookInteractor(cookInteractorSize, interactorCollision, interactorBody, gameScreen.getCollisionHelper());
+        this.cookInteractor = new CookInteractor(x,y,cookInteractorSize);
     }
 
     public void userInput() {
@@ -129,7 +125,7 @@ public class Cook extends GameEntity {
 
     @Override
     public void renderShapeDebug(ShapeRenderer shape) {
-
+        cookInteractor.renderDebug(shape);
     }
 
     /** Return the X pixel offset from the cook's position that the cook's FoodStack requires for rendering.*/

@@ -75,5 +75,6 @@ public class Boot extends Game {
      * @return shapeRenderer
      */
     public ShapeRenderer getShapeRenderer() { return shapeRenderer; }
+    public ScreenController getScreenController() { return screenController; }
 
 }
