@@ -120,7 +120,17 @@ public class Cook extends GameEntity {
     }
 
     @Override
+    public void renderDebug(SpriteBatch batch) {
+
+    }
+
+    @Override
     public void renderShape(ShapeRenderer shape) { }
+
+    @Override
+    public void renderShapeDebug(ShapeRenderer shape) {
+
+    }
 
     /** Return the X pixel offset from the cook's position that the cook's FoodStack requires for rendering.*/
     private float foodRelativeX(Cook.Facing dir) {
@@ -242,7 +252,7 @@ public class Cook extends GameEntity {
         }
     }
 
-    /** Responsible for processing user input information into {@link inputs}, {@link velX} and {@link velY}. */
+    /** Responsible for processing user input information into {@link this.inputs}, {@link this.velX} and {@link this.velY}. */
     private void checkUserInput()
     {
         velX = 0F;

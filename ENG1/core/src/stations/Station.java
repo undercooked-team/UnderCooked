@@ -50,5 +50,15 @@ public class Station extends CookInteractable {
     }
 
     @Override
+    public void renderDebug(SpriteBatch batch) {
+
+    }
+
+    @Override
     public void renderShape(ShapeRenderer shape) { }
+
+    @Override
+    public void renderShapeDebug(ShapeRenderer shape) {
+
+    }
 }
