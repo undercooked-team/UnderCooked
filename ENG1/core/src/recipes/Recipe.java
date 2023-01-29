@@ -119,7 +119,7 @@ public class Recipe {
 	}
 
 	/**
-	 * Creates an entry in {@link recipes} of recipieName:(listOfFoodStacks as a string)
+	 * Creates an entry in {@link recipes} of recipeName:(listOfFoodStacks as a string)
 	 * @param recipeName The name of the recipe
 	 * @param listOfFoodStacks All FoodStacks which equal this recipe.
 	 */
@@ -137,6 +137,7 @@ public class Recipe {
 	 * @param stuff The items you want all combos out of
 	 * @return An array of arrays, containing all combos
 	 */
+	@SafeVarargs
 	private static <T> Array<Array<T>> allCombos(T... stuff) {
 		return allCombosR(new Array<T>(), new Array<T>(Array.with(stuff)));
 	}
@@ -150,6 +151,7 @@ public class Recipe {
 	 * @param stuff The stuff to generate all combos of stuff.length of
 	 * @return An array of arrays containing all combinations with the prepend and append.
 	 */
+	@SafeVarargs
 	private static <T> Array<Array<T>> allCombos(Array<T> prepend, Array<T> append, T... stuff) {
 		Array<Array<T>> combos = allCombosR(new Array<T>(), new Array<T>(Array.with(stuff)));
 		Array<Array<T>> newCombos = new Array<Array<T>>();
@@ -170,7 +172,8 @@ public class Recipe {
 	 * @param remaining The remaining elements to add to the combo.
 	 * @return An array containing all combos (each combo is in an array too).
 	 */
-	private static <T> Array<Array<T>> allCombosR(Array<T> myList, Array<T> remaining) {
+	@SuppressWarnings("unchecked")
+	 private static <T> Array<Array<T>> allCombosR(Array<T> myList, Array<T> remaining) {
 		// If there's no remaining, add myList to storage by returning it in storage form
 		if (remaining.size == 0) {
 			return new Array<Array<T>>(Array.with(myList));
@@ -193,6 +196,7 @@ public class Recipe {
 		return storage;
 	}
 
+	/*
 	// vscode debugging
 	// public static void main(String[] args) {
 	// 	String[] myRecipes = recipes.get("Tomato Onion Burger");
@@ -200,4 +204,5 @@ public class Recipe {
 	// 		System.out.println(myRecipe);
 	// 	}
 	// }
+	 */
 }
