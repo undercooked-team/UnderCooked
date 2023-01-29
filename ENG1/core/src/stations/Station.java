@@ -24,8 +24,8 @@ public class Station extends CookInteractable {
     boolean inUse;
     GameSprites gameSprites;
 
-    public Station(float width, float height, Body body, Rectangle rectangle) {
-        super(width,height,body,rectangle);
+    public Station(Body body, Rectangle rectangle) {
+        super(body,rectangle);
         inUse = false;
         this.gameSprites = GameSprites.getInstance();
     }

@@ -108,33 +108,33 @@ public class MapHelper {
                     Station station;
                     switch(rectangleName) {
                         case "cut":
-                            station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new PreparationStation(body,rectangle);
                             station.setID(Station.StationID.cut);
                             gameScreen.addGameEntity(station);
                             break;
                         case "fry":
-                            station = new PreparationStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new PreparationStation(body,rectangle);
                             station.setID(Station.StationID.fry);
                             gameScreen.addGameEntity(station);
                             break;
                         case "counter":
-                            station = new CounterStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new CounterStation(body,rectangle);
                             station.setID(Station.StationID.counter);
                             gameScreen.addGameEntity(station);
                             break;
                         case "bin":
-                            station = new BinStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new BinStation(body,rectangle);
                             station.setID(Station.StationID.bin);
                             break;
                         case "serving":
-                            station = new ServingStation(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new ServingStation(body,rectangle);
                             station.setID(Station.StationID.serving);
                             gameScreen.addGameEntity(station);
                             this.SetServingStationPosition(station.getBody().getPosition());
 
                             break;
                         default:
-                            station = new Station(rectangle.getWidth(),rectangle.getHeight(),body,rectangle);
+                            station = new Station(body,rectangle);
                             station.setID(Station.StationID.none);
                             break;
                     }
@@ -145,7 +145,7 @@ public class MapHelper {
                     // Pantries
                     rectangleName = rectangleName.substring("Pantry".length());
                     Body body = makeBody(rectangle, true);
-                    Pantry pantry = new Pantry(rectangle.getWidth(), rectangle.getHeight(), body, rectangle);
+                    Pantry pantry = new Pantry(body, rectangle);
                     gameScreen.addInteractable(pantry);
                     switch(rectangleName) {
                         case "Lettuce":

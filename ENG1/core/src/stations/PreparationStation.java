@@ -20,8 +20,8 @@ public class PreparationStation extends Station {
     private int stepNum;
     private StationState state;
 
-    public PreparationStation(float width, float height, Body body, Rectangle rectangle) {
-        super(width, height, body, rectangle);
+    public PreparationStation(Body body, Rectangle rectangle) {
+        super(body, rectangle);
     }
 
     @Override

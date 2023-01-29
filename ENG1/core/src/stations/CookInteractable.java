@@ -14,8 +14,8 @@ import static helper.Constants.PPM;
 public abstract class CookInteractable extends GameEntity {
     protected Rectangle interactRect;
 
-    public CookInteractable(float width, float height, Body body, Rectangle rect) {
-        super(width, height, body);
+    public CookInteractable(Body body, Rectangle rect) {
+        super(rect.width, rect.height, body);
         this.interactRect = rect;
     }
 

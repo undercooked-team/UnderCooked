@@ -11,8 +11,8 @@ public class ServingStation extends Station {
 
     private String request;
     //private Customer customer;
-    public ServingStation(float width, float height, Body body, Rectangle rectangle) {
-        super(width, height, body, rectangle);
+    public ServingStation(Body body, Rectangle rectangle) {
+        super(body, rectangle);
     }
 
     /*public boolean hasCustomer() {

@@ -13,8 +13,8 @@ public class Pantry extends CookInteractable {
 
     FoodItem.FoodID foodID;
 
-    public Pantry(float width, float height, Body body, Rectangle rectangle) {
-        super(width,height,body,rectangle);
+    public Pantry(Body body, Rectangle rectangle) {
+        super(body,rectangle);
     }
 
     public void setItem(FoodItem.FoodID foodID) {
