@@ -28,7 +28,7 @@ public class FoodStack {
 
     /**
      * FoodStack Constructor. Creates a foodStack out of the argument.
-     * @param foodStack The LibGDX Array<FoodID> which will become a FoodStack.
+     * @param foodStack The LibGDX Array of FoodIDs which will become a FoodStack.
      */
     public FoodStack(Array<FoodID> foodStack) {
         this.foodStack = foodStack;
