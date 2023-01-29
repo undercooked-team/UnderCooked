@@ -7,6 +7,11 @@ import com.badlogic.gdx.utils.Array;
 import food.FoodStack;
 import food.FoodItem.FoodID;
 
+/** Contains all the Recipes.
+ * Each recipe can be represented by a FoodStack.
+ * Many FoodStacks map to the same recipe.
+ * Also contains many helper functions useful in generating recipes.
+ */
 public class Recipe {
 	/** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
 	private static final HashMap<String, Array<String>> recipes = new HashMap<>();
@@ -113,6 +118,11 @@ public class Recipe {
 			*/
 	}
 
+	/**
+	 * Creates an entry in {@link recipes} of recipieName:(listOfFoodStacks as a string)
+	 * @param recipeName The name of the recipe
+	 * @param listOfFoodStacks All FoodStacks which equal this recipe.
+	 */
 	private static void generateRecipes(String recipeName, Array<Array<FoodID>> listOfFoodStacks) {
 		Array<String> allValidRecipes = new Array<String>();
 		for (int i = 0; i < listOfFoodStacks.size; i++) {
@@ -121,9 +131,25 @@ public class Recipe {
 		}
 		recipes.put(recipeName, allValidRecipes);
 	}
+	/**
+	 * Generates all the combinations (think THE1 :D) of the stuff.length for the stuff specified
+	 * @param <T> Works for any type.
+	 * @param stuff The items you want all combos out of
+	 * @return An array of arrays, containing all combos
+	 */
 	private static <T> Array<Array<T>> allCombos(T... stuff) {
 		return allCombosR(new Array<T>(), new Array<T>(Array.with(stuff)));
 	}
+	/**
+	 * Very similar to {@link allCombos}, except every combo is prepended and appended stuff.
+	 * E.g. Every Burger has a topBun and bottomBun, so topBun is in prepend, and bottomBun is in append,
+	 * while the filling is in T... stuff.
+	 * @param <T> Any type.
+	 * @param prepend The stuff which will appear before all combos.
+	 * @param append The stuff which will appear after all combos.
+	 * @param stuff The stuff to generate all combos of stuff.length of
+	 * @return An array of arrays containing all combinations with the prepend and append.
+	 */
 	private static <T> Array<Array<T>> allCombos(Array<T> prepend, Array<T> append, T... stuff) {
 		Array<Array<T>> combos = allCombosR(new Array<T>(), new Array<T>(Array.with(stuff)));
 		Array<Array<T>> newCombos = new Array<Array<T>>();
@@ -136,6 +162,14 @@ public class Recipe {
 		}
 		return newCombos;
 	}
+	/**
+	 * The recursive helper function responsible for creating all combos.
+	 * Used exclusively by allCombos atm.
+	 * @param <T> Any type.
+	 * @param myList The combo being generated.
+	 * @param remaining The remaining elements to add to the combo.
+	 * @return An array containing all combos (each combo is in an array too).
+	 */
 	private static <T> Array<Array<T>> allCombosR(Array<T> myList, Array<T> remaining) {
 		// If there's no remaining, add myList to storage by returning it in storage form
 		if (remaining.size == 0) {
