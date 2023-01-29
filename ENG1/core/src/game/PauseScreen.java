@@ -37,12 +37,18 @@ public class PauseScreen extends ScreenAdapter {
 
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
-
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         Table table = new Table();
         table.center();
         table.setFillParent(true);
 
+        String[] strLabels = new String[] {
+            "PAUSED",
+            String.format("Press %s to continue",Interactions.getKeyString(InputKey.InputTypes.UNPAUSE)),
+            String.format("Press %s for instructions",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS)),
+            String.format("Press %s to reset",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME))
+        };
+        /* OLD CODE
         Label pauseLabel = new Label("PAUSED", font);
         table.add(pauseLabel).expandX();
         table.row();
@@ -51,11 +57,27 @@ public class PauseScreen extends ScreenAdapter {
         table.add(continueLabel).expandX();
         table.row();
 
+        Label instructionsLabel = new Label(String.format("Press %s for instructions",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS)), font);
+        table.add(instructionsLabel).expandX();
+        table.row();
+
         Label resetLabel = new Label(String.format("Press %s to reset",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)), font);
         table.add(resetLabel).expandX();
         table.row();
+        */
 
-        pauseLabel.setFontScale(4);
+        /** Contains the Labels objects for the PauseScreen */
+        Label[] lblLabels = new Label[strLabels.length];
+
+        for (int j = 0; j < lblLabels.length; j++) {
+            String strLabel = strLabels[j];
+            lblLabels[j] = new Label(String.format(strLabel), font);
+            table.add(lblLabels[j]).expandX();
+            table.row();
+        }
+
+        // pauseLabel.setFontScale(4);
+        lblLabels[0].setFontScale(4);
         stage.addActor(table);
     }
 
