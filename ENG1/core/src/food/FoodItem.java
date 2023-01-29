@@ -4,9 +4,7 @@ import java.util.HashMap;
 
 public class FoodItem {
 
-    /**
-    * IDs of all the different possible types of food ingredients.
-    */
+    /** IDs of all the different possible types of food ingredients.*/
     public enum FoodID {
         lettuce,
         lettuceChop,
@@ -22,6 +20,7 @@ public class FoodItem {
         none
     }
 
+    /** A dict of the pixel height for each food. Used when rendering the FoodStack.*/
     public static final HashMap<FoodID, Float> foodHeights = new HashMap<>();
 
     static {
@@ -38,9 +37,7 @@ public class FoodItem {
         foodHeights.put(FoodID.topBun, 12F);
     }
 
-    /**
-    * The ID of this FoodItem. Has a public get and set.
-    */
+    /** The ID of this FoodItem. Has a public get and set method.*/
     private FoodID foodID;
     public FoodID GetID(FoodID newID) {
         return foodID;
@@ -49,10 +46,8 @@ public class FoodItem {
         foodID = newID;
     }
 
-    /**
-    * FoodItem Constructor. Creates a new FoodItem of ingredient: foodIDin
+    /** FoodItem Constructor. Creates a new FoodItem of ingredient: foodIDin
     * @param foodIDin : The ingredient you want to create a FoodItem out of.
-    * @return FoodItem
     */
     public FoodItem(FoodID foodIDin) {
         foodID = foodIDin;
