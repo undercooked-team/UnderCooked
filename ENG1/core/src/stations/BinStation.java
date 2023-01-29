@@ -5,6 +5,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import interactions.InputKey;
 
+/** The Bin Station Class.
+ * Contains what happens when the station is interacted with.
+ */
 public class BinStation extends Station {
 
     public BinStation(Body body, Rectangle rectangle) {
