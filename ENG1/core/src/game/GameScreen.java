@@ -1,12 +1,13 @@
 package game;
 
 import Customers.Customer;
-import Customers.CustomerDef;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -34,8 +35,7 @@ import static helper.Constants.PPM;
 /** A screen containing certain elements of the game. Can switch between GameScreens. */
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
-    private Array<Customer> customers;
-    private PriorityQueue<CustomerDef> customerToSpawn;
+
     private long previousSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
@@ -59,6 +59,8 @@ public class GameScreen extends ScreenAdapter {
     //Objects
     private Array<Cook> cooks;
     private Cook cook;
+    private Customer customer;
+    private Texture customerIMG;
     private int cookIndex;
     private int customerCount;
 
@@ -83,26 +85,12 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper.setGameScreen(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
+        this.customerIMG = new Texture("Customer/Customer.png");
+        this.customer = new Customer(customerIMG);
 
-        customerToSpawn = new PriorityQueue<>();
-        customers = new Array<>();
     }
 
-    public void spawnCustomer(CustomerDef cDef)
-    {
-        customerToSpawn.add(cDef);
-    }
-    public void handleCustomers()
-    {
-        if(!customerToSpawn.isEmpty())
-        {
-            CustomerDef cDef = customerToSpawn.poll();
-            if(cDef.type == Customer.class)
-            {
-                customers.add(new Customer(this, cDef.position.x,cDef.position.y));
-            }
-        }
-    }
+
 
     private void update(float delta)
     {
@@ -123,10 +111,7 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
         }
-        SpawnCustomer();
-        handleCustomers();
-        for(Customer customer: customers)
-            customer.update(delta);
+
 
         gameHud.updateTime(hoursPassed, minutesPassed, secondsPassed);
         cameraUpdate();
@@ -145,6 +130,10 @@ public class GameScreen extends ScreenAdapter {
         // Not using new input system as it's for testing
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             updateCustomers();
+        }
+        if(secondsPassed==5)
+        {
+            customer.setCanDraw(true);
         }
 
         if(Interactions.isJustPressed(InputKey.InputTypes.PAUSE))
@@ -191,10 +180,10 @@ public class GameScreen extends ScreenAdapter {
             entity.render(batch);
             entity.renderDebug(batch);
         }
-        for (Customer customer: customers)
-        {
-            customer.draw(batch);
-        }
+       if(customer.canSpawn())
+       {
+           customer.Draw(batch);
+       }
 
         batch.end();
         shape.begin(ShapeRenderer.ShapeType.Filled);
@@ -314,12 +303,6 @@ public class GameScreen extends ScreenAdapter {
         gameHud.setCustomerCount(customers);
     }
 
-    public void SpawnCustomer()
-    {
-        if(gameHud.GetTime() == 10)
-        {
-            spawnCustomer(new CustomerDef(new Vector2(mapHelper.getServingStationPosition()),Customer.class));
-        }
-    }
+
 
 }
