@@ -14,8 +14,8 @@ import interactions.InputKey;
 public class CounterStation extends Station {
 
     FoodStack foodStack;
-    public CounterStation(Body body, Rectangle rectangle) {
-        super(body, rectangle);
+    public CounterStation(Rectangle rectangle) {
+        super(rectangle);
         foodStack = new FoodStack();
     }
 

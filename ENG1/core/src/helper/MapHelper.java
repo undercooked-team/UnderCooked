@@ -1,4 +1,6 @@
 package helper;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.maps.Map;
 import cooks.Cook;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -24,12 +26,25 @@ public class MapHelper {
     private GameScreen gameScreen;
     private TiledMap tiledMap;
     private Vector2 ServingStationPosition;
+    private static MapHelper INSTANCE;
 
-    public MapHelper(GameScreen gameScreen)
-    {
-        this.gameScreen = gameScreen;
+    public MapHelper() { }
+
+    public static MapHelper getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new MapHelper();
+        }
+        return INSTANCE;
     }
 
+    public static MapHelper newInstance() {
+        INSTANCE = new MapHelper();
+        return INSTANCE;
+    }
+
+    public void setGameScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
+    }
 
     public OrthogonalTiledMapRenderer setupMap()
     {
@@ -65,8 +80,8 @@ public class MapHelper {
 
     }
 
-    private Body makeBody(Rectangle rectangle, boolean isStatic) {
-        return BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),isStatic, gameScreen.getWorld());
+    public static Body makeBody(Rectangle rectangle, boolean isStatic) {
+        return BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),isStatic, INSTANCE.gameScreen.getWorld());
     }
 
     private void parseMapObjects(MapObjects mapObjects)
@@ -105,37 +120,36 @@ public class MapHelper {
                 if(rectangleName.startsWith("Station")) {
                     // Stations
                     rectangleName = rectangleName.substring("Station".length()).toLowerCase();
-                    Body body = makeBody(rectangle, true);
                     Station station;
                     switch(rectangleName) {
                         case "cut":
-                            station = new PreparationStation(body,rectangle);
+                            station = new PreparationStation(rectangle);
                             station.setID(Station.StationID.cut);
                             gameScreen.addGameEntity(station);
                             break;
                         case "fry":
-                            station = new PreparationStation(body,rectangle);
+                            station = new PreparationStation(rectangle);
                             station.setID(Station.StationID.fry);
                             gameScreen.addGameEntity(station);
                             break;
                         case "counter":
-                            station = new CounterStation(body,rectangle);
+                            station = new CounterStation(rectangle);
                             station.setID(Station.StationID.counter);
                             gameScreen.addGameEntity(station);
                             break;
                         case "bin":
-                            station = new BinStation(body,rectangle);
+                            station = new BinStation(rectangle);
                             station.setID(Station.StationID.bin);
                             break;
                         case "serving":
-                            station = new ServingStation(body,rectangle);
+                            station = new ServingStation(rectangle);
                             station.setID(Station.StationID.serving);
                             gameScreen.addGameEntity(station);
                             this.SetServingStationPosition(station.getBody().getPosition());
 
                             break;
                         default:
-                            station = new Station(body,rectangle);
+                            station = new Station(rectangle);
                             station.setID(Station.StationID.none);
                             break;
                     }
@@ -145,8 +159,7 @@ public class MapHelper {
                 if (rectangleName.startsWith("Pantry")) {
                     // Pantries
                     rectangleName = rectangleName.substring("Pantry".length());
-                    Body body = makeBody(rectangle, true);
-                    Pantry pantry = new Pantry(body, rectangle);
+                    Pantry pantry = new Pantry(rectangle);
                     gameScreen.addInteractable(pantry);
                     switch(rectangleName) {
                         case "Lettuce":

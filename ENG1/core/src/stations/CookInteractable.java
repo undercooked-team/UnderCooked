@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import cooks.GameEntity;
 
+import helper.MapHelper;
 import interactions.InputKey;
 
 /** The CookInteractable Class. This is basically stations and pantries.*/
@@ -12,8 +13,8 @@ public abstract class CookInteractable extends GameEntity {
     /** The rectangle representing the collision of this interactable. */
     protected Rectangle interactRect;
 
-    public CookInteractable(Body body, Rectangle rect) {
-        super(rect.width, rect.height, body);
+    public CookInteractable(Rectangle rect) {
+        super(rect);
         this.interactRect = rect;
     }
 

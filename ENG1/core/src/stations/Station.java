@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import game.GameSprites;
+import helper.MapHelper;
 import interactions.InputKey;
 
 public class Station extends CookInteractable {
@@ -24,8 +25,8 @@ public class Station extends CookInteractable {
     boolean inUse;
     GameSprites gameSprites;
 
-    public Station(Body body, Rectangle rectangle) {
-        super(body,rectangle);
+    public Station(Rectangle rectangle) {
+        super(rectangle);
         inUse = false;
         this.gameSprites = GameSprites.getInstance();
     }

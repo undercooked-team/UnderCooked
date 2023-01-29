@@ -26,6 +26,7 @@ import interactions.Interactions;
 import stations.CookInteractable;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
@@ -78,12 +79,13 @@ public class GameScreen extends ScreenAdapter {
 
         this.world = new World(new Vector2(0,0), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
-        this.mapHelper = new MapHelper(this);
+        this.mapHelper = MapHelper.getInstance();
+        this.mapHelper.setGameScreen(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
 
-        customerToSpawn = new PriorityQueue<CustomerDef>();
-        customers = new Array<Customer>();
+        customerToSpawn = new PriorityQueue<>();
+        customers = new Array<>();
     }
 
     public void spawnCustomer(CustomerDef cDef)
@@ -295,7 +297,8 @@ public class GameScreen extends ScreenAdapter {
         gameEntities.clear();
         interactables.clear();
         mapHelper.dispose();
-        mapHelper = new MapHelper(this);
+        mapHelper = MapHelper.newInstance();
+        mapHelper.setGameScreen(this);
         world.dispose();
         this.world = new World(new Vector2(0,0), false);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();

@@ -10,8 +10,8 @@ import interactions.InputKey;
  */
 public class BinStation extends Station {
 
-    public BinStation(Body body, Rectangle rectangle) {
-        super(body, rectangle);
+    public BinStation(Rectangle rectangle) {
+        super(rectangle);
     }
 
     @Override

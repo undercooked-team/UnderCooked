@@ -2,7 +2,9 @@ package cooks;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
+import helper.MapHelper;
 
 import static helper.Constants.PPM;
 
@@ -29,6 +31,10 @@ public abstract class GameEntity {
         this.velY = 0;
         this.speed = 0;
         this.body = body;
+    }
+
+    public GameEntity(Rectangle rectangle) {
+        this(rectangle.getWidth(),rectangle.getHeight(),MapHelper.makeBody(rectangle,true));
     }
 
     public abstract void update(float delta);
