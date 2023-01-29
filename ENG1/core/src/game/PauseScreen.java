@@ -49,7 +49,8 @@ public class PauseScreen extends ScreenAdapter {
             String.format("Press %s to continue",Interactions.getKeyString(InputKey.InputTypes.UNPAUSE)),
             String.format("Press %s for instructions",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS)),
             String.format("Press %s for credits",Interactions.getKeyString(InputKey.InputTypes.CREDITS)),
-            String.format("Press %s to reset",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME))
+            String.format("Press %s to reset",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)),
+            String.format("Press %s to quit",Interactions.getKeyString(InputKey.InputTypes.QUIT))
         };
         /* OLD CODE
         Label pauseLabel = new Label("PAUSED", font);
@@ -102,6 +103,9 @@ public class PauseScreen extends ScreenAdapter {
         else if (Interactions.isJustPressed(InputKey.InputTypes.RESET_GAME)) {
             screenController.resetGameScreen();
             screenController.setScreen(ScreenID.MENU);
+        }
+        else if (Interactions.isJustPressed(InputKey.InputTypes.QUIT)) {
+            Gdx.app.exit();
         }
     }
 
