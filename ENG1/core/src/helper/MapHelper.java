@@ -19,6 +19,7 @@ import stations.*;
 
 import static helper.Constants.PPM;
 
+/** The MapHelper Class.*/
 public class MapHelper {
     private GameScreen gameScreen;
     private TiledMap tiledMap;
