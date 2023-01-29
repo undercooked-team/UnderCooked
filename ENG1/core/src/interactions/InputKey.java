@@ -39,6 +39,10 @@ public class InputKey {
         return key;
     }
 
+    /**
+     * Get the enum constant for what this input is.
+     * @return The enum constant for this input.
+     */
     public InputTypes getType() {
         return inputType;
     }
