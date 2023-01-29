@@ -8,15 +8,29 @@ import helper.CollisionHelper;
 import interactions.InputKey;
 import stations.CookInteractable;
 
-import static cooks.Cook.OFFSET_Y;
+// import static cooks.Cook.OFFSET_Y;
 import static helper.Constants.PPM;
 
+/**
+ * The Cook's in-game Collision and Detection Class
+ */
 public class CookInteractor extends GameEntity {
 
+    /** The X and Y Coordinates of this {@link CookInteractor}. */
     protected float x,y;
+    /** The size of this {@link CookInteractor}. */
     protected float size;
+    /** The rectangle responsible for collision in {@link CookInteractor}. */
     protected Rectangle collision;
+    /** The Collision Helper Singleton. */
     protected CollisionHelper ch;
+    /**
+     * CookInteractor Constructor.
+     * @param size The size of CookInteractor's {@link GameEntity}.
+     * @param collision The rectangle responsible for this CookInteractor's collision.
+     * @param body The body for this CookInteractor's collision.
+     * @param ch The collision helper singleton.
+     */
     public CookInteractor(float size, Rectangle collision, Body body, CollisionHelper ch) {
         super(size,size,body);
         this.size = size;
@@ -24,6 +38,12 @@ public class CookInteractor extends GameEntity {
         this.ch = ch;
     }
 
+    /**
+     * Returns an X offset depending on the cook's direction.
+     * Used during collision detection between the cook and other interactables.
+     * @param dir The direction the cook can face
+     * @return An X offset in pixels.
+     */
     private float relativeX(Cook.Facing dir) {
         switch (dir) {
             case RIGHT:
@@ -35,6 +55,12 @@ public class CookInteractor extends GameEntity {
         }
     }
 
+    /**
+     * Returns an Y offset depending on the cook's direction.
+     * Used during collision detection between the cook and other interactables.
+     * @param dir The direction the cook can face
+     * @return An Y offset in pixels.
+     */
     private float relativeY(Cook.Facing dir) {
         switch (dir) {
             case UP:
@@ -49,6 +75,13 @@ public class CookInteractor extends GameEntity {
         }
     }
 
+    /**
+     * Update the Position of the CookInteractor to the next x, y position
+     * and given direction
+     * @param x New X position
+     * @param y New Y position
+     * @param dir New direction
+     */
     protected void updatePosition(float x, float y, Cook.Facing dir) {
         float relX = relativeX(dir);
         float relY = relativeY(dir);
@@ -65,6 +98,11 @@ public class CookInteractor extends GameEntity {
         this.body.setTransform(this.x,this.y,this.body.getAngle());
     }
 
+    /**
+     * Check for any collisions the CookInteractor has made
+     * @param cook The cook
+     * @param inputType The enum constant of the input made
+     */
     public void checkCollisions(Cook cook, InputKey.InputTypes inputType) {
         CookInteractable interactStation = ch.getInteract(cook, collision);
         if (interactStation != null) {
@@ -75,18 +113,12 @@ public class CookInteractor extends GameEntity {
     }
 
     @Override
-    public void update(float delta) {
-
-    }
+    public void update(float delta) { }
 
     @Override
-    public void render(SpriteBatch batch) {
-
-    }
+    public void render(SpriteBatch batch) { }
 
     @Override
-    public void renderShape(ShapeRenderer shape) {
-
-    }
+    public void renderShape(ShapeRenderer shape) { }
 
 }
