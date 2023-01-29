@@ -36,7 +36,7 @@ public class CookInteractor {
         this.size = size;
         this.x = x;
         this.y = y;
-        this.collision = BodyHelper.createRectangle(x,y,size,size);
+        this.collision = new Rectangle(x,y,size,size);
         this.ch = CollisionHelper.getInstance();
     }
 
