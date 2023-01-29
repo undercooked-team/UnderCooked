@@ -3,47 +3,66 @@ package game;
 // import com.badlogic.gdx.ApplicationAdapter;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import helper.Constants;
+
+/** Responsible for starting the game.
+ * The singleton used to initialize all game elements.*/
 public class Boot extends Game {
 
-  public static Boot INSTANCE;
-  private int widthScreen, heightScreen;
-  private OrthographicCamera orthographicCamera;
-  public Boot()
-  {
-      INSTANCE = this;
-  }
-  private Viewport gamePort;
-  private SpriteBatch spriteBatch;
-  private ShapeRenderer shapeRenderer;
-  private ScreenController screenController;
+    /** The Boot Singleton Instance. */
+    public static Boot INSTANCE;
+    /** The screen width and height. */
+    // private int widthScreen, heightScreen;
+    /** The camera for the game. */
+    private OrthographicCamera orthographicCamera;
+    /** Boot Singleton Constructor */
+    public Boot()
+    {
+        INSTANCE = this;
+    }
+    /** The Viewport for the game. */
+    private Viewport gamePort;
+    /** The spriteBatch for the game. */
+    private SpriteBatch spriteBatch;
+    /** The shapeRenderer for the game. */
+    private ShapeRenderer shapeRenderer;
+    /** The screenController used by the game. */
+    private ScreenController screenController;
 
-  @Override
-  public void create()
-  {
-      this.widthScreen = Gdx.graphics.getWidth();
-      this.heightScreen = Gdx.graphics.getHeight();
-      this.orthographicCamera = new OrthographicCamera();
-      this.spriteBatch = new SpriteBatch();
-      this.shapeRenderer = new ShapeRenderer();
-      this.shapeRenderer.setAutoShapeType(true);
-      gamePort = new FitViewport(960,640, orthographicCamera);
-      this.screenController = new ScreenController(this, orthographicCamera);
-      setScreen(new MenuScreen(screenController, orthographicCamera));
-  }
+    @Override
+    public void create()
+    {
+        // this.widthScreen = Gdx.graphics.getWidth();
+        // this.heightScreen = Gdx.graphics.getHeight();
+        this.orthographicCamera = new OrthographicCamera();
+        this.spriteBatch = new SpriteBatch();
+        this.shapeRenderer = new ShapeRenderer();
+        this.shapeRenderer.setAutoShapeType(true);
+        gamePort = new FitViewport(Constants.V_Width, Constants.V_Height, orthographicCamera);
+        this.screenController = new ScreenController(this, orthographicCamera);
+        setScreen(new MenuScreen(screenController, orthographicCamera));
+    }
 
-  public void resize(int width, int height)
+    public void resize(int width, int height)
     {
         gamePort.update(width, height);
     }
 
-  public SpriteBatch getSpriteBatch() { return spriteBatch; }
-  public ShapeRenderer getShapeRenderer() { return shapeRenderer; }
+    /**
+     * The spriteBatch getter
+     * @return spriteBatch
+     */
+    public SpriteBatch getSpriteBatch() { return spriteBatch; }
+    /**
+     * The shapeRenderer getter
+     * @return shapeRenderer
+     */
+    public ShapeRenderer getShapeRenderer() { return shapeRenderer; }
 
 }
