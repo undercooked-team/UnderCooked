@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
-import food.FoodStack;
 import interactions.InputKey;
 
 public class ServingStation extends Station {
