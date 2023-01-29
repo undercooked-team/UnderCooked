@@ -9,6 +9,7 @@ public class InputKey {
         INSTRUCTIONS,
         PAUSE,
         UNPAUSE,
+        CREDITS,
 
         // COOK_INTERACT
         PUT_DOWN,

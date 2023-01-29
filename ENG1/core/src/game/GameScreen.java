@@ -50,7 +50,7 @@ public class GameScreen extends ScreenAdapter {
     private MapHelper mapHelper;
     private Array<CookInteractable> interactables;
     private CollisionHelper collisionHelper;
-    private GameSprites gameSprites;
+    // private GameSprites gameSprites;
     private Array<GameEntity> gameEntities;
     private DrawQueueComparator drawQueueComparator;
     private int xOffset = 480;

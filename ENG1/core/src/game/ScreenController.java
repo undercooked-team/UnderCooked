@@ -14,6 +14,7 @@ public class ScreenController {
     private GameScreen gameScreen;
     private MenuScreen menuScreen;
     private GameOverScreen gameOverScreen;
+    private CreditsScreen creditsScreen;
     private InstructionScreen instructionScreen;
     private PauseScreen pauseScreen;
     private HashMap<ScreenID, ScreenAdapter> screens;
@@ -30,12 +31,14 @@ public class ScreenController {
         this.menuScreen = new MenuScreen(this,camera);
         this.gameOverScreen = new GameOverScreen(this,camera);
         this.instructionScreen = new InstructionScreen(this,camera);
+        this.creditsScreen = new CreditsScreen(this,camera);
 
         this.screens = new HashMap<>();
         this.screens.put(ScreenID.MENU,menuScreen);
         this.screens.put(ScreenID.GAME,gameScreen);
         this.screens.put(ScreenID.GAMEOVER, gameOverScreen);
         this.screens.put(ScreenID.INSTRUCTIONS,instructionScreen);
+        this.screens.put(ScreenID.CREDITS,creditsScreen);
 
         this.pauseScreen = new PauseScreen(this,camera);
         this.screens.put(ScreenID.PAUSE,pauseScreen);
@@ -58,7 +61,8 @@ public class ScreenController {
         GAME,
         PAUSE,
         GAMEOVER,
-        INSTRUCTIONS
+        INSTRUCTIONS,
+        CREDITS
     }
 
     public ScreenAdapter getScreen(ScreenID screenID) {

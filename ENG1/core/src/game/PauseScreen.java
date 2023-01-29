@@ -33,7 +33,7 @@ public class PauseScreen extends ScreenAdapter {
         this.camera = orthographicCamera;
 
         this.batch = screenController.getSpriteBatch();
-        this.gameScreen = ((GameScreen) screenController.getScreen(ScreenController.ScreenID.GAME));
+        this.gameScreen = ((GameScreen) screenController.getScreen(ScreenID.GAME));
         this.shape = screenController.getShapeRenderer();
         shape.setAutoShapeType(true);
 
@@ -48,6 +48,7 @@ public class PauseScreen extends ScreenAdapter {
             "PAUSED",
             String.format("Press %s to continue",Interactions.getKeyString(InputKey.InputTypes.UNPAUSE)),
             String.format("Press %s for instructions",Interactions.getKeyString(InputKey.InputTypes.INSTRUCTIONS)),
+            String.format("Press %s for credits",Interactions.getKeyString(InputKey.InputTypes.CREDITS)),
             String.format("Press %s to reset",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME))
         };
         /* OLD CODE
@@ -94,9 +95,13 @@ public class PauseScreen extends ScreenAdapter {
             ((InstructionScreen)screenController.getScreen(ScreenID.INSTRUCTIONS)).setPrevScreenID(ScreenID.PAUSE);
             screenController.setScreen(ScreenID.INSTRUCTIONS);
         }
+        else if (Interactions.isJustPressed(InputKey.InputTypes.CREDITS)) {
+            ((CreditsScreen)screenController.getScreen(ScreenID.CREDITS)).setPrevScreenID(ScreenID.PAUSE);
+            screenController.setScreen(ScreenID.CREDITS);
+        }
         else if (Interactions.isJustPressed(InputKey.InputTypes.RESET_GAME)) {
             screenController.resetGameScreen();
-            screenController.setScreen(ScreenController.ScreenID.MENU);
+            screenController.setScreen(ScreenID.MENU);
         }
     }
 
