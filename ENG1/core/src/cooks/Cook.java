@@ -37,8 +37,6 @@ public class Cook extends GameEntity {
      * inputs = { Facing.RIGHT, Facing.DOWN }
      */
     private Array<Facing> inputs;
-    /** Offset for the sprites after changing the collision of the Cook */
-    protected static final float OFFSET_Y = 27F;
 
     /** All possible directions the cook can be facing. */
     enum Facing {
@@ -74,10 +72,6 @@ public class Cook extends GameEntity {
         this.setSprite();
 
         float cookInteractorSize = 32;
-        Rectangle interactorCollision = new Rectangle(this.x, this.y, cookInteractorSize, cookInteractorSize);
-        // The below is just to visualize the debug square
-        Body interactorBody = BodyHelper.createBody(this.x,this.y,cookInteractorSize,cookInteractorSize,true,body.getWorld());
-        interactorBody.setActive(false);
 
         this.cookInteractor = new CookInteractor(x,y,cookInteractorSize);
     }
@@ -167,7 +161,7 @@ public class Cook extends GameEntity {
         float xOffset = foodRelativeX(dir), yOffset = foodRelativeY(dir);
         // Get offset based on direction.
 
-        float drawX = x, drawY = y + OFFSET_Y;
+        float drawX = x, drawY = y + 27F;
         /*if (foodStack.size() > 0) {
             foodStack.popStack();
         }*/
