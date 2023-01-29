@@ -12,12 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import game.ScreenController.ScreenID;
 import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
 
 public class InstructionScreen extends ScreenAdapter {
 
+    private ScreenID prevScreenID = ScreenID.MENU;
     private OrthographicCamera camera;
     private ScreenController screenController;
     private FitViewport viewport;
@@ -80,7 +83,7 @@ public class InstructionScreen extends ScreenAdapter {
             table.row();
         }
 
-        Label extraText = new Label("To go back to the Main Menu, press I", font);
+        Label extraText = new Label("To go back, press I", font);
         extraText.setFontScale(1.5F);
         table.add(extraText);
 
@@ -97,11 +100,14 @@ public class InstructionScreen extends ScreenAdapter {
         // Check for input.
         Interactions.updateKeys();
         if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
-            screenController.setScreen(ScreenController.ScreenID.MENU);
+            screenController.setScreen(prevScreenID);
         }
 
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+    }
+    public void setPrevScreenID(ScreenID scID) {
+        prevScreenID = scID;
     }
 }

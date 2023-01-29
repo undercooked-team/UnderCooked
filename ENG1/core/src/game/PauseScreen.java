@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import game.ScreenController.ScreenID;
 import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
@@ -88,7 +90,11 @@ public class PauseScreen extends ScreenAdapter {
             screenController.playGameScreen();
             return;
         }
-        if (Interactions.isJustPressed(InputKey.InputTypes.RESET_GAME)) {
+        if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
+            ((InstructionScreen)screenController.getScreen(ScreenID.INSTRUCTIONS)).setPrevScreenID(ScreenID.PAUSE);
+            screenController.setScreen(ScreenID.INSTRUCTIONS);
+        }
+        else if (Interactions.isJustPressed(InputKey.InputTypes.RESET_GAME)) {
             screenController.resetGameScreen();
             screenController.setScreen(ScreenController.ScreenID.MENU);
         }

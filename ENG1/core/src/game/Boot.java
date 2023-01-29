@@ -34,7 +34,7 @@ public class Boot extends Game {
       this.shapeRenderer = new ShapeRenderer();
       this.shapeRenderer.setAutoShapeType(true);
       gamePort = new FitViewport(960,640, orthographicCamera);
-      this.screenController = new ScreenController(this,orthographicCamera);
+      this.screenController = new ScreenController(this, orthographicCamera);
       setScreen(new MenuScreen(screenController, orthographicCamera));
   }
 

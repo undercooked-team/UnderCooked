@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import game.ScreenController.ScreenID;
 import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
@@ -52,14 +54,18 @@ public class MenuScreen extends ScreenAdapter {
 
     }
 
+    /**This function runs every (frame???)*/
     public void update() {
         Interactions.updateKeys();
+
+        // Set the screen to the gameplay screen
         if (Interactions.isJustPressed(InputKey.InputTypes.START_GAME)) {
-            screenController.setScreen(ScreenController.ScreenID.GAME);
-            ((GameScreen) screenController.getScreen(ScreenController.ScreenID.GAME)).startGame(5);
+            screenController.setScreen(ScreenID.GAME);
+            ((GameScreen) screenController.getScreen(ScreenID.GAME)).startGame(5);
         }
-        if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
-            screenController.setScreen(ScreenController.ScreenID.INSTRUCTIONS);
+        // Set the screen to the instructions screen
+        else if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
+            screenController.setScreen(ScreenID.INSTRUCTIONS);
         }
     }
 
