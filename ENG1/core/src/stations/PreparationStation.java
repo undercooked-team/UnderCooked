@@ -154,6 +154,12 @@ public class PreparationStation extends Station {
             }
             // Otherwise, check if the user is trying to use the Station.
             if (inputType == InputKey.InputTypes.USE) {
+                // If progress >= 100, then take the result of the preparation.
+                if (progress >= 100) {
+                    inUse = false;
+                    cook.foodStack.addStack(interaction.getResult());
+                    return;
+                }
                 // If currently at a step, move to the next step.
                 float[] steps = interaction.getSteps();
                 if (stepNum < steps.length) {
