@@ -1,19 +1,11 @@
 package cooks;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
-import game.Boot;
-import game.ScreenController;
-import helper.BodyHelper;
 import helper.CollisionHelper;
 import interactions.InputKey;
 import stations.CookInteractable;
-
-// import static cooks.Cook.OFFSET_Y;
-import static helper.Constants.PPM;
 
 /**
  * The Cook's in-game Collision and Detection Class
