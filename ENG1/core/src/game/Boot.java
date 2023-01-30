@@ -66,15 +66,20 @@ public class Boot extends Game {
     }
 
     /**
-     * The spriteBatch getter
-     * @return spriteBatch
+     * The {@link SpriteBatch} getter
+     * @return {@link SpriteBatch} : The {@link SpriteBatch} for the game.
      */
     public SpriteBatch getSpriteBatch() { return spriteBatch; }
     /**
-     * The shapeRenderer getter
-     * @return shapeRenderer
+     * The {@link ShapeRenderer} getter.
+     * @return {@link ShapeRenderer} : The {@link ShapeRenderer} for the game.
      */
     public ShapeRenderer getShapeRenderer() { return shapeRenderer; }
+
+    /**
+     * The {@link ScreenController} getter.
+     * @return {@link ScreenController} : The {@link ScreenController} for the game.
+     */
     public ScreenController getScreenController() { return screenController; }
 
 }

@@ -1,6 +1,7 @@
 package cooks;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import helper.CollisionHelper;
@@ -103,6 +104,11 @@ public class CookInteractor {
         }*/
     }
 
+    /**
+     * The debug render function, used to render the {@link CookInteractor}'s
+     * collision box.
+     * @param shape The {@link ShapeRenderer} used to render.
+     */
     public void renderDebug(ShapeRenderer shape) {
         shape.set(ShapeRenderer.ShapeType.Line);
         shape.setColor(Color.BLACK);
