@@ -4,3 +4,15 @@ Creator: poloviiinkin
 Link to food_graphics: https://poloviiinkin.itch.io/food
 Link to other_sprites: https://poloviiinkin.itch.io/mega-pixel-art-32x32-px-icons-sprite-sheet
 Link to license: https://creativecommons.org/licenses/by-sa/4.0/deed.en
+
+Cook Forward facing base: http://pixelartmaker.com/art/77e4b71a43c348d
+Cook modification / different facing sprites: Owen
+
+Bin Sprite: Hamza
+Menu Screen: Sehran
+
+The Texture Packer used to create the atlases was: https://github.com/crashinvaders/gdx-texture-packer-gui/releases
+License: https://github.com/crashinvaders/gdx-texture-packer-gui/blob/master/LICENSE
+
+To create a Tilemap, we used the free version of Tiled: https://www.mapeditor.org/
+License: https://github.com/mapeditor/tiled/blob/master/LICENSE.GPL
