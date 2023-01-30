@@ -116,9 +116,9 @@ public class Interactions {
                 new InputKey(InputKey.InputTypes.COOK_RIGHT,Input.Keys.RIGHT)
         }));
         inputs.put(InputID.COOK_INTERACT, new Array<>(new InputKey[]{
-                new InputKey(InputKey.InputTypes.USE, Input.Keys.K),
-                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.J),
-                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.L)
+                new InputKey(InputKey.InputTypes.USE, Input.Keys.I),
+                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.O),
+                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.J)
         }));
         inputs.put(InputID.COOK_MISC, new Array<>(new InputKey[] {
                 new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.SPACE)
