@@ -19,6 +19,11 @@ import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
 
+/**
+ * A {@link ScreenAdapter} that is used when the game is paused.
+ * It renders the {@link GameScreen} behind it, so the user can still
+ * see the game.
+ */
 public class PauseScreen extends ScreenAdapter {
     private ScreenController screenController;
     private OrthographicCamera camera;
@@ -28,6 +33,12 @@ public class PauseScreen extends ScreenAdapter {
     private Stage stage;
     private GameScreen gameScreen;
     private ShapeRenderer shape;
+
+    /**
+     * The constructor for the {@link PauseScreen}.
+     * @param screenController The {@link ScreenController} of the {@link ScreenAdapter}.
+     * @param orthographicCamera The {@link OrthographicCamera} that the game should use.
+     */
     public PauseScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
         this.screenController = screenController;
         this.camera = orthographicCamera;
@@ -85,6 +96,10 @@ public class PauseScreen extends ScreenAdapter {
         stage.addActor(table);
     }
 
+    /**
+     * Check for user input every frame and act on specified inputs.
+     * @param delta The time between frames as a float.
+     */
     public void update(float delta) {
         Interactions.updateKeys();
         // Check if the Unpause key was pressed.
@@ -109,6 +124,14 @@ public class PauseScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * The function used to render the {@link PauseScreen}.
+     *
+     * <br>Draws the {@link GameScreen} underneath using the
+     * {@link GameScreen#renderGame(float)} function, and then
+     * renders the {@link PauseScreen} over it.
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
 

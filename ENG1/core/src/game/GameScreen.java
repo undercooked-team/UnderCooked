@@ -31,7 +31,8 @@ import java.util.Comparator;
 
 import static helper.Constants.PPM;
 
-/** A screen containing certain elements of the game. Can switch between GameScreens. */
+/** A {@link ScreenAdapter} containing certain elements of the game.
+ * <br>It is possible to switch between multiple {@link GameScreen}s. */
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private int delay;
@@ -67,7 +68,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * The constructor for the {@link GameScreen}.
-     * @param screenController
+     * @param screenController The {@link ScreenController} of the {@link ScreenAdapter}.
      * @param camera The {@link OrthographicCamera} that the game should use.
      */
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
