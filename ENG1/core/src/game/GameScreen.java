@@ -50,7 +50,6 @@ public class GameScreen extends ScreenAdapter {
     private MapHelper mapHelper;
     private Array<CookInteractable> interactables;
     private CollisionHelper collisionHelper;
-    // private GameSprites gameSprites;
     private Array<GameEntity> gameEntities;
     private DrawQueueComparator drawQueueComparator;
     private int xOffset = 480;
@@ -66,6 +65,11 @@ public class GameScreen extends ScreenAdapter {
     private Customer customer;
     private Sprite customerIMG;
 
+    /**
+     * The constructor for the {@link GameScreen}.
+     * @param screenController
+     * @param camera The {@link OrthographicCamera} that the game should use.
+     */
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
         this.previousSecond = TimeUtils.millis();
@@ -94,6 +98,10 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * Update the game's values, {@link GameEntity}s and so on.
+     * @param delta The time between frames as a float.
+     */
     private void update(float delta)
     {
 
@@ -147,12 +155,19 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Update the {@link #camera}.
+     */
     private void cameraUpdate()
     {
         camera.position.set(new Vector3(0 + xOffset,0+yOffset,0));
         camera.update();
     }
 
+    /**
+     * The next frame of the game.
+     * @param delta The time between frames as a float.
+     */
     @Override
     public void render(float delta)
     {
@@ -168,6 +183,11 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Render the {@link GameScreen}. It is a separate function to
+     * allow rendering of the game from the {@link PauseScreen}.
+     * @param delta The time between frames as a float.
+     */
     public void renderGame(float delta) {
 
         Gdx.gl.glClearColor(1,1,1,1);
@@ -352,7 +372,7 @@ public class GameScreen extends ScreenAdapter {
         gameHud.setCustomerCount(customers);
     }
 
-    /** Spawns a Customer. */
+    /**  */
     public void setupServingStation()
     {
         for (ServingStation i : mapHelper.getServingStations())
