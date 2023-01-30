@@ -2,21 +2,42 @@ package food;
 
 import java.util.HashMap;
 
+/**
+ * A class that controls how {@link FoodID}s are
+ * used and handled.
+ */
 public class FoodItem {
 
     /** IDs of all the different possible types of food ingredients.*/
     public enum FoodID {
+        /** Lettuce */
         lettuce,
+        /** Lettuce -> {@link stations.PreparationStation}
+         * with type {@link stations.Station.StationID#cut} */
         lettuceChop,
+        /** Tomato */
         tomato,
+        /** Tomato -> {@link stations.PreparationStation}
+         * with type {@link stations.Station.StationID#cut} */
         tomatoChop,
+        /** Onion */
         onion,
+        /** Onion -> {@link stations.PreparationStation}
+         * with type {@link stations.Station.StationID#cut} */
         onionChop,
+        /** Meat */
         meat,
+        /** Meat -> {@link stations.PreparationStation}
+         * with type {@link stations.Station.StationID#fry} */
         meatCook,
+        /** Bun — Used only to specify that the {@link stations.Pantry} gives
+         * either a {@link #bottomBun} or {@link #topBun}. */
         bun,
+        /** Bottom Bun -> Highest bun on {@link FoodStack} is {@code null} or {@link #topBun} */
         bottomBun,
+        /** Top Bun -> Highest bun on {@link FoodStack} is {@link #bottomBun} */
         topBun,
+        /** Default */
         none
     }
 
@@ -39,12 +60,6 @@ public class FoodItem {
 
     /** The ID of this FoodItem. Has a public get and set method.*/
     private FoodID foodID;
-    public FoodID GetID(FoodID newID) {
-        return foodID;
-    }
-    public void SetID(FoodID newID) {
-        foodID = newID;
-    }
 
     /** FoodItem Constructor. Creates a new FoodItem of ingredient: foodIDin
     * @param foodIDin : The ingredient you want to create a FoodItem out of.
