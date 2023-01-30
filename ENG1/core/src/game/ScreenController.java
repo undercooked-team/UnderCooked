@@ -88,7 +88,7 @@ public class ScreenController {
     /**
      * Get the desired screen from the {@link ScreenController}.
      * @param screenID The {@link ScreenID} of the screen you want.
-     * @return {@link ScreenAdapter} : The requested {@link ScreenAdapter)}.
+     * @return {@link ScreenAdapter} : The requested {@link ScreenAdapter}.
      */
     public ScreenAdapter getScreen(ScreenID screenID) {
         return this.screens.get(screenID);
