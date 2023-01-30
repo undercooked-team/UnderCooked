@@ -370,6 +370,7 @@ public class GameScreen extends ScreenAdapter {
         gameEntities.clear();
         interactables.clear();
         mapHelper.dispose();
+        customerController.clearServingStations();
         dispose();
         mapHelper = MapHelper.newInstance();
         mapHelper.setGameScreen(this);

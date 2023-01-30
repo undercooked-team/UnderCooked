@@ -177,4 +177,12 @@ public class CustomerController {
         customersServed++;
         gameScreen.setCustomerHud(customersServed);
     }
+
+    /**
+     * Clears the {@link Array} of {@link ServingStation}. Should
+     * be called when the game is reset.
+     */
+    public void clearServingStations() {
+        servingStations.clear();
+    }
 }
