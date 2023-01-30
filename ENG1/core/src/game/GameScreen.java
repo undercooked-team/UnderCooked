@@ -393,6 +393,7 @@ public class GameScreen extends ScreenAdapter {
         customerController.setCustomersServed(0);
         setCustomerHud(customers);
         gameHud.setCustomerCount(customers);
+        gameHud.setRecipe(null);
     }
 
     /**
