@@ -17,6 +17,11 @@ import helper.Util;
 import interactions.InputKey;
 import interactions.Interactions;
 
+/**
+ * The {@link GameOverScreen}, which shows once the player
+ * has finished the game. It provides the player with the
+ * option to {@link InputKey.InputTypes#QUIT} or to {@link InputKey.InputTypes#RESET_GAME}.
+ */
 public class GameOverScreen extends ScreenAdapter {
     private Viewport viewport;
     private ScreenController screenController;
@@ -26,7 +31,11 @@ public class GameOverScreen extends ScreenAdapter {
 
     private Label timeLabel;
 
-
+    /**
+     * The constructor for the {@link GameOverScreen}.
+     * @param screenController The {@link ScreenController} of the {@link ScreenAdapter}.
+     * @param orthographicCamera The {@link OrthographicCamera} that the game should use.
+     */
     public GameOverScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
 
         this.screenController = screenController;
@@ -53,58 +62,59 @@ public class GameOverScreen extends ScreenAdapter {
 
         table.row();
 
-        Label extraText = new Label(String.format("To restart, press %s.",Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)), font);
+        Label extraText = new Label(String.format("To restart, press %s.", Interactions.getKeyString(InputKey.InputTypes.RESET_GAME)), font);
         extraText.setFontScale(1);
         table.add(extraText);
+
+        table.row();
+
+        Label quitText = new Label(String.format("To quit, press %s.", Interactions.getKeyString(InputKey.InputTypes.QUIT)), font);
+        quitText.setFontScale(1);
+        table.add(quitText);
 
         stage.addActor(table);
 
     }
 
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
+    /**
+     * Check for user input every frame and act on specified inputs.
+     * @param delta The time between frames as a float.
+     */
+    public void update(float delta) {
         // Check for input.
         Interactions.updateKeys();
         if (Interactions.isJustPressed(InputKey.InputTypes.RESET_GAME)) {
             screenController.resetGameScreen();
             screenController.setScreen(ScreenController.ScreenID.MENU);
         }
+        else if (Interactions.isJustPressed(InputKey.InputTypes.QUIT)) {
+            Gdx.app.exit();
+        }
+    }
 
+    /**
+     * The function used to render the {@link GameOverScreen}.
+     *
+     * <br>Draws the {@link #stage} of the {@link GameOverScreen},
+     * which contains all the text as {@link Label}s.
+     * @param delta The time in seconds since the last render.
+     */
+    @Override
+    public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+
+        this.update(delta);
     }
 
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-
+    /**
+     * Sets the {@link #timeLabel} to use the end time
+     * of the player after finishing the game.
+     * @param hours Hours taken.
+     * @param minutes Minutes taken.
+     * @param seconds Seconds taken.
+     */
     public void setTime(int hours, int minutes, int seconds) {
         timeLabel.setText(Util.formatTime(hours,minutes,seconds));
     }

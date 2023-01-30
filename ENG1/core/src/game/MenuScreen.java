@@ -100,7 +100,7 @@ public class MenuScreen extends ScreenAdapter {
     }
 
     /**
-     * The function used to render the {@link PauseScreen}.
+     * The function used to render the {@link MenuScreen}.
      *
      * <br>Draws the {@link #stage} of the {@link MenuScreen},
      * which contains all the text as {@link Label}s.

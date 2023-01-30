@@ -386,6 +386,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /** */
     public void addnewCustomer()
     {
         this.customer = new Customer(customerIMG, this);
