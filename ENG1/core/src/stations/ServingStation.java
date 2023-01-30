@@ -7,7 +7,7 @@ import cooks.Cook;
 import interactions.InputKey;
 
 /**
- * The ServingStation class, where the {@link cooks.Cook} provide
+ * The {@link ServingStation} class, where the {@link cooks.Cook} provide
  * the {@link customers.Customer}s with their orders.
  */
 public class ServingStation extends Station {
@@ -17,8 +17,8 @@ public class ServingStation extends Station {
     //private Customer customer;
 
     /**
-     * The constructor for the ServingStation
-     * @param rectangle The shape and location of the Station.
+     * The constructor for the {@link ServingStation}.
+     * @param rectangle The collision and interaction area of the {@link ServingStation}.
      */
     public ServingStation(Rectangle rectangle) {
         super(rectangle);
@@ -32,6 +32,15 @@ public class ServingStation extends Station {
         this.customer = customer;
     }*/
 
+    /**
+     * The interact function for the {@link ServingStation}.
+     *
+     * <br>This checks that the {@link Cook} has the right {@link food.Recipe}, and then acts
+     * based on if the {@link Cook} does or does not.
+     * @param cook The cook that interacted with the {@link CookInteractable}.
+     * @param inputType The type of {@link InputKey.InputTypes} the player made with
+     *                  the {@link CookInteractable}.
+     */
     @Override
     public void interact(Cook cook, InputKey.InputTypes inputType) {
         // USE to see request, or submit request
@@ -55,14 +64,19 @@ public class ServingStation extends Station {
     }
 
     /**
-     * Any custom rendering for the {@link ServingStation}
-     * @param batch The SpriteBatch renderer to render the Station in.
+     * The function used to render the {@link ServingStation}.
+     * @param batch The {@link SpriteBatch} used to render.
      */
     @Override
     public void render(SpriteBatch batch) {
 
     }
 
+    /**
+     * Set the {@link #customer} of the {@link ServingStation} to
+     * a new {@link Customer}.
+     * @param customer The {@link Customer} to set the {@link ServingStation} to.
+     */
     public void setCustomer(Customer customer)
     {
         this.customer = customer;
