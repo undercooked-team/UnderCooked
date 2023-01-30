@@ -17,4 +17,6 @@ public class Constants {
 
     /** The {@link customers.Customer} default spawn position */
     public static final Vector2 customerSpawn= new Vector2(425,470);
+    /** The location that the {@link food.Recipe} being checked is rendered. */
+    public static final float RECIPE_X = 928F, RECIPE_Y = 608F;
 }

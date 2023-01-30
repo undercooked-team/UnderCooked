@@ -3,6 +3,7 @@ package customers;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import food.Recipe;
 import game.GameSprites;
 import stations.ServingStation;
 
@@ -61,10 +62,12 @@ public class CustomerController {
 
     /**
      * Add a {@link Customer} to a {@link ServingStation}.
-     * @return {@code boolean} : Whether a {@link Customer} could (true)
-     *                            or couldn't (false) be added.
+     * @return {@code int} : The number of instructions in the
+     *                       {@link Customer}'s recipe.
+     *                       <br>It is -1 if the {@link Customer} fails
+     *                       to spawn.
      */
-    public boolean addCustomer() {
+    public int addCustomer() {
         // Get a deep copy of all the ServingStations.
         Array<ServingStation> emptyStations = new Array<>(servingStations);
         // Loop through and remove all the stations that have a
@@ -76,7 +79,7 @@ public class CustomerController {
         }
         // If there are no Stations left, return false.
         if (emptyStations.size == 0) {
-            return false;
+            return -1;
         }
         // Now that the only stations left are the ones without Customers,
         // randomly pick one and add a customer to it.
@@ -89,7 +92,7 @@ public class CustomerController {
         customers.add(newCustomer);
         newCustomer.randomRecipe();
         chosenStation.setCustomer(newCustomer);
-        return true;
+        return Recipe.firstRecipeOption(newCustomer.getRequestName()).size();
     }
 
     public void removeCustomer(ServingStation station) {

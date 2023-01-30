@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private int delay;
 
-    private long previousSecond = 0;
+    private long previousSecond = 0, lastCustomerSecond = 0, nextCustomerSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
     private SpriteBatch batch;
@@ -75,6 +75,8 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
         this.previousSecond = TimeUtils.millis();
+        this.lastCustomerSecond = TimeUtils.millis();
+        this.nextCustomerSecond = this.lastCustomerSecond + 2000;
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = CollisionHelper.getInstance();
@@ -140,9 +142,17 @@ public class GameScreen extends ScreenAdapter {
             updateCustomers();
         }
 
-        if(secondsPassed==5)
+        if(TimeUtils.millis() >= nextCustomerSecond)
         {
-            addnewCustomer();
+            int recipeComplexity = customerController.addCustomer();
+            if (recipeComplexity == -1) {
+                // If customer couldn't be added, then wait 2 seconds.
+                nextCustomerSecond += 2000;
+            } else {
+                // Wait longer if the recipe has more steps.
+                lastCustomerSecond = TimeUtils.millis();
+                nextCustomerSecond += 4000 * recipeComplexity;
+            }
         }
 
         if(Interactions.isJustPressed(InputKey.InputTypes.PAUSE))
@@ -283,7 +293,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * A getter to get the {@link #previousSecond}.
-     * The {@link #previousSecond} is used for the timer, by checking when the previous
+     * <br>The {@link #previousSecond} is used for the timer, by checking when the previous
      * second was so that the game can check if it has been another second or not.
      * @return {@code long} : The {@link #previousSecond}.
      */
@@ -297,6 +307,24 @@ public class GameScreen extends ScreenAdapter {
      */
     public void setPreviousSecond(long newSecond) {
         previousSecond = newSecond;
+    }
+
+    /**
+     * A getter to get the {@link #nextCustomerSecond}.
+     * <br>The {@link #nextCustomerSecond} is used for spawning the
+     * {@link Customer}s after a short delay.
+     * @return {@code long} : The {@link #nextCustomerSecond}.
+     */
+    public long getNextCustomerSecond() {
+        return nextCustomerSecond;
+    }
+
+    /**
+     * A setter to set the {@link #nextCustomerSecond} to the {@code long} provided.
+     * @param newSecond What to set the {@link #nextCustomerSecond} to as a {@code long}.
+     */
+    public void setNextCustomerSecond(long newSecond) {
+        nextCustomerSecond = newSecond;
     }
 
     /**
@@ -373,12 +401,6 @@ public class GameScreen extends ScreenAdapter {
         previousSecond = TimeUtils.millis();
         customerController.setCustomersLeft(customers);
         gameHud.setCustomerCount(customers);
-    }
-
-    /** */
-    public void addnewCustomer()
-    {
-        customerController.addCustomer();
     }
 
     /**

@@ -64,8 +64,6 @@ public class ServingStation extends Station {
         // USE to see request, or submit request
         if (inputType == InputKey.InputTypes.USE) {
             // First make sure there is actually a request on this counter.
-            customerController.updateCustomersLeft();
-            customerController.addCustomer();
             if (hasCustomer()) {
                 // If there is a request, then compare the two.
                 if (Recipe.matchesRecipe(cook.foodStack,customer.getRequestName())) {
@@ -75,7 +73,7 @@ public class ServingStation extends Station {
                     customerController.customerServed(this);
                 } else {
                     // If not, then display the customer's request.
-                    gameScreen.getGameHud();
+                    gameScreen.getGameHud().setRecipe(customer.getRequestName());
                 }
             }
         }

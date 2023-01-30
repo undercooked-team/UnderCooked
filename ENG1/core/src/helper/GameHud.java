@@ -2,9 +2,15 @@ package helper;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.TimeUtils;
+import food.FoodItem;
+import food.FoodStack;
+import food.Recipe;
 import game.GameScreen;
+import game.GameSprites;
 
 // import java.awt.*;
 
@@ -25,6 +31,12 @@ public class GameHud extends Hud {
     Label CustomerScore;
     /** The {@link SpriteBatch} of the GameHud. Use for drawing {@link food.Recipe}s. */
     private SpriteBatch batch;
+    /** The {@link FoodStack} that the {@link GameHud} should render. */
+    private FoodStack recipe;
+    /** The name of the {@link Recipe} to be rendered. */
+    private String recipeName;
+    /** The time, in milliseconds, of the last recipe change. */
+    private long lastChange;
 
     /**
      * The GameHud constructor.
@@ -47,6 +59,32 @@ public class GameHud extends Hud {
         table.add(timeLabel).expandX().padTop(60);
 
         this.batch = batch;
+    }
+
+    @Override
+    public void render() {
+        super.render();
+        batch.begin();
+        GameSprites gameSprites = GameSprites.getInstance();
+        float drawX = Constants.RECIPE_X, drawY = Constants.RECIPE_Y;
+        // If there is a recipe...
+        if (recipe != null) {
+            // Loop through on the top right of the screen, and render!
+            for (FoodItem.FoodID ingredient : recipe.getStack()) {
+                Sprite foodSprite = gameSprites.getSprite(GameSprites.SpriteID.FOOD, ingredient.toString());
+                foodSprite.setScale(2F);
+                foodSprite.setPosition(drawX-foodSprite.getWidth()/2,drawY-foodSprite.getHeight()/2);
+                foodSprite.draw(batch);
+                drawY -= 64;
+            }
+        }
+        batch.end();
+    }
+
+    public void setRecipe(String recipeName) {
+        this.lastChange = TimeUtils.millis();
+        this.recipeName = recipeName;
+        this.recipe = Recipe.randomRecipeOption(recipeName);
     }
 
     /**

@@ -239,9 +239,40 @@ public class Recipe {
 	}
 	*/
 
-    /** Outputs a random option from the {@link #recipes} of the
-     * recipe for {@link #recipeNames}. */
-    public static FoodStack randomRecipeOption() {
-        return new FoodStack();
+    /**
+     * Outputs a random option from the {@link #recipes} of the
+     * recipe for {@link #recipeNames}.
+     * @param recipeName The name of the {@link Recipe#recipes}.
+     * @return {@link FoodStack} : A random {@link FoodStack} from the
+     *                      different ways of making the recipe for
+     *                      {@code recipeName}.
+     *                      <br> Returns {@code null} if nothing is found.
+     * */
+    public static FoodStack randomRecipeOption(String recipeName) {
+        Array<FoodStack> options = recipes.get(recipeName);
+        // If null, return null
+        if (options == null) {
+            return null;
+        }
+        // If not null, then return a random option.
+        Random random = new Random();
+        return options.get(random.nextInt(options.size));
+    }
+
+    /**
+     * Outputs the first option added to the {@link #recipes} for
+     * the recipe name input.
+     * @param recipeName
+     * @return {@link FoodStack} : The first {@link FoodStack} available
+     *                      for the recipe named {@code requestName}.
+     *                      <br> Returns {@code null} if nothing is found.
+     */
+    public static FoodStack firstRecipeOption(String recipeName) {
+        Array<FoodStack> options = recipes.get(recipeName);
+        // If null, return null
+        if (options == null) {
+            return null;
+        }
+        return options.get(0);
     }
 }
