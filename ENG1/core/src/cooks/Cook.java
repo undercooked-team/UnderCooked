@@ -298,11 +298,11 @@ public class Cook extends GameEntity {
     /**
      * A function to find where the {@link Cook} should be
      * facing depending on the order of inputs, the latest
-     * being prioritised, and ignoring any inputs that are
+     * being prioritized, and ignoring any inputs that are
      * input with their opposite.
      *
      * For example, pressing {Left, Up, Right} in the same
-     * order. Right is prioritised as it is the newest input,
+     * order. Right is prioritized as it is the newest input,
      * but the opposite Left was pressed, so Up is the
      * final choice of direction.
      */
