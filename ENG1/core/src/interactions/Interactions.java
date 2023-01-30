@@ -22,6 +22,11 @@ public class Interactions {
         interactions.put(InteractionKey(FoodID.meat, StationID.fry), new InteractionResult(FoodID.meatCook,new float[] {50},13F));
     }
 
+    /**
+     * A subclass used to more easily define what interaction must be made to get
+     * a desired change in an ingredient, as well as the speed at which it progresses
+     * to change, and to specify at what percentages a user input is required.
+     */
     public static class InteractionResult {
         private FoodID result;
         private float[] steps;
@@ -41,27 +46,52 @@ public class Interactions {
             this.speed = speed;
         }
 
+        /**
+         * A getter to return the result of the interaction.
+         * @return FoodID result.
+         */
         public FoodID getResult() { return result; }
+
+        /**
+         * A getter to return the steps of the interaction.
+         * @return An array of floats, each indicating a percentage that user input is
+         *          required during the process.
+         */
         public float[] getSteps() { return steps; }
+
+        /**
+         * A getter to return the speed of the interaction.
+         * @return A float that defines the percentage increase in a second.
+         */
         public float getSpeed() { return speed; }
     }
 
     /** The different IDs of interaction. Used to get the Arrays. */
     public enum InputID {
+        /** Key maps for Cook Interactions controls. */
         COOK_INTERACT,
+        /** Key maps for Menu controls. */
         MENU,
-        COOK_MISC, COOK_MOVEMENT
+        /** Key maps for Menu controls. */
+        COOK_MOVEMENT,
+        /** Key maps for Miscellaneous Cook controls. */
+        COOK_MISC
     }
 
     /** A HashMap containing all different forms of user inputs. These can easily
      * be changed / modified as needed from here, instead of searching through the
      * code.
      *
-     * The InputKeys returned can then be looped through, and checked using the appropriate
-     * Gdx.input.isKeyPressed function.
+     * There is two ways to read through these.
+     * 1: Call the function {@link #getInputKeys(InputID)} on the ID you want, and then
+     *    loop through the Array, calling the Gdx.input.isKeyPressed function you require.
      *
-     * This means dynamic key changing can be added, if you change this function from static,
-     * and multiple keys can be assigned to one control.
+     * 2: At the start of the current update of the game, use the function {@link #updateKeys()}.
+     *    This will automatically check the keys, and then store the {@link InputKey.InputTypes}
+     *    that have been pressed down.
+     *    You can then use the functions {@link #isPressed(InputKey.InputTypes)}
+     *    or {@link #isJustPressed(InputKey.InputTypes)} to check if the user has pressed the keys.
+     *    They are named in the same way as the LibGDX functions.
      * */
     private static final HashMap<InputID, Array<InputKey>> inputs = new HashMap<>();
     static {
@@ -100,7 +130,7 @@ public class Interactions {
 
     /**
      * Get the input key assigned to the enum constant inputID
-     * @param inputID Enum Constant
+     * @param inputID {@link InputID} enum Constant
      * @return The key on the keyboard correlated to it.
      */
     public static Array<InputKey> getInputKeys(InputID inputID) {
@@ -113,7 +143,11 @@ public class Interactions {
         keysJustPressed.clear();
     }
 
-    /** Get all the keys that are currently being pressed into {@link keysPressed} and {@link keysJustPressed}.*/
+    /**
+     * This function updates the internal arrays in Interactions for the
+     *  array variables that record what {@link InputKey.InputTypes} are pressed,
+     *  based on the {@link Interactions#inputs} HashMap, such as {@link Interactions#keysPressed}.
+     */
     public static void updateKeys() {
         resetKeys();
         for (InputID inputID : InputID.values()) {
@@ -129,11 +163,11 @@ public class Interactions {
     }
 
     /**
-     * Returns the Keys assigned to the enum constant inputType as a string
-     * @param inputType {@link InputTypes} enum constant
-     * @return String of keys used to trigger the given inputType
+     * Returns the Keys assigned to the enum constant {@link InputKey.InputTypes} as an array of strings.
+     * @param inputType {@link InputKey.InputTypes} enum constant
+     * @return A LibGDX Array of the string names for the keys assigned to {@link InputKey.InputTypes}
      */
-    public static String getKeyString(InputKey.InputTypes inputType) {
+    public static Array<String> getKeyStrings(InputKey.InputTypes inputType) {
         Array<String> validKeys = new Array<>();
         for (Array<InputKey> inputKeys : inputs.values()) {
             for (InputKey inputKey : inputKeys) {
@@ -142,6 +176,17 @@ public class Interactions {
                 }
             }
         }
+        return validKeys;
+    }
+
+    /**
+     * Returns the Keys assigned to the enum constant {@link InputKey.InputTypes} as a string.
+     * Uses {@link #getKeyStrings(InputKey.InputTypes) getKeyStrings}
+     * @param inputType {@link InputKey.InputTypes} enum constant
+     * @return A string of all valid keys for the {@link InputKey.InputTypes} key.
+     */
+    public static String getKeyString(InputKey.InputTypes inputType) {
+        Array<String> validKeys = getKeyStrings(inputType);
         // If there are no results, return "undefined"
         if (validKeys.size == 0) {
             return "undefined";
@@ -159,7 +204,7 @@ public class Interactions {
     }
 
     /**
-     * Turn an inputKey into string format.
+     * Turn an {@link InputKey} into string format.
      * @param inputKey Desired InputKey
      * @return String version of the input key.
      */
@@ -168,22 +213,22 @@ public class Interactions {
     }
 
     /**
-     * Checks to see if a inputType has been triggered.
-     * Eg. Has COOK_RIGHT been triggered?
-     * Use this function to detect when to remove changes induced from {@link isJustPressed()}
+     * Checks to see if a inputType is being pressed.
+     * Eg. Is COOK_RIGHT being pressed?
+     * This is equivalent to LibGDX's Gdx.input.isKeyPressed()
      * @param inputType The inputType to check for.
-     * @return boolean : true if inputType has been triggered.
+     * @return boolean : true if inputType is being pressed.
      */
     public static boolean isPressed(InputKey.InputTypes inputType) {
         return keysPressed.contains(inputType, true);
     }
 
     /**
-     * Checks to see if a inputType has just been triggered.
-     * Eg. Has COOK_RIGHT been JUST triggered?
-     * Use this function to trigger the initial changes that occur with this trigger.
+     * Checks to see if a inputType has just been pressed.
+     * Eg. Has COOK_RIGHT JUST been pressed?
+     * This is equivalent to LibGDX's Gdx.input.isKeyJustPressed()
      * @param inputType The inputType to check for.
-     * @return boolean : true if inputType has been triggered.
+     * @return boolean : true if inputType has been pressed.
      */
     public static boolean isJustPressed(InputKey.InputTypes inputType) {
         return keysJustPressed.contains(inputType, true);
