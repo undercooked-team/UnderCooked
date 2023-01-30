@@ -244,7 +244,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Get the world that the game is using.
-     * @return The {@link GameScreen}'s {@link World}.
+     * @return {@link World} : The {@link GameScreen}'s {@link World}.
      */
     public World getWorld()
     {
@@ -254,7 +254,7 @@ public class GameScreen extends ScreenAdapter {
     /**
      * Sets the currently active {@link #cook} that the game is using.
      * @param cookIndex The index of {@link #cook} in the {@link #cooks} array.
-     * @return The {@link Cook} that the game has swapped to.
+     * @return {@link Cook} : The {@link Cook} that the game has swapped to.
      */
     public Cook setCook(int cookIndex)
     {
@@ -267,9 +267,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     * Adds a new {@link Cook} to the {@link #cooks} {@link Array} for the game to swap between
+     * Adds a new {@link Cook} to the {@link #cooks} {@link Array} for the game to swap between.
      * @param newCook
-     * @return The index of the new cook in the cooks array
+     * @return {@code int} : The index of the new cook in the cooks array.
      */
     public int addCook(Cook newCook) {
         gameEntities.add(newCook);
@@ -279,7 +279,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Returns the number of customers remaining before the game is finished.
-     * @return The int value of {@link #customerCount}
+     * @return {@code int} : The value of {@link #customerCount}.
      */
     public int getCustomerCount() {
         return this.customerCount;
@@ -289,7 +289,7 @@ public class GameScreen extends ScreenAdapter {
      * A getter to get the {@link #previousSecond}.
      * The {@link #previousSecond} is used for the timer, by checking when the previous
      * second was so that the game can check if it has been another second or not.
-     * @return The {@link #previousSecond} as a {@code long}
+     * @return {@code long} : The {@link #previousSecond}.
      */
     public long getPreviousSecond() {
         return previousSecond;
@@ -320,14 +320,14 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * {@link #interactables} getter. Contains all the {@link #interactables} in the {@link GameScreen}.
-     * @return The {@link CookInteractable} {@link Array}, {@link #interactables}.
+     * @return {@link Array}&lt;{@link CookInteractable}&gt; : {@link #interactables}.
      */
     public Array<CookInteractable> getInteractables() {
         return interactables;
     }
 
     /**
-     * Adds a {@link CookInteractable} that a {@link Cook} can interact with.
+     * Adds a {@link CookInteractable} that a {@link Cook} can interact with to {@link #interactables}.
      * @param cookInteractable The {@link CookInteractable} object that the {@link Cook}
      *                         should be able to interact with.
      */
