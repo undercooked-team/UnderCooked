@@ -1,4 +1,4 @@
-package recipes;
+package food;
 
 import java.util.HashMap;
 
