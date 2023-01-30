@@ -90,10 +90,9 @@ public class GameScreen extends ScreenAdapter {
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
         this.customerIMG = new Texture("Customer/Customer.png");
+
         this.customer = new Customer(customerIMG, this);
-
         setupServingStation();
-
     }
 
 

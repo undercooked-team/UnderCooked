@@ -29,10 +29,8 @@ public class Customer {
 
     public void Draw(SpriteBatch batch)
     {
-
         sprite.setPosition(position.x, position.y);
         sprite.draw(batch);
-
     }
 
     public boolean canSpawn()
