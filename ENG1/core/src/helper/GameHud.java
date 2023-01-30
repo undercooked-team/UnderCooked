@@ -61,6 +61,11 @@ public class GameHud extends Hud {
         this.batch = batch;
     }
 
+    /**
+     * Renders the recipe required the {@link customers.Customer} selected
+     * from a {@link stations.ServingStation} on the right side of the
+     * screen.
+     */
     @Override
     public void render() {
         super.render();
@@ -82,7 +87,9 @@ public class GameHud extends Hud {
     }
 
     /**
-     *
+     * Changes the order of the {@link FoodItem}s in the recipe every second
+     * to show which {@link FoodItem}s have non-specific places in the
+     * {@link Recipe}.
      */
     public void update() {
         if (recipe != null) {
@@ -93,6 +100,10 @@ public class GameHud extends Hud {
         }
     }
 
+    /**
+     * Sets the recipe to be rendered.
+     * @param recipeName The name, as a {@link String} of the recipe
+     */
     public void setRecipe(String recipeName) {
         this.lastChange = TimeUtils.millis();
         this.recipeName = recipeName;
