@@ -389,6 +389,8 @@ public class GameScreen extends ScreenAdapter {
         hoursPassed = 0;
         customersToServe = customers;
         previousSecond = TimeUtils.millis();
+        lastCustomerSecond = TimeUtils.millis();
+        nextCustomerSecond = TimeUtils.millis()+2000;
         customerController.setCustomersLeft(customers);
         customerController.setCustomersServed(0);
         setCustomerHud(customers);
