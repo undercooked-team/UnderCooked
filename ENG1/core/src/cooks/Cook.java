@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import food.FoodItem;
 import game.GameScreen;
@@ -16,11 +17,11 @@ import food.FoodItem.FoodID;
 import interactions.InputKey;
 import interactions.Interactions;
 
+/** A {@link GameEntity} that the player controls to interact with the game. */
 public class Cook extends GameEntity {
 
     /** The cook's current sprite. */
     private Sprite sprite;
-    // private float spriteHeight, spriteWidth;
     private GameSprites gameSprites;
     private CookInteractor cookInteractor;
     // private GameScreen gameScreen;
@@ -45,10 +46,10 @@ public class Cook extends GameEntity {
 
     /**
      * Cook Constructor.
-     * @param width Pixel Width of the Cook
-     * @param height Pixel Height of the Cook
-     * @param body The World.Body which will become the Cook
-     * @param gameScreen The GameScreen that creates the Cook.
+     * @param width Pixel Width of the {@link Cook}'s {@link Body}.
+     * @param height Pixel Height of the {@link Cook}'s {@link Body}.
+     * @param body The {@link World}.{@link Body} which will become the {@link Cook}
+     * @param gameScreen The {@link GameScreen} that creates the {@link Cook}.
      */
     public Cook(float width, float height, Body body, GameScreen gameScreen) {
         super(width, height, body);
@@ -72,7 +73,7 @@ public class Cook extends GameEntity {
         this.cookInteractor = new CookInteractor(x,y,cookInteractorSize);
     }
 
-    /** Responsible for processing user input information into {@link this.inputs}, {@link this.velX} and {@link this.velY}. */
+    /** Responsible for processing user input information into {@link #inputs}, {@link #velX} and {@link #velY}. */
     public void userInput() {
         velX = 0F;
         velY = 0F;
@@ -124,6 +125,12 @@ public class Cook extends GameEntity {
         body.setLinearVelocity(velX * speed,velY * speed);
     }
 
+    /**
+     * The update function for the {@link Cook}, which updates the {@link Cook}'s
+     * {@link #x} and {@link #y} values, and updates the position of the
+     * {@link Cook}'s {@link CookInteractor}.
+     * @param delta
+     */
     @Override
     public void update(float delta) {
         x = body.getPosition().x*PPM;
@@ -131,6 +138,9 @@ public class Cook extends GameEntity {
         this.cookInteractor.updatePosition(x,y,dir);
     }
 
+    /**
+     * Update the current {@link Sprite} of the {@link Cook}.
+     */
     private void setSprite() {
         // Set up sprite string
         String spriteName = "";
@@ -141,6 +151,10 @@ public class Cook extends GameEntity {
         sprite = gameSprites.getSprite(GameSprites.SpriteID.COOK, spriteName + dir);
     }
 
+    /**
+     * Render the {@link Cook} and their {@link FoodStack}.
+     * @param batch The {@link SpriteBatch} that the {@link Cook} will render using.
+     */
     @Override
     public void render(SpriteBatch batch) {
         setSprite();
@@ -157,14 +171,28 @@ public class Cook extends GameEntity {
         }
     }
 
+    /**
+     * Debug rendering using the {@link SpriteBatch}. Unused.
+     * @param batch The {@link SpriteBatch} used to render.
+     */
     @Override
     public void renderDebug(SpriteBatch batch) {
 
     }
 
+    /**
+     * Rendering using the {@link ShapeRenderer}. Unused.
+     * @param shape The {@link ShapeRenderer} used to draw.
+     */
     @Override
-    public void renderShape(ShapeRenderer shape) { }
+    public void renderShape(ShapeRenderer shape) {
 
+    }
+
+    /**
+     * Debug rendering using the {@link ShapeRenderer}. Unused.
+     * @param shape The {@link ShapeRenderer} used to draw.
+     */
     @Override
     public void renderShapeDebug(ShapeRenderer shape) {
         cookInteractor.renderDebug(shape);
@@ -197,6 +225,10 @@ public class Cook extends GameEntity {
         }
     }
 
+    /**
+     * Renders the {@link FoodStack} of the {@link Cook} visually.
+     * @param batch The {@link SpriteBatch} that the {@link Cook} will render using.
+     */
     private void renderFood(SpriteBatch batch) {
         // Loop through the items in the food stack.
         // It is done from the end of the stack to the start because the stack's top is
@@ -263,6 +295,17 @@ public class Cook extends GameEntity {
         }
     }
 
+    /**
+     * A function to find where the {@link Cook} should be
+     * facing depending on the order of inputs, the latest
+     * being prioritised, and ignoring any inputs that are
+     * input with their opposite.
+     *
+     * For example, pressing {Left, Up, Right} in the same
+     * order. Right is prioritised as it is the newest input,
+     * but the opposite Left was pressed, so Up is the
+     * final choice of direction.
+     */
     private void setDir() {
         // If the size of inputs is 0, just return and change nothing.
         if (inputs.size == 0) { return; }
