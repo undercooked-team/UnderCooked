@@ -16,11 +16,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import food.FoodItem;
 import game.GameScreen;
+import game.GameSprites;
 import stations.*;
 
 import static helper.Constants.PPM;
 
-/** The MapHelper Class.*/
+/** The {@link MapHelper} class helps by setting up the map
+ * of the game, and providing the {@link OrthogonalTiledMapRenderer}
+ * which is used to draw the {@link TiledMap}.*/
 public class MapHelper {
     private GameScreen gameScreen;
     private TiledMap tiledMap;
@@ -29,8 +32,16 @@ public class MapHelper {
     private Array<ServingStation> servingStations = new Array<>();
 
 
-    public MapHelper() { }
+    /**
+     * The {@link MapHelper} constructor.
+     * It is {@code private} as it is a Singleton.
+     */
+    private MapHelper() { }
 
+    /**
+     * The getter function to get the {@link #INSTANCE} of the {@link MapHelper}.
+     * @return {@link MapHelper}: The single {@link MapHelper} instance.
+     */
     public static MapHelper getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new MapHelper();
@@ -39,6 +50,11 @@ public class MapHelper {
         return INSTANCE;
     }
 
+    /**
+     * Forgets the old {@link #INSTANCE}, and creates
+     * a new {@link #INSTANCE} of the {@link MapHelper}.
+     * @return {@link #INSTANCE} : A new {@link MapHelper} instance.
+     */
     public static MapHelper newInstance() {
         INSTANCE = new MapHelper();
 
@@ -67,8 +83,11 @@ public class MapHelper {
         return new OrthogonalTiledMapRenderer(tiledMap);
     }
 
-
-
+    /**
+     * Creates a Static {@link Body} added to the map that is used
+     * to stop the {@link Cook} from moving through certain places.
+     * @param polygonMapObject
+     */
     private void createStaticBody(PolygonMapObject polygonMapObject)
     {
         BodyDef bodyDef = new BodyDef();
@@ -79,6 +98,14 @@ public class MapHelper {
         shape.dispose();
     }
 
+    /**
+     * Creates a Polygon{@link Shape} using the {@link PolygonMapObject}.
+     * <br>It is used to create the {@link Shape} for the
+     * {@link #createStaticBody(PolygonMapObject)} function for
+     * the {@link Body}'s {@link com.badlogic.gdx.physics.box2d.Fixture}.
+     * @param polygonMapObject
+     * @return
+     */
     private Shape createPolygonShape(PolygonMapObject polygonMapObject)
     {
         float[] vertices = polygonMapObject.getPolygon().getTransformedVertices();
@@ -94,10 +121,23 @@ public class MapHelper {
 
     }
 
+    /**
+     * Makes a {@link Body} using a {@link Rectangle} as a base.
+     * @param rectangle The {@link Rectangle} for the {@link Body}'s {@link Shape}.
+     * @param isStatic If true, then the {@link Body} is stationary.
+     *                 If false, then the {@link Body} is not stationary.
+     * @return {@link Body} : The {@link Body} created using {@link BodyHelper}.
+     */
     public static Body makeBody(Rectangle rectangle, boolean isStatic) {
         return BodyHelper.createBody(rectangle.x + rectangle.getWidth() /2, rectangle.y +rectangle.getHeight()/2,rectangle.getWidth(), rectangle.getHeight(),isStatic, INSTANCE.gameScreen.getWorld());
     }
 
+    /**
+     * Loops through all of the {@link MapObjects} and loads them
+     * into the {@link GameScreen}'s {@code world} using the
+     * other {@link MapHelper} functions.
+     * @param mapObjects The {@link MapObjects} of the map.
+     */
     private void parseMapObjects(MapObjects mapObjects)
     {
         for(MapObject mapObject:mapObjects)
@@ -199,9 +239,19 @@ public class MapHelper {
         }
     }
 
+    /**
+     * A dispose function to dispose of information when it is
+     * no longer needed.
+     */
     public void dispose() {
         tiledMap.dispose();
     }
+
+    /**
+     * A getter than returns the {@link Array} of {@link ServingStation}s
+     * that are present on the map.
+     * @return {@link Array}&lt;{@link ServingStation}&gt; : A list of all {@link ServingStation}s on the map.
+     */
     public Array<ServingStation> getServingStations()
     {
         return servingStations;
