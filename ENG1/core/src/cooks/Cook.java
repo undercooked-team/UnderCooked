@@ -72,8 +72,56 @@ public class Cook extends GameEntity {
         this.cookInteractor = new CookInteractor(x,y,cookInteractorSize);
     }
 
+    /** Responsible for processing user input information into {@link this.inputs}, {@link this.velX} and {@link this.velY}. */
     public void userInput() {
-        checkUserInput();
+        velX = 0F;
+        velY = 0F;
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_RIGHT))
+        {
+            velX += 1;
+            if (!inputs.contains(Facing.RIGHT, true)) {
+                inputs.add(Facing.RIGHT);
+            }
+        } else {
+            inputs.removeValue(Facing.RIGHT,true);
+        }
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_LEFT))
+        {
+            velX += -1;
+            if (!inputs.contains(Facing.LEFT, true)) {
+                inputs.add(Facing.LEFT);
+            }
+        } else {
+            inputs.removeValue(Facing.LEFT,true);
+        }
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_UP))
+        {
+            velY += 1;
+            if (!inputs.contains(Facing.UP, true)) {
+                inputs.add(Facing.UP);
+            }
+        } else {
+            inputs.removeValue(Facing.UP,true);
+        }
+        if(Interactions.isPressed(InputKey.InputTypes.COOK_DOWN))
+        {
+            velY += -1;
+            if (!inputs.contains(Facing.DOWN, true)) {
+                inputs.add(Facing.DOWN);
+            }
+        } else {
+            inputs.removeValue(Facing.DOWN,true);
+        }
+
+        setDir();
+
+        for (InputKey inputKey : Interactions.getInputKeys(Interactions.InputID.COOK_INTERACT)) {
+            if (Gdx.input.isKeyJustPressed(inputKey.getKey())) {
+                cookInteractor.checkCollisions(this, inputKey.getType());
+            }
+        }
+
+        body.setLinearVelocity(velX * speed,velY * speed);
     }
 
     @Override
@@ -240,58 +288,5 @@ public class Cook extends GameEntity {
             // If the opposite isn't there, it's fine to switch.
             dir = possibleNext;
         }
-    }
-
-    /** Responsible for processing user input information into {@link this.inputs}, {@link this.velX} and {@link this.velY}. */
-    private void checkUserInput()
-    {
-        velX = 0F;
-        velY = 0F;
-        if(Interactions.isPressed(InputKey.InputTypes.COOK_RIGHT))
-        {
-            velX += 1;
-            if (!inputs.contains(Facing.RIGHT, true)) {
-                inputs.add(Facing.RIGHT);
-            }
-        } else {
-            inputs.removeValue(Facing.RIGHT,true);
-        }
-        if(Interactions.isPressed(InputKey.InputTypes.COOK_LEFT))
-        {
-            velX += -1;
-            if (!inputs.contains(Facing.LEFT, true)) {
-                inputs.add(Facing.LEFT);
-            }
-        } else {
-            inputs.removeValue(Facing.LEFT,true);
-        }
-        if(Interactions.isPressed(InputKey.InputTypes.COOK_UP))
-        {
-            velY += 1;
-            if (!inputs.contains(Facing.UP, true)) {
-                inputs.add(Facing.UP);
-            }
-        } else {
-            inputs.removeValue(Facing.UP,true);
-        }
-        if(Interactions.isPressed(InputKey.InputTypes.COOK_DOWN))
-        {
-            velY += -1;
-            if (!inputs.contains(Facing.DOWN, true)) {
-                inputs.add(Facing.DOWN);
-            }
-        } else {
-            inputs.removeValue(Facing.DOWN,true);
-        }
-
-        setDir();
-
-        for (InputKey inputKey : Interactions.getInputKeys(Interactions.InputID.COOK_INTERACT)) {
-            if (Gdx.input.isKeyJustPressed(inputKey.getKey())) {
-                cookInteractor.checkCollisions(this, inputKey.getType());
-            }
-        }
-
-        body.setLinearVelocity(velX * speed,velY * speed);
     }
 }
