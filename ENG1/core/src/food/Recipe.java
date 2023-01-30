@@ -16,13 +16,13 @@ import food.FoodItem.FoodID;
 public class Recipe {
     private static Array<String> recipeNames = new Array<>();
 	/** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
-	private static final HashMap<String, Array<String>> recipes = new HashMap<>();
+	private static final HashMap<String, Array<FoodStack>> recipes = new HashMap<>();
 		static {
 			generateRecipes("Onion Tomato Salad", allCombos(FoodID.onionChop, FoodID.tomatoChop));
 			generateRecipes("Lettuce Tomato Salad", allCombos(FoodID.lettuceChop, FoodID.tomatoChop));
 			generateRecipes("Lettuce Onion Salad", allCombos(FoodID.lettuceChop, FoodID.onionChop));
-			Array<String> plainBurger = new Array<String>();
-			plainBurger.add(new FoodStack(FoodID.topBun, FoodID.meatCook, FoodID.bottomBun).toString());
+			Array<FoodStack> plainBurger = new Array<>();
+			plainBurger.add(new FoodStack(FoodID.topBun, FoodID.meatCook, FoodID.bottomBun));
 			recipes.put("Plain Burger", plainBurger);
 
 			Array<FoodID> topBunArray = new Array<FoodID>();
@@ -126,10 +126,10 @@ public class Recipe {
 	 * @param listOfFoodStacks All FoodStacks which equal this recipe.
 	 */
 	private static void generateRecipes(String recipeName, Array<Array<FoodID>> listOfFoodStacks) {
-		Array<String> allValidRecipes = new Array<String>();
+		Array<FoodStack> allValidRecipes = new Array<>();
 		for (int i = 0; i < listOfFoodStacks.size; i++) {
 			Array<FoodID> recipe = listOfFoodStacks.get(i);
-			allValidRecipes.add(new FoodStack(recipe).toString());
+			allValidRecipes.add(new FoodStack(recipe));
 		}
 		recipes.put(recipeName, allValidRecipes);
         recipeNames.add(recipeName);
@@ -198,23 +198,23 @@ public class Recipe {
 
     public static boolean matchesRecipe(FoodStack foodStack, String recipeName) {
          // First get the recipe
-        Array<String> validStacks = recipes.get(recipeName);
+        Array<FoodStack> validStacks = recipes.get(recipeName);
         // If it doesn't exist, return false
         if (validStacks == null) { return false; }
 
         // For each validStack, check if the foodStack matches.
-        for (String validStack : validStacks) {
+        for (FoodStack validStack : validStacks) {
             System.out.println("foodStack: " + foodStack.toString());
             System.out.println("validStack: " + validStack);
-            if (validStack.equals(foodStack.toString())) {
+            if (validStack.toString().equals(foodStack.toString())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static Array<String> getRecipeCombos(String recipeName) {
-        Array<String> recipeCombos = recipes.get(recipeName);
+    public static Array<FoodStack> getRecipeCombos(String recipeName) {
+        Array<FoodStack> recipeCombos = recipes.get(recipeName);
         return recipeCombos;
     }
 
@@ -223,10 +223,11 @@ public class Recipe {
          return recipeNames.get(random.nextInt(recipeNames.size));
     }
 
-	// vscode debugging
+	/*
+    // debugging
     public static void main(String[] args) {
-        Array<String> myRecipes = recipes.get("Tomato Onion Burger");
-	 	for (String myRecipe : myRecipes) {
+        Array<FoodStack> myRecipes = recipes.get("Tomato Onion Burger");
+	 	for (FoodStack myRecipe : myRecipes) {
 		    System.out.println(myRecipe);
 	    }
 
@@ -234,6 +235,13 @@ public class Recipe {
                  FoodID.topBun,
                  FoodID.meatCook,
                  FoodID.bottomBun
-         ),randomRecipe()));
+         ));
 	}
+	*/
+
+    /** Outputs a random option from the {@link #recipes} of the
+     * recipe for {@link #recipeNames}. */
+    public static FoodStack randomRecipeOption() {
+        return new FoodStack();
+    }
 }
