@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import food.FoodItem;
 import game.GameScreen;
 import game.GameSprites;
+import game.ScreenController;
 import stations.*;
 
 import static helper.Constants.PPM;
@@ -27,10 +28,7 @@ import static helper.Constants.PPM;
 public class MapHelper {
     private GameScreen gameScreen;
     private TiledMap tiledMap;
-    private Vector2 ServingStationPosition;
     private static MapHelper INSTANCE;
-    private Array<ServingStation> servingStations = new Array<>();
-
 
     /**
      * The {@link MapHelper} constructor.
@@ -199,7 +197,8 @@ public class MapHelper {
                             station = new ServingStation(rectangle);
                             station.setID(Station.StationID.serving);
                             gameScreen.addGameEntity(station);
-                            servingStations.add((ServingStation) station);
+                            gameScreen.addServingStation((ServingStation) station);
+                            ((ServingStation) station).setGameScreen(gameScreen);
                             break;
                         default:
                             station = new Station(rectangle);
@@ -246,17 +245,5 @@ public class MapHelper {
     public void dispose() {
         tiledMap.dispose();
     }
-
-    /**
-     * A getter than returns the {@link Array} of {@link ServingStation}s
-     * that are present on the map.
-     * @return {@link Array}&lt;{@link ServingStation}&gt; : A list of all {@link ServingStation}s on the map.
-     */
-    public Array<ServingStation> getServingStations()
-    {
-        return servingStations;
-    }
-
-
 
 }

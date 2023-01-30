@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import cooks.Cook;
 import cooks.GameEntity;
+import customers.CustomerController;
 import helper.CollisionHelper;
 import helper.GameHud;
 import helper.MapHelper;
@@ -31,8 +32,7 @@ import java.util.Comparator;
 
 import static helper.Constants.PPM;
 
-/** A {@link ScreenAdapter} containing certain elements of the game.
- * <br>It is possible to switch between multiple {@link GameScreen}s. */
+/** A {@link ScreenAdapter} containing certain elements of the game. */
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private int delay;
@@ -53,6 +53,7 @@ public class GameScreen extends ScreenAdapter {
     private CollisionHelper collisionHelper;
     private Array<GameEntity> gameEntities;
     private DrawQueueComparator drawQueueComparator;
+    private Array<ServingStation> servingStations;
     private int xOffset = 480;
     private int yOffset = 320;
 
@@ -61,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
     private Cook cook;
 
     private int cookIndex;
-    private int customerCount;
+    private CustomerController customerController;
 
     private Customer customer;
     private Sprite customerIMG;
@@ -85,6 +86,7 @@ public class GameScreen extends ScreenAdapter {
         this.shape = screenController.getShapeRenderer();
         this.gameEntities = new Array<>();
         this.drawQueueComparator = new DrawQueueComparator();
+        this.customerController = new CustomerController();
 
         this.world = new World(new Vector2(0,0), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
@@ -92,10 +94,6 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper.setGameScreen(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
-        this.customerIMG = new Sprite(GameSprites.getInstance().getSprite(GameSprites.SpriteID.CUSTOMER,"0"));
-        this.customer = new Customer(customerIMG, this);
-
-        setupServingStation();
 
     }
 
@@ -141,9 +139,10 @@ public class GameScreen extends ScreenAdapter {
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             updateCustomers();
         }
+
         if(secondsPassed==5)
         {
-            customer.setCanDraw(true);
+            addnewCustomer();
         }
 
         if(Interactions.isJustPressed(InputKey.InputTypes.PAUSE))
@@ -177,7 +176,7 @@ public class GameScreen extends ScreenAdapter {
 
         renderGame(delta);
 
-        if(customerCount<1)
+        if(customerController.getCustomersLeft()<1)
         {
             screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
             ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
@@ -202,10 +201,6 @@ public class GameScreen extends ScreenAdapter {
             entity.render(batch);
             entity.renderDebug(batch);
         }
-       if(customer.canSpawn())
-       {
-           customer.Draw(batch);
-       }
 
         batch.end();
         shape.begin(ShapeRenderer.ShapeType.Filled);
@@ -280,10 +275,10 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Returns the number of customers remaining before the game is finished.
-     * @return {@code int} : The value of {@link #customerCount}.
+     * @return {@code int} : The value of {@link CustomerController#getCustomersLeft()}.
      */
     public int getCustomerCount() {
-        return this.customerCount;
+        return customerController.getCustomersLeft();
     }
 
     /**
@@ -305,18 +300,15 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     * Lowers the number of customers down by 1.
-     * This is called once a Customer has been successfully served.
+     * Lowers the number of customers down by 1 by calling the
+     * {@link CustomerController#updateCustomersLeft()} function.
+     * <br>This is called once a {@link Customer} has been successfully served.
      */
     public void updateCustomers()
     {
-        if(customerCount<1)
-        {
-            throw new RuntimeException("Customer count should not go below 0.");
-        }
-        customerCount--;
+        customerController.updateCustomersLeft();
 
-        gameHud.setCustomerCount(customerCount);
+        gameHud.setCustomerCount(customerController.getCustomersLeft());
     }
 
     /**
@@ -344,6 +336,12 @@ public class GameScreen extends ScreenAdapter {
         gameEntities.add(entity);
     }
 
+    /**
+     * Intermediate function to allow the {@link MapHelper} to add
+     * the {@link ServingStation}s to the {@link CustomerController}.
+     * @param station
+     */
+    public void addServingStation(ServingStation station) { customerController.addServingStation(station); }
     /** Reset the game variables, map and world. */
     public void reset() {
         // Reset all variables
@@ -373,30 +371,31 @@ public class GameScreen extends ScreenAdapter {
         minutesPassed = 0;
         hoursPassed = 0;
         previousSecond = TimeUtils.millis();
-        customerCount = customers;
+        customerController.setCustomersLeft(customers);
         gameHud.setCustomerCount(customers);
-    }
-
-    /**  */
-    public void setupServingStation()
-    {
-        for (ServingStation i : mapHelper.getServingStations())
-        {
-            i.setCustomer(this.customer);
-        }
     }
 
     /** */
     public void addnewCustomer()
     {
-        this.customer = new Customer(customerIMG, this);
-
-
-        customer.setCanDraw(true);
-        setupServingStation();
-
+        customerController.addCustomer();
     }
 
+    /**
+     * A getter for the {@link CustomerController} of the
+     * game.
+     * @return {@link CustomerController} : The {@link CustomerController}
+     *                                      for the game.
+     */
+    public CustomerController getCustomerController() {
+        return this.customerController;
+    }
 
-
+    /**
+     * Getter to get the {@link GameHud}.
+     * @return {@link GameHud} : The game's {@link GameHud}.
+     */
+    public GameHud getGameHud() {
+        return gameHud;
+    }
 }

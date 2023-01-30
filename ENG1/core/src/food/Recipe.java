@@ -1,6 +1,7 @@
 package food;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import com.badlogic.gdx.utils.Array;
 
@@ -13,6 +14,7 @@ import food.FoodItem.FoodID;
  * Also contains many helper functions useful in generating recipes.
  */
 public class Recipe {
+    private static Array<String> recipeNames = new Array<>();
 	/** A HashMap containing how each FoodItem's FoodID, via a station of StationID, can convert to another foodID.*/
 	private static final HashMap<String, Array<String>> recipes = new HashMap<>();
 		static {
@@ -119,7 +121,7 @@ public class Recipe {
 	}
 
 	/**
-	 * Creates an entry in {@link recipes} of recipeName:(listOfFoodStacks as a string)
+	 * Creates an entry in {@link #recipes} of recipeName:(listOfFoodStacks as a string)
 	 * @param recipeName The name of the recipe
 	 * @param listOfFoodStacks All FoodStacks which equal this recipe.
 	 */
@@ -130,6 +132,7 @@ public class Recipe {
 			allValidRecipes.add(new FoodStack(recipe).toString());
 		}
 		recipes.put(recipeName, allValidRecipes);
+        recipeNames.add(recipeName);
 	}
 	/**
 	 * Generates all the combinations (think THE1 :D) of the stuff.length for the stuff specified
@@ -137,12 +140,11 @@ public class Recipe {
 	 * @param stuff The items you want all combos out of
 	 * @return An array of arrays, containing all combos
 	 */
-	@SafeVarargs
 	private static <T> Array<Array<T>> allCombos(T... stuff) {
 		return allCombosR(new Array<T>(), new Array<T>(Array.with(stuff)));
 	}
 	/**
-	 * Very similar to {@link allCombos}, except every combo is prepended and appended stuff.
+	 * Very similar to {@link #allCombos(Array, Array, Object[])}, except every combo is prepended and appended stuff.
 	 * E.g. Every Burger has a topBun and bottomBun, so topBun is in prepend, and bottomBun is in append,
 	 * while the filling is in T... stuff.
 	 * @param <T> Any type.
@@ -151,7 +153,6 @@ public class Recipe {
 	 * @param stuff The stuff to generate all combos of stuff.length of
 	 * @return An array of arrays containing all combinations with the prepend and append.
 	 */
-	@SafeVarargs
 	private static <T> Array<Array<T>> allCombos(Array<T> prepend, Array<T> append, T... stuff) {
 		Array<Array<T>> combos = allCombosR(new Array<T>(), new Array<T>(Array.with(stuff)));
 		Array<Array<T>> newCombos = new Array<Array<T>>();
@@ -172,7 +173,6 @@ public class Recipe {
 	 * @param remaining The remaining elements to add to the combo.
 	 * @return An array containing all combos (each combo is in an array too).
 	 */
-	@SuppressWarnings("unchecked")
 	 private static <T> Array<Array<T>> allCombosR(Array<T> myList, Array<T> remaining) {
 		// If there's no remaining, add myList to storage by returning it in storage form
 		if (remaining.size == 0) {
@@ -196,13 +196,44 @@ public class Recipe {
 		return storage;
 	}
 
-	/*
+    public static boolean matchesRecipe(FoodStack foodStack, String recipeName) {
+         // First get the recipe
+        Array<String> validStacks = recipes.get(recipeName);
+        // If it doesn't exist, return false
+        if (validStacks == null) { return false; }
+
+        // For each validStack, check if the foodStack matches.
+        for (String validStack : validStacks) {
+            System.out.println("foodStack: " + foodStack.toString());
+            System.out.println("validStack: " + validStack);
+            if (validStack.equals(foodStack.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Array<String> getRecipeCombos(String recipeName) {
+        Array<String> recipeCombos = recipes.get(recipeName);
+        return recipeCombos;
+    }
+
+    public static String randomRecipe() {
+         Random random = new Random();
+         return recipeNames.get(random.nextInt(recipeNames.size));
+    }
+
 	// vscode debugging
-	// public static void main(String[] args) {
-	// 	String[] myRecipes = recipes.get("Tomato Onion Burger");
-	// 	for (String myRecipe : myRecipes) {
-	// 		System.out.println(myRecipe);
-	// 	}
-	// }
-	 */
+    public static void main(String[] args) {
+        Array<String> myRecipes = recipes.get("Tomato Onion Burger");
+	 	for (String myRecipe : myRecipes) {
+		    System.out.println(myRecipe);
+	    }
+
+         System.out.println(matchesRecipe(new FoodStack(
+                 FoodID.topBun,
+                 FoodID.meatCook,
+                 FoodID.bottomBun
+         ),randomRecipe()));
+	}
 }

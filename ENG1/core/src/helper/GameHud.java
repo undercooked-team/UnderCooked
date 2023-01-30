@@ -14,18 +14,17 @@ public class GameHud extends Hud {
     // public Stage stage;
     // private Viewport viewport;
 
-    /** The timer being used in the game, and being displayed by the {@link GameHud}. */
-    // NOTE: World Timer seems a little redundant
-    private int WorldTimer=0;
 
     /** The label saying 'timer:' . */
     Label timeLabel;
     /** The label saying 'customers:'  */
     Label CustomerLabel;
-    /** The label {@link worldTimer} outputs to. */
+    /** The label that the play time outputs to. */
     Label timer;
-    /** The label {@link gameScreen.getCustomerCount()} outputs to. */
+    /** The label {@link GameScreen#getCustomerCount()} outputs to. */
     Label CustomerScore;
+    /** The {@link SpriteBatch} of the GameHud. Use for drawing {@link food.Recipe}s. */
+    private SpriteBatch batch;
 
     /**
      * The GameHud constructor.
@@ -36,7 +35,7 @@ public class GameHud extends Hud {
     {
         super(batch);
 
-        timeLabel = new Label(String.format("%03d", WorldTimer), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        timeLabel = new Label(Util.formatTime(0,0,0), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         timer = new Label("TIMER:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
         CustomerLabel = new Label("CUSTOMERS:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
@@ -47,6 +46,7 @@ public class GameHud extends Hud {
         table.add(timer).expandX().padTop(60);
         table.add(timeLabel).expandX().padTop(60);
 
+        this.batch = batch;
     }
 
     /**
@@ -84,9 +84,4 @@ public class GameHud extends Hud {
     public void setCustomerCount(int customerCount) {
         CustomerLabel.setText(String.format("CUSTOMERS: %d",customerCount));
     }
-    /**
-     * WorldTimer getter
-     * @return WorldTimer
-     */
-    public float GetTime(){return WorldTimer;}
 }

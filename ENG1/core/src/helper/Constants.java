@@ -15,8 +15,6 @@ public class Constants {
     /** The ViewPort / Window Height. */
     public static final int V_Height = 640;
 
-    /** The scale of the {@link customers.Customer}s.*/
-    public static  final float customerScale = 0.2f;
     /** The {@link customers.Customer} default spawn position */
     public static final Vector2 customerSpawn= new Vector2(425,470);
 }
