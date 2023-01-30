@@ -129,7 +129,7 @@ public class Cook extends GameEntity {
      * The update function for the {@link Cook}, which updates the {@link Cook}'s
      * {@link #x} and {@link #y} values, and updates the position of the
      * {@link Cook}'s {@link CookInteractor}.
-     * @param delta
+     * @param delta The time between frames as a float.
      */
     @Override
     public void update(float delta) {

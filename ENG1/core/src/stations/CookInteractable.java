@@ -17,7 +17,7 @@ public abstract class CookInteractable extends GameEntity {
      * Calls the parent function, {@link GameEntity}, and sets the
      * {@link #interactRect} of the {@link CookInteractable} used for
      * cheking if the {@link CookInteractable} is overlapping the {@link CookInteractable}.
-     * @param rect
+     * @param rect The collision and interaction area of the {@link CookInteractable}.
      */
     public CookInteractable(Rectangle rect) {
         super(rect);

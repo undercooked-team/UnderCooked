@@ -9,7 +9,10 @@ import cooks.Cook;
 import game.GameSprites;
 import interactions.InputKey;
 
-/** The default {@link stations} class used as a Parent for other {@link stations}. */
+/**
+ * The default {@link stations} class used as
+ * a Parent for other {@link stations}.
+ * */
 public class Station extends CookInteractable {
 
     /** IDs of all the different possible types of stations.*/
@@ -46,9 +49,10 @@ public class Station extends CookInteractable {
      * Sets the {@link #stationID} of the {@link Station} to a
      * {@link StationID}.
      *
-     * This is not used by all Stations, but is useful if you want
+     * <br>This is not used by all Stations, but is useful if you want
      * something like that {@link PreparationStation} to function.
-     * @param stationID
+     * @param stationID The {@link StationID} for the {@link Station}
+     *                  to be set to.
      */
     public void setID(StationID stationID) {
         this.stationID = stationID;
@@ -56,7 +60,7 @@ public class Station extends CookInteractable {
 
     /**
      * The function that allows a {@link Cook} to interact with the {@link Station}.
-     * Here it does not do anything, as the default {@link Station} does nothing.
+     * <br>The default {@link Station} does nothing.
      * @param cook The cook that interacted with the {@link CookInteractable}.
      * @param inputType The type of {@link InputKey.InputTypes} the player made with
      *                  the {@link CookInteractable}.

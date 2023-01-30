@@ -22,6 +22,8 @@ public class CookInteractor {
     protected CollisionHelper ch;
     /**
      * CookInteractor Constructor.
+     * @param x The {@link #x} coordinate of the {@link CookInteractor}.
+     * @param y The {@link #y} coordinate of the {@link CookInteractor}.
      * @param size The size of CookInteractor's {@link GameEntity}.
      */
     public CookInteractor(float x, float y, float size) {

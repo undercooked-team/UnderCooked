@@ -125,7 +125,9 @@ public class Interactions {
         }));
     }
 
+    /** A list of all keys that were being pressed when {@link #updateKeys()} was called.*/
     public static Array<InputKey.InputTypes> keysPressed = new Array<>();
+    /** A list of all keys that were pressed the same frame that {@link #updateKeys()} was called.*/
     public static Array<InputKey.InputTypes> keysJustPressed = new Array<>();
 
     /**

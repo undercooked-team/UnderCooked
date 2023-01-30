@@ -269,7 +269,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Adds a new {@link Cook} to the {@link #cooks} {@link Array} for the game to swap between.
-     * @param newCook
+     * @param newCook The {@link Cook} to be added to the {@link Array}.
      * @return {@code int} : The index of the new cook in the cooks array.
      */
     public int addCook(Cook newCook) {
@@ -363,7 +363,11 @@ public class GameScreen extends ScreenAdapter {
         cookIndex = -1;
     }
 
-    /** A variable for setting up the game when it starts. */
+    /**
+     * A variable for setting up the game when it starts.
+     * @param customers The number of customers that need to be
+     *                  served in the game to finish.
+     */
     public void startGame(int customers) {
         secondsPassed = 0;
         minutesPassed = 0;
