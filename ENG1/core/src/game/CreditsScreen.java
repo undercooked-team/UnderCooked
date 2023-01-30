@@ -17,6 +17,10 @@ import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
 
+/**
+ * A {@link CreditsScreen} to give credit
+ * to the source of the assets used.
+ */
 public class CreditsScreen extends ScreenAdapter {
 
     private ScreenID prevScreenID = ScreenID.MENU;
@@ -25,6 +29,12 @@ public class CreditsScreen extends ScreenAdapter {
     private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
+
+    /**
+     * The constructor for the {@link CreditsScreen}.]
+     * @param screenController The {@link ScreenController} of the {@link ScreenAdapter}.
+     * @param orthographicCamera The {@link OrthographicCamera} that the game should use.
+     */
     public CreditsScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
         this.screenController = screenController;
         this.camera = orthographicCamera;
@@ -66,22 +76,39 @@ public class CreditsScreen extends ScreenAdapter {
         stage.addActor(table);
     }
 
-    // @Override
-    // public void show() {
-    // }
-
-    @Override
-    public void render(float delta) {
+    /**
+     * Check for user input every frame and act on specified inputs.
+     * @param delta The time between frames as a float.
+     */
+    public void update(float delta) {
         // Check for input.
         Interactions.updateKeys();
         if (Interactions.isJustPressed(InputKey.InputTypes.CREDITS)) {
             screenController.setScreen(prevScreenID);
         }
+    }
 
+    /**
+     * The function used to render the {@link CreditsScreen}.
+     *
+     * <br>Draws the {@link #stage} of the {@link CreditsScreen},
+     * which contains all the text as {@link Label}s.
+     * @param delta The time in seconds since the last render.
+     */
+    @Override
+    public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+        this.update(delta);
     }
+
+    /**
+     * Sets the variable {@link #prevScreenID} to the input,
+     * which allows the {@link CreditsScreen} to return the
+     * player to the screen they opened it from.
+     * @param scID The {@link ScreenController.ScreenID} of the previous {@link ScreenAdapter}.
+     */
     public void setPrevScreenID(ScreenID scID) {
         prevScreenID = scID;
     }
