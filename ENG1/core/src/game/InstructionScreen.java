@@ -17,6 +17,10 @@ import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
 
+/**
+ * The {@link InstructionScreen}, which provides the
+ * player with instructions on how to play the game.
+ */
 public class InstructionScreen extends ScreenAdapter {
 
     private ScreenID prevScreenID = ScreenID.MENU;
@@ -25,6 +29,12 @@ public class InstructionScreen extends ScreenAdapter {
     private FitViewport viewport;
     private Stage stage;
     private SpriteBatch batch;
+
+    /**
+     * The constructor for the {@link PauseScreen}.
+     * @param screenController The {@link ScreenController} of the {@link ScreenAdapter}.
+     * @param orthographicCamera The {@link OrthographicCamera} that the game should use.
+     */
     public InstructionScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
         this.screenController = screenController;
         this.camera = orthographicCamera;
@@ -89,22 +99,39 @@ public class InstructionScreen extends ScreenAdapter {
         stage.addActor(table);
     }
 
-    // @Override
-    // public void show() {
-    // }
-
-    @Override
-    public void render(float delta) {
+    /**
+     * Check for user input every frame and act on specified inputs.
+     * @param delta The time between frames as a float.
+     */
+    public void update(float delta) {
         // Check for input.
         Interactions.updateKeys();
         if (Interactions.isJustPressed(InputKey.InputTypes.INSTRUCTIONS)) {
             screenController.setScreen(prevScreenID);
         }
+    }
 
+    /**
+     * The function used to render the {@link PauseScreen}.
+     *
+     * <br>Draws the {@link #stage} of the {@link PauseScreen},
+     * which contains all the text as {@link Label}s.
+     * @param delta The time in seconds since the last render.
+     */
+    @Override
+    public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+        this.update(delta);
     }
+
+    /**
+     * Sets the variable {@link #prevScreenID} to the input,
+     * which allows the {@link PauseScreen} to return the
+     * player to the screen they opened it from.
+     * @param scID The {@link ScreenController.ScreenID} of the previous {@link ScreenAdapter}.
+     */
     public void setPrevScreenID(ScreenID scID) {
         prevScreenID = scID;
     }
