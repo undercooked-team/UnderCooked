@@ -63,7 +63,6 @@ public class ServingStation extends Station {
 
     }
 
-    @Override
     public void setCustomer(Customer customer)
     {
         this.customer = customer;
