@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -31,6 +32,7 @@ public class MenuScreen extends ScreenAdapter {
 
     private Viewport viewport;
     private Stage stage;
+    private Sprite backgroundSprite;
 
     /**
      * The constructor for the {@link MenuScreen}.
@@ -44,6 +46,7 @@ public class MenuScreen extends ScreenAdapter {
 
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
+        this.backgroundSprite = new Sprite("Maps/StartMenuBackGround.png");
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         Table table = new Table();
@@ -110,6 +113,10 @@ public class MenuScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        backgroundSprite.draw(batch);
+        batch.end();
         stage.draw();
         this.update(delta);
     }
