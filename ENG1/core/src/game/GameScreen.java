@@ -155,6 +155,7 @@ public class GameScreen extends ScreenAdapter {
         for (GameEntity entity : gameEntities) {
             entity.update(delta);
         }
+        gameHud.update();
     }
 
     /**

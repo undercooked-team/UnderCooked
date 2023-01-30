@@ -81,6 +81,18 @@ public class GameHud extends Hud {
         batch.end();
     }
 
+    /**
+     *
+     */
+    public void update() {
+        if (recipe != null) {
+            if (TimeUtils.timeSinceMillis(lastChange) > 1000) {
+                this.recipe = Recipe.randomRecipeOption(recipeName);
+                lastChange = TimeUtils.millis();
+            }
+        }
+    }
+
     public void setRecipe(String recipeName) {
         this.lastChange = TimeUtils.millis();
         this.recipeName = recipeName;
