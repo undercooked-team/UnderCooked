@@ -17,6 +17,12 @@ import helper.Constants;
 import interactions.InputKey;
 import interactions.Interactions;
 
+/**
+ * The {@link MenuScreen}, which provides the player with
+ * a few options of inputs, which do different things.
+ * One of which is to change to the {@link GameScreen} and
+ * play the game.
+ */
 public class MenuScreen extends ScreenAdapter {
 
     private ScreenController screenController;
@@ -25,6 +31,12 @@ public class MenuScreen extends ScreenAdapter {
 
     private Viewport viewport;
     private Stage stage;
+
+    /**
+     * The constructor for the {@link MenuScreen}.
+     * @param screenController The {@link ScreenController} of the {@link ScreenAdapter}.
+     * @param orthographicCamera The {@link OrthographicCamera} that the game should use.
+     */
     public MenuScreen(ScreenController screenController, OrthographicCamera orthographicCamera) {
         this.screenController = screenController;
         this.camera = orthographicCamera;
@@ -62,8 +74,11 @@ public class MenuScreen extends ScreenAdapter {
 
     }
 
-    /**This function runs every (frame???)*/
-    public void update() {
+    /**
+     * Check for user input every frame and act on specified inputs.
+     * @param delta The time between frames as a float.
+     */
+    public void update(float delta) {
         Interactions.updateKeys();
 
         // Set the screen to the gameplay screen
@@ -84,11 +99,18 @@ public class MenuScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * The function used to render the {@link PauseScreen}.
+     *
+     * <br>Draws the {@link #stage} of the {@link MenuScreen},
+     * which contains all the text as {@link Label}s.
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        this.update();
+        this.update(delta);
     }
 }
