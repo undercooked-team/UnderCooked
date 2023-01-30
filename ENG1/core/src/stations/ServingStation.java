@@ -76,6 +76,11 @@ public class ServingStation extends Station {
                     gameScreen.getGameHud().setRecipe(customer.getRequestName());
                 }
             }
+        } else {
+            if (hasCustomer()) {
+                // Display the customer's request.
+                gameScreen.getGameHud().setRecipe(customer.getRequestName());
+            }
         }
     }
 
