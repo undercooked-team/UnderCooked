@@ -133,10 +133,8 @@ public class GameScreen extends ScreenAdapter {
         if(Interactions.isJustPressed(InputKey.InputTypes.COOK_SWAP)) {
             setCook((cookIndex + 1) % cooks.size);
         }
-        // Not using new input system as it's for testing
-        if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            updateCustomers();
-        }
+
+
         if(secondsPassed==5)
         {
             customer.setCanDraw(true);
