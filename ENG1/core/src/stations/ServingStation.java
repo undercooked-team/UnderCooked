@@ -1,5 +1,6 @@
 package stations;
 
+import Customers.Customer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -9,6 +10,7 @@ import interactions.InputKey;
 public class ServingStation extends Station {
 
     private String request;
+    private Customer customer;
     //private Customer customer;
     public ServingStation(Rectangle rectangle) {
         super(rectangle);
@@ -27,6 +29,9 @@ public class ServingStation extends Station {
         // USE to see request, or submit request
         if (inputType == InputKey.InputTypes.USE) {
             // First make sure there is actually a request on this counter.
+            customer.setCanDraw(false);
+            customer.updateCustomerCount();
+            customer.addNewCustomer();
             if (request != null) {
                 // If there is a request, then compare the two.
                 if (request == cook.foodStack.toString()) {
@@ -44,5 +49,11 @@ public class ServingStation extends Station {
     @Override
     public void render(SpriteBatch batch) {
 
+    }
+
+    @Override
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
     }
 }

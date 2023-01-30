@@ -1,5 +1,6 @@
 package stations;
 
+import Customers.Customer;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -60,6 +61,12 @@ public class Station extends CookInteractable {
 
     @Override
     public void renderShapeDebug(ShapeRenderer shape) {
+
+    }
+
+
+    public void setCustomer(Customer customer)
+    {
 
     }
 }

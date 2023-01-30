@@ -1,6 +1,9 @@
 package helper;
+import Customers.Customer;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.utils.Array;
 import cooks.Cook;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -27,18 +30,22 @@ public class MapHelper {
     private TiledMap tiledMap;
     private Vector2 ServingStationPosition;
     private static MapHelper INSTANCE;
+    private Array<Station> servingStations = new Array<>();
+
 
     public MapHelper() { }
 
     public static MapHelper getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new MapHelper();
+
         }
         return INSTANCE;
     }
 
     public static MapHelper newInstance() {
         INSTANCE = new MapHelper();
+
         return INSTANCE;
     }
 
@@ -145,7 +152,8 @@ public class MapHelper {
                             station = new ServingStation(rectangle);
                             station.setID(Station.StationID.serving);
                             gameScreen.addGameEntity(station);
-                            this.SetServingStationPosition(station.getBody().getPosition());
+                            servingStations.add(station);
+
 
                             break;
                         default:
@@ -189,13 +197,11 @@ public class MapHelper {
     public void dispose() {
         tiledMap.dispose();
     }
+    public Array<Station> getServingStations()
+    {
+        return servingStations;
+    }
 
-    public Vector2 getServingStationPosition()
-    {
-        return ServingStationPosition;
-    }
-    private void SetServingStationPosition(Vector2 position)
-    {
-        this.ServingStationPosition = position;
-    }
+
+
 }

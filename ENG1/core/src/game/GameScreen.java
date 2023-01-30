@@ -25,6 +25,7 @@ import helper.MapHelper;
 import interactions.InputKey;
 import interactions.Interactions;
 import stations.CookInteractable;
+import stations.Station;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -35,6 +36,7 @@ import static helper.Constants.PPM;
 /** A screen containing certain elements of the game. Can switch between GameScreens. */
 public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
+    private int delay;
 
     private long previousSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
@@ -59,10 +61,12 @@ public class GameScreen extends ScreenAdapter {
     //Objects
     private Array<Cook> cooks;
     private Cook cook;
-    private Customer customer;
-    private Texture customerIMG;
+
     private int cookIndex;
     private int customerCount;
+
+    private Customer customer;
+    private Texture customerIMG;
 
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
@@ -86,7 +90,9 @@ public class GameScreen extends ScreenAdapter {
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
         this.customerIMG = new Texture("Customer/Customer.png");
-        this.customer = new Customer(customerIMG);
+        this.customer = new Customer(customerIMG, this);
+
+        setupServingStation();
 
     }
 
@@ -253,6 +259,7 @@ public class GameScreen extends ScreenAdapter {
             throw new RuntimeException("Customer count should not go below 0.");
         }
         customerCount--;
+
         gameHud.setCustomerCount(customerCount);
     }
 
@@ -286,6 +293,7 @@ public class GameScreen extends ScreenAdapter {
         gameEntities.clear();
         interactables.clear();
         mapHelper.dispose();
+        dispose();
         mapHelper = MapHelper.newInstance();
         mapHelper.setGameScreen(this);
         world.dispose();
@@ -301,6 +309,24 @@ public class GameScreen extends ScreenAdapter {
         previousSecond = TimeUtils.millis();
         customerCount = customers;
         gameHud.setCustomerCount(customers);
+    }
+
+    public void setupServingStation()
+    {
+        for (Station i : mapHelper.getServingStations())
+        {
+            i.setCustomer(this.customer);
+        }
+    }
+
+    public void addnewCustomer()
+    {
+        this.customer = new Customer(customerIMG, this);
+
+
+        customer.setCanDraw(true);
+        setupServingStation();
+
     }
 
 
