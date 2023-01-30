@@ -55,7 +55,7 @@ public class GameSprites {
 
     /**
      * The getter function to get the {@link #INSTANCE} of the {@link GameSprites}.
-     * @return The single {@link GameSprites} instance.
+     * @return {@link GameSprites}: The single {@link GameSprites} instance.
      */
     public static GameSprites getInstance() {
         if (INSTANCE == null) {
@@ -85,7 +85,7 @@ public class GameSprites {
      * into a {@link String} key for the {@link #spriteMap}.
      * @param spriteID The {@link SpriteID} of the {@link Sprite}.
      * @param spriteName The name of the {@link Sprite} as a {@link String}.
-     * @return A {@link String} key to use for the {@link #spriteMap}.
+     * @return  {@link String}: The key to use for the {@link #spriteMap}.
      */
     public String spriteKey(SpriteID spriteID, String spriteName) {
         return String.format("%s-%s", spriteID.ordinal(), spriteName);
@@ -95,7 +95,7 @@ public class GameSprites {
      * Get a {@link Sprite} from the {@link #spriteMap}.
      * @param spriteID The {@link SpriteID} of the {@link Sprite}.
      * @param spriteName The name of the {@link Sprite} as a {@link String}.
-     * @return The {@link Sprite} retrieved from the {@link #spriteMap}.
+     * @return  {@link Sprite}: The retrieved from the {@link #spriteMap}.
      */
     public Sprite getSprite(SpriteID spriteID, String spriteName) {
         Sprite returnSprite = spriteMap.get(spriteKey(spriteID,spriteName));
