@@ -3,6 +3,7 @@ package customers;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 import food.Recipe;
 import game.GameScreen;
 import game.GameSprites;
@@ -176,6 +177,15 @@ public class CustomerController {
         removeCustomer(station);
         customersServed++;
         gameScreen.setCustomerHud(customersServed);
+
+        // If there is no more customers on the stations, and
+        // the time for the next customer to arrive is above 2 seconds,
+        // lower the time until the next customer to 2.
+        if (customers.size == 0) {
+            if (TimeUtils.timeSinceMillis(gameScreen.getNextCustomerSecond()) > 2000) {
+                gameScreen.setNextCustomerSecond(TimeUtils.millis() + 2000);
+            }
+        }
     }
 
     /**
