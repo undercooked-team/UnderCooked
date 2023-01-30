@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -46,7 +47,7 @@ public class MenuScreen extends ScreenAdapter {
 
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
-        this.backgroundSprite = new Sprite("Maps/StartMenuBackGround.png");
+        this.backgroundSprite = new Sprite(new Texture("Maps/StartMenuBackGround.png"));
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         Table table = new Table();
