@@ -118,7 +118,10 @@ public class Interactions {
         inputs.put(InputID.COOK_INTERACT, new Array<>(new InputKey[]{
                 new InputKey(InputKey.InputTypes.USE, Input.Keys.I),
                 new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.O),
-                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.J)
+                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.J),
+                new InputKey(InputKey.InputTypes.USE, Input.Keys.R),
+                new InputKey(InputKey.InputTypes.PICK_UP, Input.Keys.E),
+                new InputKey(InputKey.InputTypes.PUT_DOWN, Input.Keys.G)
         }));
         inputs.put(InputID.COOK_MISC, new Array<>(new InputKey[] {
                 new InputKey(InputKey.InputTypes.COOK_SWAP, Input.Keys.SPACE)
@@ -199,9 +202,10 @@ public class Interactions {
 
         // Otherwise, return them in an array format.
         String output = "[";
-        for (int i = 0 ; i < validKeys.size ; i++) {
-            output += validKeys.get(i) + (i == validKeys.size-1 ? "" : ",");
+        for (int i = 0 ; i < validKeys.size-1 ; i++) {
+            output += validKeys.get(i) + (i == validKeys.size-2 ? "" : ",");
         }
+        output += " or " + validKeys.get(validKeys.size-1);
         return output + "]";
     }
 
