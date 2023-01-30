@@ -3,11 +3,9 @@ package game;
 import customers.Customer;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -63,9 +61,7 @@ public class GameScreen extends ScreenAdapter {
 
     private int cookIndex;
     private CustomerController customerController;
-
-    private Customer customer;
-    private Sprite customerIMG;
+    private int customersToServe;
 
     /**
      * The constructor for the {@link GameScreen}.
@@ -88,7 +84,7 @@ public class GameScreen extends ScreenAdapter {
         this.shape = screenController.getShapeRenderer();
         this.gameEntities = new Array<>();
         this.drawQueueComparator = new DrawQueueComparator();
-        this.customerController = new CustomerController();
+        this.customerController = new CustomerController(this);
 
         this.world = new World(new Vector2(0,0), false);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
@@ -137,10 +133,6 @@ public class GameScreen extends ScreenAdapter {
         if(Interactions.isJustPressed(InputKey.InputTypes.COOK_SWAP)) {
             setCook((cookIndex + 1) % cooks.size);
         }
-        // Not using new input system as it's for testing
-        if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            updateCustomers();
-        }
 
         if(TimeUtils.millis() >= nextCustomerSecond)
         {
@@ -186,7 +178,7 @@ public class GameScreen extends ScreenAdapter {
 
         renderGame(delta);
 
-        if(customerController.getCustomersLeft()<1)
+        if(customersToServe <= customerController.getCustomersServed())
         {
             screenController.setScreen((ScreenController.ScreenID.GAMEOVER));
             ((GameOverScreen) screenController.getScreen(ScreenController.ScreenID.GAMEOVER)).setTime(hoursPassed,minutesPassed,secondsPassed);
@@ -284,6 +276,15 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
+     * Updates the {@link GameHud} with the correct number of {@link Customer}s.
+     * @param customerCount The {@code int} number to set the number of
+     *                      {@link Customer}s to.
+     */
+    public void setCustomerHud(int customerCount) {
+        gameHud.setCustomerCount(customersToServe - customerCount);
+    }
+
+    /**
      * Returns the number of customers remaining before the game is finished.
      * @return {@code int} : The value of {@link CustomerController#getCustomersLeft()}.
      */
@@ -325,18 +326,6 @@ public class GameScreen extends ScreenAdapter {
      */
     public void setNextCustomerSecond(long newSecond) {
         nextCustomerSecond = newSecond;
-    }
-
-    /**
-     * Lowers the number of customers down by 1 by calling the
-     * {@link CustomerController#updateCustomersLeft()} function.
-     * <br>This is called once a {@link Customer} has been successfully served.
-     */
-    public void updateCustomers()
-    {
-        customerController.updateCustomersLeft();
-
-        gameHud.setCustomerCount(customerController.getCustomersLeft());
     }
 
     /**
@@ -398,8 +387,11 @@ public class GameScreen extends ScreenAdapter {
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
+        customersToServe = customers;
         previousSecond = TimeUtils.millis();
         customerController.setCustomersLeft(customers);
+        customerController.setCustomersServed(0);
+        setCustomerHud(customers);
         gameHud.setCustomerCount(customers);
     }
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import food.Recipe;
+import game.GameScreen;
 import game.GameSprites;
 import stations.ServingStation;
 
@@ -22,23 +23,26 @@ public class CustomerController {
     private static Sprite customerSprite;
     /** An array of all {@link ServingStation}s to assign to the {@link Customer}s.*/
     private static Array<ServingStation> servingStations;
-    /** The number of {@link Customer}s left to serve. */
+    /** The number of {@link Customer}s to spawn. */
     private int customersLeft,
     /** The number of {@link Customer}s served. */
-    customerCount;
+    customersServed;
+    /** The {@link game.GameScreen} to send the {@link #customersServed} to. */
+    private GameScreen gameScreen;
 
     /**
      * Constructor for the {@link CustomerController}.
      * <br>It sets up the array that the {@link Customer}s
      * will be stored in.
      */
-    public CustomerController() {
-        customers = new Array<>();
-        customersLeft = 0;
-        customerCount = 0;
-        customerSprite = GameSprites.getInstance().getSprite(GameSprites.SpriteID.CUSTOMER,"0");
-        customerSprite.setSize(42.5F,70);
-        servingStations = new Array<>();
+    public CustomerController(GameScreen gameScreen) {
+        this.customers = new Array<>();
+        this.customersLeft = 0;
+        this.customersServed = 0;
+        this.customerSprite = GameSprites.getInstance().getSprite(GameSprites.SpriteID.CUSTOMER,"0");
+        this.customerSprite.setSize(42.5F,70);
+        this.servingStations = new Array<>();
+        this.gameScreen = gameScreen;
     }
 
     /**
@@ -68,6 +72,10 @@ public class CustomerController {
      *                       to spawn.
      */
     public int addCustomer() {
+        // If there are no more customers left to serve, then don't bother
+        if (customersLeft <= 0) {
+            return -1;
+        }
         // Get a deep copy of all the ServingStations.
         Array<ServingStation> emptyStations = new Array<>(servingStations);
         // Loop through and remove all the stations that have a
@@ -92,6 +100,7 @@ public class CustomerController {
         customers.add(newCustomer);
         newCustomer.randomRecipe();
         chosenStation.setCustomer(newCustomer);
+        customersLeft--;
         return Recipe.firstRecipeOption(newCustomer.getRequestName()).size();
     }
 
@@ -109,7 +118,7 @@ public class CustomerController {
 
     /**
      * Sets the number of {@link Customer}s needing to be served.
-     * @param customersLeft
+     * @param customersLeft The number of {@link Customer}s left.
      */
     public void setCustomersLeft(int customersLeft) {
         this.customersLeft = customersLeft;
@@ -123,8 +132,20 @@ public class CustomerController {
         return customersLeft;
     }
 
-    public void updateCustomersLeft() {
-        customersLeft -= 1;
+    /**
+     * Sets the number of {@link Customer}s needing to be served.
+     * @param customersServed The number of {@link Customer}s served.
+     */
+    public void setCustomersServed(int customersServed) {
+        this.customersServed = customersServed;
+    }
+
+    /**
+     * Gets the number of {@link Customer}s that have been served.
+     * @return {@code int} : The number of {@link Customer}s served.
+     */
+    public int getCustomersServed() {
+        return customersServed;
     }
 
     /**
@@ -149,11 +170,11 @@ public class CustomerController {
 
     public void customerServed(ServingStation station) {
         int customerInd = customers.indexOf(station.getCustomer(),true);
-        System.out.println(customerInd);
         if (customerInd < 0) {
             return;
         }
         removeCustomer(station);
-        updateCustomersLeft();
+        customersServed++;
+        gameScreen.setCustomerHud(customersServed);
     }
 }
