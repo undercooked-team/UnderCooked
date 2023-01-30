@@ -55,7 +55,7 @@ public class InstructionScreen extends ScreenAdapter {
         table.row();
 
         String[] instructions = new String[] {
-                String.format("Move using the WASD keys, or the arrow keys. Swap the cook you are controlling by pressing %s.",Interactions.getKeyString(InputKey.InputTypes.COOK_SWAP)),
+                String.format("Move using the WASD keys or the arrow keys. Swap the cook you are controlling by pressing %s.",Interactions.getKeyString(InputKey.InputTypes.COOK_SWAP)),
                 "",
                 String.format("To use a station, press %s while facing it.", Interactions.getKeyString(InputKey.InputTypes.USE)),
                 String.format("Take items from the Pantries (tables with ingredients on them) or a Station by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PICK_UP)),
@@ -75,7 +75,7 @@ public class InstructionScreen extends ScreenAdapter {
                         Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
                 "",
                 "Each customer has a range of different foods they can request from.",
-                String.format("The recipe of their request will be display if you interact with the station in any way. (%s, %s or %s)",
+                String.format("The recipe of their request will be display if you interact with the serving counter in any way. (%s, %s or %s)",
                         Interactions.getKeyString(InputKey.InputTypes.USE),
                         Interactions.getKeyString(InputKey.InputTypes.PICK_UP),
                         Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
