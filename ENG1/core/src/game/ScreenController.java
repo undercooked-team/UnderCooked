@@ -8,6 +8,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.HashMap;
 
+/**
+ * A class to control the different {@link ScreenAdapter} that the game
+ * switches between.
+ */
 public class ScreenController {
 
     private Boot boot;
@@ -54,12 +58,12 @@ public class ScreenController {
 
     /**
      * An intermediate function to get the SpriteBatch from the {@link Boot}.
-     * @return SpriteRenderer of the game.
+     * @return {@link SpriteBatch} : {@link SpriteBatch} for the game.
      */
     public SpriteBatch getSpriteBatch() { return boot.getSpriteBatch(); }
     /**
-     * An intermediate function to get the ShapeRenderer from the {@link Boot}.
-     * @return ShapeRenderer of the game.
+     * An intermediate function to get the {@link ShapeRenderer} from the {@link Boot}.
+     * @return {@link ShapeRenderer} : {@link ShapeRenderer} for the game.
      */
     public ShapeRenderer getShapeRenderer() { return boot.getShapeRenderer(); }
 
@@ -82,9 +86,9 @@ public class ScreenController {
     }
 
     /**
-     * Get the desired screen from the ScreenController.
-     * @param screenID The ID of the screen you want.
-     * @return The desired screen.
+     * Get the desired screen from the {@link ScreenController}.
+     * @param screenID The {@link ScreenID} of the screen you want.
+     * @return {@link ScreenAdapter} : The requested {@link ScreenAdapter)}.
      */
     public ScreenAdapter getScreen(ScreenID screenID) {
         return this.screens.get(screenID);
@@ -103,7 +107,7 @@ public class ScreenController {
     }
 
     /** Resume the game from pause.
-     * Only call this after {@link #pauseGameScreen()} has been called to pause the game. */
+     * Only call this AFTER {@link #pauseGameScreen()}. */
     public void playGameScreen() {
         gameScreen.setPreviousSecond(TimeUtils.millis()-timeDiff);
         setScreen(ScreenID.GAME);
