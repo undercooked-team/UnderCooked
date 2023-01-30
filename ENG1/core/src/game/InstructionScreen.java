@@ -61,7 +61,7 @@ public class InstructionScreen extends ScreenAdapter {
                 String.format("Take items from the Pantries (tables with ingredients on them) or a Station by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PICK_UP)),
                 "Pantries have an infinite number of resources, and the Cook has no carry limit.",
                 "",
-                String.format("You can put an item down on a table by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
+                String.format("You can put an item down on a station (table) by pressing %s.", Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)),
                 "Counters can do this for any item, but preparation stations require valid ingredients.",
                 "",
                 String.format("You progress ingredient preparation by using (%s) the station when the bar is yellow.", Interactions.getKeyString(InputKey.InputTypes.USE)),
