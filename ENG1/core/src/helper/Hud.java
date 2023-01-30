@@ -14,9 +14,7 @@ public class Hud {
     protected Stage stage;
     /** The viewport of the Hud. */
     protected Viewport viewport;
-    /** Sizes and positions children using position constraints.
-     * @see {@link Table}
-     */
+    /** Sizes and positions children using position constraints. */
     protected Table table;
 
     /**

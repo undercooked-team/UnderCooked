@@ -1,8 +1,4 @@
 package helper;
-import Customers.Customer;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.utils.Array;
 import cooks.Cook;
 import com.badlogic.gdx.maps.MapObject;
@@ -30,7 +26,7 @@ public class MapHelper {
     private TiledMap tiledMap;
     private Vector2 ServingStationPosition;
     private static MapHelper INSTANCE;
-    private Array<Station> servingStations = new Array<>();
+    private Array<ServingStation> servingStations = new Array<>();
 
 
     public MapHelper() { }
@@ -49,10 +45,21 @@ public class MapHelper {
         return INSTANCE;
     }
 
+    /**
+     * Function to set the MapHelper's gameScreen so that it can access
+     * relevant information it may need to know.
+     * @param gameScreen {@link GameScreen}
+     */
     public void setGameScreen(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
 
+    /**
+     * Sets up the map by loading the StationsMap tilemap, and then using
+     * the function {@link #parseMapObjects(MapObjects)} to parse and
+     * load it into the game.
+     * @return The {@link OrthogonalTiledMapRenderer} used to render the Tilemap.
+     */
     public OrthogonalTiledMapRenderer setupMap()
     {
         tiledMap = new TmxMapLoader().load("Maps/StationsMap.tmx");
@@ -152,9 +159,7 @@ public class MapHelper {
                             station = new ServingStation(rectangle);
                             station.setID(Station.StationID.serving);
                             gameScreen.addGameEntity(station);
-                            servingStations.add(station);
-
-
+                            servingStations.add((ServingStation) station);
                             break;
                         default:
                             station = new Station(rectangle);
@@ -197,7 +202,7 @@ public class MapHelper {
     public void dispose() {
         tiledMap.dispose();
     }
-    public Array<Station> getServingStations()
+    public Array<ServingStation> getServingStations()
     {
         return servingStations;
     }

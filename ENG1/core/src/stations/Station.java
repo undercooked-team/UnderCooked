@@ -1,14 +1,12 @@
 package stations;
 
-import Customers.Customer;
+import customers.Customer;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import game.GameSprites;
-import helper.MapHelper;
 import interactions.InputKey;
 
 public class Station extends CookInteractable {

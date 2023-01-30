@@ -1,14 +1,10 @@
-package Customers;
+package customers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import game.GameScreen;
 import helper.Constants;
-import helper.GameHud;
-import helper.MapHelper;
 
 public class Customer {
 
@@ -16,15 +12,15 @@ public class Customer {
     public Sprite sprite;
     private GameScreen screen;
 
-    private boolean canDraw= false;
+    private boolean canDraw = false;
 
-    public Customer(Texture img, GameScreen screen)
+    public Customer(Sprite sprite, GameScreen gameScreen)
     {
 
-        this.sprite = new Sprite(img);
+        this.sprite = sprite;
         position = Constants.customerSpawn;
         sprite.setScale(Constants.customerScale);
-        this.screen =screen;
+        this.screen = gameScreen;
     }
 
     public void Draw(SpriteBatch batch)

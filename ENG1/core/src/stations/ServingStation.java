@@ -1,17 +1,25 @@
 package stations;
 
-import Customers.Customer;
+import customers.Customer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
 import cooks.Cook;
 import interactions.InputKey;
 
+/**
+ * The ServingStation class, where the {@link cooks.Cook} provide
+ * the {@link customers.Customer}s with their orders.
+ */
 public class ServingStation extends Station {
 
     private String request;
     private Customer customer;
     //private Customer customer;
+
+    /**
+     * The constructor for the ServingStation
+     * @param rectangle The shape and location of the Station.
+     */
     public ServingStation(Rectangle rectangle) {
         super(rectangle);
     }
@@ -46,6 +54,10 @@ public class ServingStation extends Station {
         }
     }
 
+    /**
+     * Any custom rendering for the {@link ServingStation}
+     * @param batch The SpriteBatch renderer to render the Station in.
+     */
     @Override
     public void render(SpriteBatch batch) {
 

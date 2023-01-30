@@ -1,13 +1,13 @@
 package game;
 
-import Customers.Customer;
+import customers.Customer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -25,11 +25,9 @@ import helper.MapHelper;
 import interactions.InputKey;
 import interactions.Interactions;
 import stations.CookInteractable;
-import stations.Station;
+import stations.ServingStation;
 
 import java.util.Comparator;
-import java.util.Map;
-import java.util.PriorityQueue;
 
 import static helper.Constants.PPM;
 
@@ -66,7 +64,7 @@ public class GameScreen extends ScreenAdapter {
     private int customerCount;
 
     private Customer customer;
-    private Texture customerIMG;
+    private Sprite customerIMG;
 
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
@@ -89,14 +87,12 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper.setGameScreen(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
-        this.customerIMG = new Texture("Customer/Customer.png");
+        this.customerIMG = new Sprite(GameSprites.getInstance().getSprite(GameSprites.SpriteID.CUSTOMER,"0"));
         this.customer = new Customer(customerIMG, this);
 
         setupServingStation();
 
     }
-
-
 
     private void update(float delta)
     {
@@ -117,7 +113,6 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
         }
-
 
         gameHud.updateTime(hoursPassed, minutesPassed, secondsPassed);
         cameraUpdate();
@@ -205,6 +200,13 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * A {@link Comparator} used to compare the Y height of two
+     * {@link GameEntity}s.
+     * If it is negative, then the left entity is higher.
+     * If it is positive, then the right entity is higher.
+     * If it is 0, then both are at the same height.
+     */
     public class DrawQueueComparator implements Comparator<GameEntity> {
 
         @Override
@@ -220,11 +222,20 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Get the world that the game is using.
+     * @return The {@link GameScreen}'s {@link World}.
+     */
     public World getWorld()
     {
         return world;
     }
 
+    /**
+     * Sets the currently active {@link #cook} that the game is using.
+     * @param cookIndex The index of {@link #cook} in the {@link #cooks} array.
+     * @return The {@link Cook} that the game has swapped to.
+     */
     public Cook setCook(int cookIndex)
     {
         if (cookIndex < 0 || cookIndex > cooks.size) {
@@ -235,23 +246,47 @@ public class GameScreen extends ScreenAdapter {
         return this.cook;
     }
 
+    /**
+     * Adds a new {@link Cook} to the {@link #cooks} {@link Array} for the game to swap between
+     * @param newCook
+     * @return The index of the new cook in the cooks array
+     */
     public int addCook(Cook newCook) {
         gameEntities.add(newCook);
         cooks.add(newCook);
         return cooks.size-1;
     }
 
+    /**
+     * Returns the number of customers remaining before the game is finished.
+     * @return The int value of {@link #customerCount}
+     */
     public int getCustomerCount() {
         return this.customerCount;
     }
+
+    /**
+     * A getter to get the {@link #previousSecond}.
+     * The {@link #previousSecond} is used for the timer, by checking when the previous
+     * second was so that the game can check if it has been another second or not.
+     * @return The {@link #previousSecond} as a {@code long}
+     */
     public long getPreviousSecond() {
         return previousSecond;
     }
 
+    /**
+     * A setter to set the {@link #previousSecond} to the {@code long} provided.
+     * @param newSecond What to set the {@link #previousSecond} to as a {@code long}.
+     */
     public void setPreviousSecond(long newSecond) {
         previousSecond = newSecond;
     }
 
+    /**
+     * Lowers the number of customers down by 1.
+     * This is called once a Customer has been successfully served.
+     */
     public void updateCustomers()
     {
         if(customerCount<1)
@@ -264,26 +299,31 @@ public class GameScreen extends ScreenAdapter {
     }
 
     /**
-     * interactables getter. Contains all the interactables in the gameScreen.
-     * @return interactables
+     * {@link #interactables} getter. Contains all the {@link #interactables} in the {@link GameScreen}.
+     * @return The {@link CookInteractable} {@link Array}, {@link #interactables}.
      */
     public Array<CookInteractable> getInteractables() {
         return interactables;
     }
 
+    /**
+     * Adds a {@link CookInteractable} that a {@link Cook} can interact with.
+     * @param cookInteractable The {@link CookInteractable} object that the {@link Cook}
+     *                         should be able to interact with.
+     */
     public void addInteractable(CookInteractable cookInteractable) {
         interactables.add(cookInteractable);
     }
 
+    /**
+     * Adds a game entity to the GameScreen to be rendered and updated.
+     * @param entity The {@link GameEntity} to be added.
+     */
     public void addGameEntity(GameEntity entity) {
         gameEntities.add(entity);
     }
 
-    public CollisionHelper getCollisionHelper() {
-        return collisionHelper;
-    }
-
-    /** Reset the game variables. */
+    /** Reset the game variables, map and world. */
     public void reset() {
         // Reset all variables
         secondsPassed = 0;
@@ -302,6 +342,7 @@ public class GameScreen extends ScreenAdapter {
         cookIndex = -1;
     }
 
+    /** A variable for setting up the game when it starts. */
     public void startGame(int customers) {
         secondsPassed = 0;
         minutesPassed = 0;
@@ -311,9 +352,10 @@ public class GameScreen extends ScreenAdapter {
         gameHud.setCustomerCount(customers);
     }
 
+    /** Spawns a Customer. */
     public void setupServingStation()
     {
-        for (Station i : mapHelper.getServingStations())
+        for (ServingStation i : mapHelper.getServingStations())
         {
             i.setCustomer(this.customer);
         }

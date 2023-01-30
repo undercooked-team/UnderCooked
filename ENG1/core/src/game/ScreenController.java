@@ -52,16 +52,32 @@ public class ScreenController {
         this.boot.setScreen(this.screens.get(screenID));
     }
 
+    /**
+     * An intermediate function to get the SpriteBatch from the {@link Boot}.
+     * @return SpriteRenderer of the game.
+     */
     public SpriteBatch getSpriteBatch() { return boot.getSpriteBatch(); }
+    /**
+     * An intermediate function to get the ShapeRenderer from the {@link Boot}.
+     * @return ShapeRenderer of the game.
+     */
     public ShapeRenderer getShapeRenderer() { return boot.getShapeRenderer(); }
 
     /** The different states that the game can be in.*/
     public enum ScreenID {
+        /** The {@link MenuScreen}, where the program opens to. */
         MENU,
+        /** The {@link GameScreen}, where the game is played. */
         GAME,
+        /** The {@link PauseScreen}, where the game is paused, and the player can
+         *  rest, look at instructions and credits, reset or quit. */
         PAUSE,
+        /** The {@link GameOverScreen}, which is opened once the game has finished. */
         GAMEOVER,
+        /** The {@link InstructionScreen}, where the instructions for the game are displayed. */
         INSTRUCTIONS,
+        /** The {@link CreditsScreen}, where the game shows credit for the assets we used
+         *  within the game. */
         CREDITS
     }
 
@@ -86,7 +102,8 @@ public class ScreenController {
         setScreen(ScreenID.PAUSE);
     }
 
-    /** Resume the game from pause. */
+    /** Resume the game from pause.
+     * Only call this after {@link #pauseGameScreen()} has been called to pause the game. */
     public void playGameScreen() {
         gameScreen.setPreviousSecond(TimeUtils.millis()-timeDiff);
         setScreen(ScreenID.GAME);
