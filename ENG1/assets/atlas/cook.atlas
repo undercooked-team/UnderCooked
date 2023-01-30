@@ -1,6 +1,6 @@
 
 cook.png
-size: 1538, 284
+size: 1700, 284
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
@@ -30,6 +30,13 @@ UP
   xy: 1346, 2
   size: 190, 280
   orig: 190, 280
+  offset: 0, 0
+  index: -1
+control
+  rotate: false
+  xy: 1538, 172
+  size: 160, 110
+  orig: 160, 110
   offset: 0, 0
   index: -1
 hDOWN

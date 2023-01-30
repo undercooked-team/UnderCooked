@@ -202,6 +202,9 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.render(batch);
+            if (entity == cook) {
+                ((Cook) entity).renderControlArrow(batch);
+            }
             entity.renderDebug(batch);
         }
 
@@ -210,11 +213,11 @@ public class GameScreen extends ScreenAdapter {
 
         for (GameEntity entity : gameEntities) {
             entity.renderShape(shape);
-            entity.renderShapeDebug(shape);
+            // entity.renderShapeDebug(shape);
         }
 
         shape.end();
-        box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        //box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
 
     }

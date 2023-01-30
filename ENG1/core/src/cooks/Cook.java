@@ -22,6 +22,8 @@ public class Cook extends GameEntity {
 
     /** The cook's current sprite. */
     private Sprite sprite;
+    /** The control arrow sprite. */
+    private Sprite controlSprite;
     private GameSprites gameSprites;
     private CookInteractor cookInteractor;
     // private GameScreen gameScreen;
@@ -57,6 +59,7 @@ public class Cook extends GameEntity {
         this.speed = 10f;
         // this.gameScreen = gameScreen;
         this.gameSprites = GameSprites.getInstance();
+        this.controlSprite = gameSprites.getSprite(GameSprites.SpriteID.COOK,"control");
 
         // Initialize FoodStack
         this.foodStack = new FoodStack();
@@ -169,6 +172,13 @@ public class Cook extends GameEntity {
             sprite.draw(batch);
             renderFood(batch);
         }
+    }
+
+    public void renderControlArrow(SpriteBatch batch) {
+        controlSprite.setSize(32,22F);
+        controlSprite.setPosition(x-controlSprite.getWidth()/2,
+                y-controlSprite.getHeight()/4 + sprite.getHeight());
+        controlSprite.draw(batch);
     }
 
     /**
