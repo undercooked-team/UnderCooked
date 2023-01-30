@@ -3,6 +3,11 @@ package food;
 import com.badlogic.gdx.utils.Array;
 import food.FoodItem.FoodID;
 
+/**
+ * A class to create the behaviour of a {@code Stack} for
+ * {@link FoodItem}s to be used by the {@link cooks.Cook},
+ * {@link stations.CounterStation} and {@link Recipe}s.
+ */
 public class FoodStack {
     /** The cook's stack of things, containing all the items they're holding. Index 0 = Top Item.
      * Has a public getter and setter.
