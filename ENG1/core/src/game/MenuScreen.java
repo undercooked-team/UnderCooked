@@ -47,7 +47,7 @@ public class MenuScreen extends ScreenAdapter {
 
         viewport = new FitViewport(Constants.V_Width, Constants.V_Height, camera);
         stage = new Stage(viewport, batch);
-        this.backgroundSprite = new Sprite(new Texture("Maps/StationsMap.png"));
+        this.backgroundSprite = new Sprite(new Texture("Maps/StartMenuBackground.png"));
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         Table table = new Table();
