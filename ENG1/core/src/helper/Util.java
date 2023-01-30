@@ -8,7 +8,7 @@ public class Util {
      * @param y1 The y coordinate of the first point
      * @param x2 The x coordinate of the second point
      * @param y2 The y coordinate of the second point
-     * @return float: The distance between the 2 points.
+     * @return {@code float}: The distance between the 2 points.
      */
     public static float distancePoints(float x1, float y1, float x2, float y2) {
         return (float) Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
