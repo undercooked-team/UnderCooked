@@ -22,8 +22,14 @@ Below is a link to the GitHub Repository we've been developing our game in:
 
 ## The Team
 Details for all the team members can be found here:
-
-_**TO BE ADDED**_
+<ul>
+<li>Fin Cochrane   - ftc505@york.ac.uk</li>
+<li>Sehran Ahmed   - rsa533@york.ac.uk</li>
+<li>Sam Davis      - sd1598@york.ac.uk</li>
+<li>Hamza Salman   - hs1955@york.ac.uk</li>
+<li>Owen Thomas    - obt503@york.ac.uk</li>
+<li>Zhenyi Xu      - zx1090@york.ac.uk</li>
+</ul>
 
 ## Requirements:
 
