@@ -39,7 +39,7 @@ public class GameScreen extends ScreenAdapter {
     private long previousSecond = 0, lastCustomerSecond = 0, nextCustomerSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
-    private InstructionHUD instructionHUD;
+    private InstructionHud instructionHUD;
     private SpriteBatch batch;
     private ShapeRenderer shape;
     private ScreenController screenController;
@@ -94,7 +94,7 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper.setGameScreen(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
-        this.instructionHUD = new InstructionHUD(batch, this);
+        this.instructionHUD = new InstructionHud(batch);
 
     }
 

@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import game.GameScreen;
+import interactions.InputKey;
+import interactions.Interactions;
 
 import java.awt.*;
 
@@ -14,11 +15,7 @@ public class InstructionHUD extends Hud{
      *
      * @param batch The SpriteBatch to render on this Hud.
      */
-
-    Label InstructionsLabel;
-    private SpriteBatch batch;
-
-    public InstructionHUD(SpriteBatch batch, GameScreen gameScreen) {
+    public InstructionHud(SpriteBatch batch) {
         super(batch);
         instructionsLabel = new Label(String.format("Press %s to USE \nPress %s to COLLECT \nPress %s to PUT DOWN",
                 Interactions.getKeyString(InputKey.InputTypes.USE),
