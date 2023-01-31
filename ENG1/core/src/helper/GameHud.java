@@ -57,9 +57,9 @@ public class GameHud extends Hud {
     }
 
     /**
-     * Renders the recipe required the {@link customers.Customer} selected
-     * from a {@link stations.ServingStation} on the right side of the
-     * screen.
+     * Renders both the {@link Hud} with the game information and
+     * the {@link Recipe} required the {@link customers.Customer} selected.
+     * <br>The {@link Recipe} displays on the right side of the screen.
      */
     @Override
     public void render() {

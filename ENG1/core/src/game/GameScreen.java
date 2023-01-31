@@ -20,7 +20,7 @@ import cooks.GameEntity;
 import customers.CustomerController;
 import helper.CollisionHelper;
 import helper.GameHud;
-import helper.InstructionHUD;
+import helper.InstructionHud;
 import helper.MapHelper;
 import interactions.InputKey;
 import interactions.Interactions;
@@ -28,8 +28,6 @@ import stations.CookInteractable;
 import stations.ServingStation;
 
 import java.util.Comparator;
-
-import static helper.Constants.PPM;
 
 /** A {@link ScreenAdapter} containing certain elements of the game. */
 public class GameScreen extends ScreenAdapter {
@@ -427,7 +425,7 @@ public class GameScreen extends ScreenAdapter {
     public GameHud getGameHud() {
         return gameHud;
     }
-    public InstructionHUD getInstructionHUD() {
+    public InstructionHud getInstructionHUD() {
         return instructionHUD;
     }
 }
