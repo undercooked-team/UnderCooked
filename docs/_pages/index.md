@@ -3,6 +3,7 @@ layout: single
 permalink: /
 title: false
 github: https://github.com/
+download: https://github.com/undercooked-team/UnderCooked/releases/tag/game
 author_profile: false
 ---
 # Home Page
@@ -13,7 +14,7 @@ Welcome to our homepage for UnderCooked!
 All the contents for this website are on this page, the navigation bar in the header will take you to a specified heading on this page.
 
 ## Download UnderCooked!
-> <span style="color:red">Download Currently Unavailable.</span> Check back in the future!
+> [{{page.download}}]({{page.download}})
 
 ## Our GitHub Repository
 Below is a link to the GitHub Repository we've been developing our game in:
