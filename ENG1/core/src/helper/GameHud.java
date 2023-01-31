@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
+import customers.Customer;
 import food.FoodItem;
 import food.FoodStack;
 import food.Recipe;
@@ -21,22 +22,19 @@ public class GameHud extends Hud {
     // private Viewport viewport;
 
 
-    /** The label saying 'timer:' . */
+    /** The label with the current amount of time played. */
     Label timeLabel;
-    /** The label saying 'customers:'  */
+    /** The label with the number of {@link Customer}s left to serve.  */
     Label CustomerLabel;
-    /** The label that the play time outputs to. */
-    Label timer;
-    /** The label {@link GameScreen#getCustomerCount()} outputs to. */
     Label CustomerScore;
     /** The {@link SpriteBatch} of the GameHud. Use for drawing {@link food.Recipe}s. */
     private SpriteBatch batch;
     /** The {@link FoodStack} that the {@link GameHud} should render. */
     private FoodStack recipe;
-    /** The name of the {@link Recipe} to be rendered. */
-    private String recipeName;
-    /** The time, in milliseconds, of the last recipe change. */
-    private long lastChange;
+    /** The {@link Customer} to have their request rendered.. */
+    private Customer customer;
+    // /** The time, in milliseconds, of the last recipe change. */
+    // private long lastChange;
 
     /**
      * The GameHud constructor.
@@ -47,16 +45,13 @@ public class GameHud extends Hud {
     {
         super(batch);
 
-        timeLabel = new Label(Util.formatTime(0,0,0), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        timer = new Label("TIMER:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        timeLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        updateTime(0,0,0);
 
-        CustomerLabel = new Label("CUSTOMERS:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        CustomerScore = new Label(String.format("%01d", gameScreen.getCustomerCount()), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        CustomerLabel = new Label("CUSTOMERS LEFT:", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
-        table.add(CustomerLabel).expandX().padTop(60);
-        table.add(CustomerScore).expandX().padTop(60);
-        table.add(timer).expandX().padTop(60);
-        table.add(timeLabel).expandX().padTop(60);
+        table.add(CustomerLabel).expandX().padTop(80).padRight(60);
+        table.add(timeLabel).expandX().padTop(80).padLeft(60);
 
         this.batch = batch;
     }
@@ -86,11 +81,12 @@ public class GameHud extends Hud {
         batch.end();
     }
 
+    /* Removed as it was confusing to look at.
     /**
      * Changes the order of the {@link FoodItem}s in the recipe every second
      * to show which {@link FoodItem}s have non-specific places in the
      * {@link Recipe}.
-     */
+     * /
     public void update() {
         if (recipe != null) {
             if (TimeUtils.timeSinceMillis(lastChange) > 1000) {
@@ -98,16 +94,20 @@ public class GameHud extends Hud {
                 lastChange = TimeUtils.millis();
             }
         }
-    }
+    }*/
 
     /**
      * Sets the recipe to be rendered.
-     * @param recipeName The name, as a {@link String} of the recipe
+     * @param customer The {@link Customer} who is requesting the {@link #recipe}.
      */
-    public void setRecipe(String recipeName) {
-        this.lastChange = TimeUtils.millis();
-        this.recipeName = recipeName;
-        this.recipe = Recipe.randomRecipeOption(recipeName);
+    public void setRecipe(Customer customer) {
+        // this.lastChange = TimeUtils.millis();
+        this.customer = customer;
+        if (customer == null) {
+            this.recipe = null;
+            return;
+        }
+        this.recipe = Recipe.randomRecipeOption(customer.getRequestName());
     }
 
     /**
@@ -135,7 +135,7 @@ public class GameHud extends Hud {
      */
     public void updateTime(int hoursPassed, int minutesPassed, int secondsPassed)
     {
-        timeLabel.setText(String.format(Util.formatTime(hoursPassed,minutesPassed,secondsPassed)));
+        timeLabel.setText("TIMER: " + String.format(Util.formatTime(hoursPassed,minutesPassed,secondsPassed)));
     }
 
     /**
@@ -144,5 +144,15 @@ public class GameHud extends Hud {
      */
     public void setCustomerCount(int customerCount) {
         CustomerLabel.setText(String.format("CUSTOMERS: %d",customerCount));
+    }
+
+    /**
+     * Getter for the {@link Customer} that has their
+     * request being shown.
+     * @return {@link Customer} : The {@link Customer} having their
+     *                            request shown.
+     */
+    public Customer getCustomer() {
+        return customer;
     }
 }
