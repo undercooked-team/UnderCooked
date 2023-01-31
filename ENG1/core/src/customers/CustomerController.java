@@ -101,6 +101,9 @@ public class CustomerController {
         customers.add(newCustomer);
         newCustomer.randomRecipe();
         chosenStation.setCustomer(newCustomer);
+        // Show the Customer's recipe
+        gameScreen.getGameHud().setRecipe(newCustomer);
+
         customersLeft--;
         return Recipe.firstRecipeOption(newCustomer.getRequestName()).size();
     }
