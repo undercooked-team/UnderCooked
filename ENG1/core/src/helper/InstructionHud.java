@@ -20,10 +20,12 @@ public class InstructionHUD extends Hud{
 
     public InstructionHUD(SpriteBatch batch, GameScreen gameScreen) {
         super(batch);
-        InstructionsLabel = new Label("Press I to USE \nPress O to COLLECT \nPress J to PUT DOWN", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        table.add(InstructionsLabel).expandX().padTop(110).padRight(480);
-
-        this.batch = batch;
+        instructionsLabel = new Label(String.format("Press %s to USE \nPress %s to COLLECT \nPress %s to PUT DOWN",
+                Interactions.getKeyString(InputKey.InputTypes.USE),
+                Interactions.getKeyString(InputKey.InputTypes.PICK_UP),
+                Interactions.getKeyString(InputKey.InputTypes.PUT_DOWN)
+                ), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        table.add(instructionsLabel).expandX().padTop(110).padRight(480);
     }
 
     @Override
