@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.TimeUtils;
 import customers.Customer;
 import food.FoodItem;
 import food.FoodStack;
@@ -17,11 +16,6 @@ import game.GameSprites;
 
 /** Responsible for displaying information above the gameplay GameScreen. */
 public class GameHud extends Hud {
-
-    // public Stage stage;
-    // private Viewport viewport;
-
-
     /** The label with the current amount of time played. */
     Label timeLabel;
     /** The label with the number of {@link Customer}s left to serve.  */

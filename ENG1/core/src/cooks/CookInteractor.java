@@ -1,11 +1,9 @@
 package cooks;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import helper.CollisionHelper;
-import helper.InstructionHUD;
 import interactions.InputKey;
 import stations.CookInteractable;
 

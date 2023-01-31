@@ -1,6 +1,5 @@
 package helper;
-import com.badlogic.gdx.utils.Array;
-import cooks.Cook;
+
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -14,10 +13,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import cooks.Cook;
 import food.FoodItem;
 import game.GameScreen;
-import game.GameSprites;
-import game.ScreenController;
 import stations.*;
 
 import static helper.Constants.PPM;

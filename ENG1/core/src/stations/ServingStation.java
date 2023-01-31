@@ -1,14 +1,12 @@
 package stations;
 
-import customers.Customer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import cooks.Cook;
+import customers.Customer;
 import customers.CustomerController;
 import food.Recipe;
-import game.Boot;
 import game.GameScreen;
-import game.ScreenController;
 import interactions.InputKey;
 
 /**
