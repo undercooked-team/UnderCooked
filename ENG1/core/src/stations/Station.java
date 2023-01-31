@@ -65,10 +65,7 @@ public class Station extends CookInteractable {
      * @param inputType The type of {@link InputKey.InputTypes} the player made with
      *                  the {@link CookInteractable}.
      */
-    public void interact(Cook cook, InputKey.InputTypes inputType) {
-        // System.out.println(stationID);
-        // System.out.println(cook.foodStack);
-    }
+    public void interact(Cook cook, InputKey.InputTypes inputType) { }
 
     /**
      * An update function to be used by the {@link game.GameScreen}

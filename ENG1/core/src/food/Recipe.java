@@ -204,8 +204,6 @@ public class Recipe {
 
         // For each validStack, check if the foodStack matches.
         for (FoodStack validStack : validStacks) {
-            System.out.println("foodStack: " + foodStack.toString());
-            System.out.println("validStack: " + validStack);
             if (validStack.toString().equals(foodStack.toString())) {
                 return true;
             }
@@ -222,22 +220,6 @@ public class Recipe {
          Random random = new Random();
          return recipeNames.get(random.nextInt(recipeNames.size));
     }
-
-	/*
-    // debugging
-    public static void main(String[] args) {
-        Array<FoodStack> myRecipes = recipes.get("Tomato Onion Burger");
-	 	for (FoodStack myRecipe : myRecipes) {
-		    System.out.println(myRecipe);
-	    }
-
-         System.out.println(matchesRecipe(new FoodStack(
-                 FoodID.topBun,
-                 FoodID.meatCook,
-                 FoodID.bottomBun
-         ));
-	}
-	*/
 
     /**
      * Outputs a random option from the {@link #recipes} of the

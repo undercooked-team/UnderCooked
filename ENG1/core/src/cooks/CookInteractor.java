@@ -102,9 +102,7 @@ public class CookInteractor {
         if (interactStation != null) {
             interactStation.interact(cook, inputType);
 
-        } /*else {
-            System.out.println("Failed");
-        }*/
+        }
     }
 
     /**

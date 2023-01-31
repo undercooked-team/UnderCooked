@@ -933,7 +933,7 @@
 										"$ref": "AAAAAAGGBTUR4FlwdKE="
 									},
 									"name": "renderDebug",
-									"documentation": "else {\r\n            System.out.println(\"Failed\");\r\n        }\nThe debug render function, used to render the {@link CookInteractor}'s\ncollision box.\n@param shape The {@link ShapeRenderer} used to render.",
+									"documentation": "The debug render function, used to render the {@link CookInteractor}'s\ncollision box.\n@param shape The {@link ShapeRenderer} used to render.",
 									"parameters": [
 										{
 											"_type": "UMLParameter",
@@ -5351,7 +5351,7 @@
 										"$ref": "AAAAAAGGBTUS9Fn/Agk="
 									},
 									"name": "randomRecipeOption",
-									"documentation": "// debugging\r\n    public static void main(String[] args) {\r\n        Array<FoodStack> myRecipes = recipes.get(\"Tomato Onion Burger\");\r\n\t \tfor (FoodStack myRecipe : myRecipes) {\r\n\t\t    System.out.println(myRecipe);\r\n\t    }\r\n\r\n         System.out.println(matchesRecipe(new FoodStack(\r\n                 FoodID.topBun,\r\n                 FoodID.meatCook,\r\n                 FoodID.bottomBun\r\n         ));\r\n\t}\nOutputs a random option from the {@link #recipes} of the\nrecipe for {@link #recipeNames}.\n@param recipeName The name of the {@link Recipe#recipes}.\n@return {@link FoodStack} : A random {@link FoodStack} from the\ndifferent ways of making the recipe for\n{@code recipeName}.\n<br> Returns {@code null} if nothing is found.",
+									"documentation": "Outputs a random option from the {@link #recipes} of the\nrecipe for {@link #recipeNames}.\n@param recipeName The name of the {@link Recipe#recipes}.\n@return {@link FoodStack} : A random {@link FoodStack} from the\ndifferent ways of making the recipe for\n{@code recipeName}.\n<br> Returns {@code null} if nothing is found.",
 									"isStatic": true,
 									"parameters": [
 										{

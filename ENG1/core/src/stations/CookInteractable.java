@@ -40,9 +40,7 @@ public abstract class CookInteractable extends GameEntity {
      *                  the {@link CookInteractable}.
      */
     public void interact(Cook cook, InputKey.InputTypes inputType) {
-
-        //System.out.println("Ping! Interacted with station at x=" + body.getPosition().x*PPM + ", y=" + body.getPosition().x*PPM);
-
+        //System.out.println("Interaction at x=" + body.getPosition().x*PPM + ", y=" + body.getPosition().x*PPM);
     }
 
 }
