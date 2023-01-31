@@ -57,6 +57,7 @@ public class CollisionHelper {
         for (CookInteractable cookInteractable : gameScreen.getInteractables()) {
             if (collision.overlaps(cookInteractable.getRectangle())) {
                 output.add(cookInteractable);
+
             }
         }
         return output;
@@ -79,6 +80,7 @@ public class CollisionHelper {
         for (int i = 1 ; i < intStations.size ; i++) {
             float dist = distRectToInteractable(cookRect, intStations.get(i));
             if (dist < closestDist) {
+
                 closestDist = dist;
                 closest = intStations.get(i);
             }

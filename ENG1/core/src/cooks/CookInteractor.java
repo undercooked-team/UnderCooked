@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import helper.CollisionHelper;
+import helper.InstructionHUD;
 import interactions.InputKey;
 import stations.CookInteractable;
 
@@ -21,6 +22,7 @@ public class CookInteractor {
     protected Rectangle collision;
     /** The Collision Helper Singleton. */
     protected CollisionHelper ch;
+
     /**
      * CookInteractor Constructor.
      * @param x The {@link #x} coordinate of the {@link CookInteractor}.
@@ -99,6 +101,7 @@ public class CookInteractor {
         CookInteractable interactStation = ch.getInteract(cook, collision);
         if (interactStation != null) {
             interactStation.interact(cook, inputType);
+
         } /*else {
             System.out.println("Failed");
         }*/

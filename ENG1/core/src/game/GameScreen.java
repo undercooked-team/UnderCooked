@@ -20,6 +20,7 @@ import cooks.GameEntity;
 import customers.CustomerController;
 import helper.CollisionHelper;
 import helper.GameHud;
+import helper.InstructionHUD;
 import helper.MapHelper;
 import interactions.InputKey;
 import interactions.Interactions;
@@ -38,6 +39,7 @@ public class GameScreen extends ScreenAdapter {
     private long previousSecond = 0, lastCustomerSecond = 0, nextCustomerSecond = 0;
     private int secondsPassed = 0, minutesPassed = 0, hoursPassed = 0;
     private GameHud gameHud;
+    private InstructionHUD instructionHUD;
     private SpriteBatch batch;
     private ShapeRenderer shape;
     private ScreenController screenController;
@@ -92,6 +94,7 @@ public class GameScreen extends ScreenAdapter {
         this.mapHelper.setGameScreen(this);
         this.orthogonalTiledMapRenderer = mapHelper.setupMap();
         this.gameHud = new GameHud(batch, this);
+        this.instructionHUD = new InstructionHUD(batch, this);
 
     }
 
@@ -219,6 +222,7 @@ public class GameScreen extends ScreenAdapter {
         shape.end();
         //box2DDebugRenderer.render(world, camera.combined.scl(PPM));
         gameHud.render();
+        instructionHUD.render();
 
     }
 
@@ -422,5 +426,8 @@ public class GameScreen extends ScreenAdapter {
      */
     public GameHud getGameHud() {
         return gameHud;
+    }
+    public InstructionHUD getInstructionHUD() {
+        return instructionHUD;
     }
 }
