@@ -58,14 +58,5 @@ public class FoodItem {
         foodHeights.put(FoodID.topBun, 12F);
     }
 
-    /** The ID of this FoodItem. Has a public get and set method.*/
-    private FoodID foodID;
-
-    /** FoodItem Constructor. Creates a new FoodItem of ingredient: foodIDin
-    * @param foodIDin : The ingredient you want to create a FoodItem out of.
-    */
-    public FoodItem(FoodID foodIDin) {
-        foodID = foodIDin;
-    }
 }
 
