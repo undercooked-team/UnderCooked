@@ -4725,31 +4725,6 @@
 									},
 									"isReadOnly": true
 								}
-							],
-							"operations": [
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAGGBTUSjFnlF8Y=",
-									"_parent": {
-										"$ref": "AAAAAAGGBTUSi1nXz5s="
-									},
-									"name": "FoodItem",
-									"documentation": "FoodItem Constructor. Creates a new FoodItem of ingredient: foodIDin\n@param foodIDin : The ingredient you want to create a FoodItem out of.",
-									"stereotype": "constructor",
-									"parameters": [
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGGBTUSjFnmgdY=",
-											"_parent": {
-												"$ref": "AAAAAAGGBTUSjFnlF8Y="
-											},
-											"name": "foodIDin",
-											"type": {
-												"$ref": "AAAAAAGGBTUSi1nY/lo="
-											}
-										}
-									]
-								}
 							]
 						},
 						{
@@ -5494,7 +5469,9 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"width": 63.57177734375,
+													"left": 25,
+													"top": 117,
+													"width": 248.19970703125,
 													"height": 13,
 													"text": "(from food)"
 												},
@@ -5572,30 +5549,11 @@
 											"model": {
 												"$ref": "AAAAAAGGBTUSi1nXz5s="
 											},
-											"subViews": [
-												{
-													"_type": "UMLOperationView",
-													"_id": "AAAAAAGGBTUmW337sQ0=",
-													"_parent": {
-														"$ref": "AAAAAAGGBTUmDn2Webk="
-													},
-													"model": {
-														"$ref": "AAAAAAGGBTUSjFnlF8Y="
-													},
-													"font": "Arial;13;0",
-													"left": 25,
-													"top": 148,
-													"width": 248.19970703125,
-													"height": 13,
-													"text": "«constructor»+FoodItem(foodIDin: FoodID)",
-													"horizontalAlignment": 0
-												}
-											],
 											"font": "Arial;13;0",
 											"left": 20,
 											"top": 143,
 											"width": 258.19970703125,
-											"height": 23
+											"height": 10
 										},
 										{
 											"_type": "UMLReceptionCompartmentView",
@@ -5608,7 +5566,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 10,
+											"left": 20,
+											"top": 153,
+											"width": 258.19970703125,
 											"height": 10
 										},
 										{
@@ -5631,7 +5591,7 @@
 									"left": 20,
 									"top": 95,
 									"width": 258.19970703125,
-									"height": 71,
+									"height": 73,
 									"nameCompartment": {
 										"$ref": "AAAAAAGGBTUmDX2Qj6I="
 									},
@@ -5699,7 +5659,9 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"width": 63.57177734375,
+													"left": 313.19970703125,
+													"top": 42,
+													"width": 253.25244140625,
 													"height": 13,
 													"text": "(from food)"
 												},
@@ -5982,7 +5944,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 10,
+											"left": 308.19970703125,
+											"top": 241,
+											"width": 263.25244140625,
 											"height": 10
 										},
 										{
@@ -6005,7 +5969,7 @@
 									"left": 308.19970703125,
 									"top": 20,
 									"width": 263.25244140625,
-									"height": 221,
+									"height": 236,
 									"nameCompartment": {
 										"$ref": "AAAAAAGGBTUmDn2aD+A="
 									},
@@ -6073,7 +6037,9 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"width": 63.57177734375,
+													"left": 606.4521484375,
+													"top": 49.5,
+													"width": 405.01220703125,
 													"height": 13,
 													"text": "(from food)"
 												},
@@ -6350,7 +6316,9 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 10,
+											"left": 601.4521484375,
+											"top": 233.5,
+											"width": 415.01220703125,
 											"height": 10
 										},
 										{
@@ -6373,7 +6341,7 @@
 									"left": 601.4521484375,
 									"top": 27.5,
 									"width": 415.01220703125,
-									"height": 206,
+									"height": 221,
 									"nameCompartment": {
 										"$ref": "AAAAAAGGBTUmEH2kZTE="
 									},
@@ -31719,30 +31687,11 @@
 									"model": {
 										"$ref": "AAAAAAGGBTUSi1nXz5s="
 									},
-									"subViews": [
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGGBVJJWPE7K+Y=",
-											"_parent": {
-												"$ref": "AAAAAAGGBVI9qea/DMc="
-											},
-											"model": {
-												"$ref": "AAAAAAGGBTUSjFnlF8Y="
-											},
-											"font": "Arial;13;0",
-											"left": 1712.7763671875,
-											"top": 193,
-											"width": 248.19970703125,
-											"height": 13,
-											"text": "«constructor»+FoodItem(foodIDin: FoodID)",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"left": 1707.7763671875,
 									"top": 188,
 									"width": 258.19970703125,
-									"height": 23
+									"height": 10
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
