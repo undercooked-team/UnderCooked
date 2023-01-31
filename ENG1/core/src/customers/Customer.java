@@ -47,6 +47,11 @@ public class Customer {
         this.position = position;
     }
 
+    public String randomRecipe() {
+        this.request = Recipe.randomRecipe();
+        return request;
+    }
+
     /**
      * Renders the {@link Customer} at their {@link #position}.
      * @param batch The {@link SpriteBatch} of the game.

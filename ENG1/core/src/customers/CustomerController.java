@@ -105,6 +105,10 @@ public class CustomerController {
         return Recipe.firstRecipeOption(newCustomer.getRequestName()).size();
     }
 
+    /**
+     * Removes a customer from a {@link ServingStation}.
+     * @param station
+     */
     public void removeCustomer(ServingStation station) {
         // First make sure the station has a Customer
         if (!station.hasCustomer()) {
@@ -169,6 +173,10 @@ public class CustomerController {
         return servingStations;
     }
 
+    /**
+     * Called when a
+     * @param station
+     */
     public void customerServed(ServingStation station) {
         int customerInd = customers.indexOf(station.getCustomer(),true);
         if (customerInd < 0) {
@@ -178,14 +186,21 @@ public class CustomerController {
         customersServed++;
         gameScreen.setCustomerHud(customersServed);
 
+        // If there are any customers left, spawn a new one.
+        if (customersLeft > 0) {
+            addCustomer();
+        }
+
+        // BELOW IS CODE FOR CUSTOMER SPAWNING.
+
         // If there is no more customers on the stations, and
         // the time for the next customer to arrive is above 2 seconds,
         // lower the time until the next customer to 2.
-        if (customers.size == 0) {
+        /*if (customers.size == 0) {
             if (TimeUtils.timeSinceMillis(gameScreen.getNextCustomerSecond()) > 2000) {
                 gameScreen.setNextCustomerSecond(TimeUtils.millis() + 2000);
             }
-        }
+        }*/
     }
 
     /**

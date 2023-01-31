@@ -71,8 +71,8 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(ScreenController screenController, OrthographicCamera camera)
     {
         this.previousSecond = TimeUtils.millis();
-        this.lastCustomerSecond = TimeUtils.millis();
-        this.nextCustomerSecond = this.lastCustomerSecond + 2000;
+        this.lastCustomerSecond = -1;
+        this.nextCustomerSecond = -1;
         this.cooks = new Array<>();
         this.interactables = new Array<>();
         this.collisionHelper = CollisionHelper.getInstance();
@@ -134,7 +134,8 @@ public class GameScreen extends ScreenAdapter {
             setCook((cookIndex + 1) % cooks.size);
         }
 
-        if(TimeUtils.millis() >= nextCustomerSecond)
+        // Spawning code to spawn a customer after an amount of time.
+        /*if(TimeUtils.millis() >= nextCustomerSecond)
         {
             int recipeComplexity = customerController.addCustomer();
             if (recipeComplexity == -1) {
@@ -145,7 +146,7 @@ public class GameScreen extends ScreenAdapter {
                 lastCustomerSecond = TimeUtils.millis();
                 nextCustomerSecond += 1000 * Math.floor(9 + 5.4F * Math.log(recipeComplexity - 0.7));
             }
-        }
+        }*/
 
         if(Interactions.isJustPressed(InputKey.InputTypes.PAUSE))
         {
@@ -155,7 +156,6 @@ public class GameScreen extends ScreenAdapter {
         for (GameEntity entity : gameEntities) {
             entity.update(delta);
         }
-        gameHud.update();
     }
 
     /**
@@ -392,15 +392,18 @@ public class GameScreen extends ScreenAdapter {
         secondsPassed = 0;
         minutesPassed = 0;
         hoursPassed = 0;
-        customersToServe = customers;
+
         previousSecond = TimeUtils.millis();
         lastCustomerSecond = TimeUtils.millis();
         nextCustomerSecond = TimeUtils.millis()+2000;
+
+        gameHud.setRecipe(null);
+        customersToServe = customers;
         customerController.setCustomersLeft(customers);
         customerController.setCustomersServed(0);
+        customerController.addCustomer();
         setCustomerHud(customers);
         gameHud.setCustomerCount(customers);
-        gameHud.setRecipe(null);
     }
 
     /**

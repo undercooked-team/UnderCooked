@@ -70,16 +70,19 @@ public class ServingStation extends Station {
                     // If it's correct, then the customer will take the food and leave.
                     request = null;
                     cook.foodStack.clearStack();
+                    if (gameScreen.getGameHud().getCustomer() == this.customer) {
+                        gameScreen.getGameHud().setRecipe(null);
+                    }
                     customerController.customerServed(this);
                 } else {
                     // If not, then display the customer's request.
-                    gameScreen.getGameHud().setRecipe(customer.getRequestName());
+                    gameScreen.getGameHud().setRecipe(customer);
                 }
             }
         } else {
             if (hasCustomer()) {
                 // Display the customer's request.
-                gameScreen.getGameHud().setRecipe(customer.getRequestName());
+                gameScreen.getGameHud().setRecipe(customer);
             }
         }
     }
