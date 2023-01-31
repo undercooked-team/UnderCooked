@@ -60,7 +60,11 @@ public class CreditsScreen extends ScreenAdapter {
             "Link to food_graphics: https://poloviiinkin.itch.io/food",
             "Link to other_sprites: https://poloviiinkin.itch.io/mega-pixel-art-32x32-px-icons-sprite-sheet",
             "Link to license: https://creativecommons.org/licenses/by-sa/4.0/deed.en",
-            ""
+            "",
+            "Cook forward facing: http://pixelartmaker.com/art/77e4b71a43c348d",
+            "",
+            "Program to create the texture atlases: https://github.com/crashinvaders/gdx-texture-packer-gui/releases",
+            "Program to create the map: https://www.mapeditor.org/"
         };
 
         for (String instruction : instructions) {
