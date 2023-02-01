@@ -51,17 +51,20 @@ Using the RDD above, we made our Initial UML Diagram.
 ![Initial UML Diagram](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/InitialUML.png)
 
 Over time, we expanded upon the Initial UML diagram, making changes where necessary:
-### Addition 1: Cooks
+### Addition 1: Food
+![Food UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/food.png)
+
+- **FoodStack** is responsible for holding a stack of in-game cooking ingredients. The chef class will use this object to hold food items.
+- **FoodItem** contains information about how to render each ingredient.
+- **Recipe** contains each recipe and how each one is made. We learnt that to consrtuct salad and burgers, the cook must hold a certain **FoodStack**. Thus, certain **FoodStack**s correlate to certain recipes. **Recipe** holds a dict which translates a String recipeName to Array<String> listOfFoodStacks which are all the foodStacks which correlate to recipe recipeName.
+
+### Addition 2: Cooks
 ![Cooks UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/cooks.png)
 
 - **Chef** was renamed to **Cook**.
-- **Collidable** branched into the **GameEntity** class, which was used as a base class for any item that could exist as an object with a physical position in the game-world. We learn't that classes **Cook** and **Customer** can use the same code in **GameEntity**.
+- **Collidable** branched into the **GameEntity** class, which was used as a base class for any item that could exist as an object with a physical position in the game-world. We learnt that classes **Cook** and **Customer** can use the same code in **GameEntity**.
 - We made **CookInteractor** because this object is solely responsible for letting a cook interact with other objects. Any other object within the **CookInteractor** Rectangle, is an object that the **Cook** and interact with.
-
-### Addition 2: Food
-![Food UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/food.png)
-
-- 
+  
 
 ### Addition 3: Stations
 ![Stations UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/stations.png)
