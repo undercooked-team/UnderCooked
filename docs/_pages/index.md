@@ -39,10 +39,12 @@ Details for all the team members can be found here:
 
 ## Requirements:
 [Requirements Google Doc](https://docs.google.com/document/d/17tcN_Xeo0Gzz8ficlVVp_1x0h8Q2EDLzrCXvKtgHNlw/edit?usp=share_link)
+
 [Requirements PDF]({{page.req_pdf}})
 
 ## Architecture:
 [Architecture Google Doc](https://docs.google.com/document/d/11IZyqiyvOG_iuKlP9LPBgSTnA8E4lxPNE8mAL1pA26s/edit?usp=sharing)
+
 [Architecture PDF]({{page.arch_pdf}})
 
 Below are UML images showcasing our development process for the Final Architecture Design (for Assessment 1).
@@ -119,13 +121,16 @@ These classes were also not present in our initial UML, and we realised this a w
 - **Constants** simply contained some global values.
   
 ## Method Selection and Planning
-[Method Selection and Planning Doc](https://docs.google.com/document/d/1KpzhVRxdkBJPyYyQxW3aTuWMCYpDrK8jtEIiyoh-2Rw/edit?usp=share_link)
+[Method Selection and Planning Google Doc](https://docs.google.com/document/d/1KpzhVRxdkBJPyYyQxW3aTuWMCYpDrK8jtEIiyoh-2Rw/edit?usp=share_link)
+
 [Method Selection and Planning PDF]({{page.plan_pdf}})
 
 ## Risk Assessment and Mitigation
-[Risk Assessment and Mitigation Doc](https://docs.google.com/document/d/1-oQ4ajU6W9XvK9kMU9fiHc9EGryhhc9Awz3sKuWzotQ/edit?usp=share_link)
+[Risk Assessment and Mitigation Google Doc](https://docs.google.com/document/d/1-oQ4ajU6W9XvK9kMU9fiHc9EGryhhc9Awz3sKuWzotQ/edit?usp=share_link)
+
 [Risk Assessment and Mitigation PDF]({{page.risk_pdf}})
 
 ## Implementation
-[Implementation Doc](https://docs.google.com/document/d/1rC9LAZ9OATbIcQgagMG_clQ7LpItRECm9ADfuPLFHQc/edit?usp=share_link)
+[Implementation Google Doc](https://docs.google.com/document/d/1rC9LAZ9OATbIcQgagMG_clQ7LpItRECm9ADfuPLFHQc/edit?usp=share_link)
+
 [Implementation PDF]({{page.impl_pdf}})
