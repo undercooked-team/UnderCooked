@@ -33,8 +33,23 @@ Details for all the team members can be found here:
 </ul>
 
 ## Requirements:
+[]()
 
 ## Architecture:
+### Use-case Diagram:
+The below summarises the general outcome of this project:
+![Use-case Diagram](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/UseCaseDiagramUnderCooked.png)
+
+### RDD Table:
+We initially designed a Responsibility-Driven Design Table (RDD) out of our requirements:
+![RDD Table](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/RDD.png)
+
+Using the RDD above, we made our Initial UML Diagram.
+### Initial UML Diagram:
+![Initial UML Diagram](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/InitialUML.png)
+
+Over time, we expanded upon the Initial UML diagram.
+### Addition 1: 
 
 ## Method Selection and Planning
 
