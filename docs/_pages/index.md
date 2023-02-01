@@ -37,6 +37,9 @@ Details for all the team members can be found here:
 
 ## Architecture:
 Below are UML images showcasing our development process for the Final Architecture Design (for Assessment 1).
+You can also find all the images here:
+Google Drive: https://drive.google.com/drive/folders/1KE2M_o6zdMu1JZjFEnv3oIxf5IxwgiiC
+GitHub: https://github.com/undercooked-team/UnderCooked/tree/main/ENG1/SUBMITTABLES/Architecture
 
 ### Use-case Diagram:
 The below summarises the general outcome of this project:
@@ -78,7 +81,7 @@ We quickly realised how limited our initial UML was surrounding the **gameMaster
 ### Addition 4: Interactions
 ![Interactions UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/interactions.png)
 
-This class was also not present in our initial UML in any form. This class is an information class:
+These classes were not present in our initial UML in any form. This class is an information class:
 - **Interactions** contained a dict, which accepted an ingredient (foodID), and a station (stationID), and outputted a processed ingredient (foodID). This information doesn't exclusively fit into Food, or Station, so it became a class of its own. This class also contains User-related interactions with the game-world, and would monitor which keys the player was pressing.
 - **InputKey** is a helper class of Interactions, aiding with the mapping of keyboard keys being pressed, to controls and output in the game.
 
@@ -88,6 +91,12 @@ This class was also not present in our initial UML in any form. This class is an
 - **CookInteractable** allowed a station to become interactable with the cook.
 - We quickly realised that we would need more stations to allow the player to have greater ability to manipulate the stack of items that they will hold. For example, if the player accidentally collects 1 too many items, they need to be able to bin the top item (**BinStation**). Or if the player needs to swap items with the other cook, they need to be able to place their FoodStack down (**CounterStation**).
 
+### Addition 6: Customers
+![Customers UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/customers.png)
+
+These classes were also not present in our initial UML, and we realised this a while ago too, that we need customers to allow for the gameplay specified in the User Requirements. However, this was also the last thing we added since all the other classes above can be tested with each other without needing customers.
+- **Customer** is similar to **Cook**, in that it holds cruical information about the customer, like the recipe/request they want.
+- **CustomerController** is a new class dedicated to controlling the flow of customers into the restaurant.
   
 ### Addition 7: Helper
 ![Helper UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/helper.png)
