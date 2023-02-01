@@ -244,7 +244,7 @@ public class Recipe {
     /**
      * Outputs the first option added to the {@link #recipes} for
      * the recipe name input.
-     * @param recipeName
+     * @param recipeName The name of the {@link Recipe} to get the first option of.
      * @return {@link FoodStack} : The first {@link FoodStack} available
      *                      for the recipe named {@code requestName}.
      *                      <br> Returns {@code null} if nothing is found.

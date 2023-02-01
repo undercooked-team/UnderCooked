@@ -12,30 +12,30 @@ public class FoodItem {
     public enum FoodID {
         /** Lettuce */
         lettuce,
-        /** Lettuce -> {@link stations.PreparationStation}
+        /** Lettuce -&gt; {@link stations.PreparationStation}
          * with type {@link stations.Station.StationID#cut} */
         lettuceChop,
         /** Tomato */
         tomato,
-        /** Tomato -> {@link stations.PreparationStation}
+        /** Tomato -&gt; {@link stations.PreparationStation}
          * with type {@link stations.Station.StationID#cut} */
         tomatoChop,
         /** Onion */
         onion,
-        /** Onion -> {@link stations.PreparationStation}
+        /** Onion -&gt; {@link stations.PreparationStation}
          * with type {@link stations.Station.StationID#cut} */
         onionChop,
         /** Meat */
         meat,
-        /** Meat -> {@link stations.PreparationStation}
+        /** Meat -&gt; {@link stations.PreparationStation}
          * with type {@link stations.Station.StationID#fry} */
         meatCook,
         /** Bun — Used only to specify that the {@link stations.Pantry} gives
          * either a {@link #bottomBun} or {@link #topBun}. */
         bun,
-        /** Bottom Bun -> Highest bun on {@link FoodStack} is {@code null} or {@link #topBun} */
+        /** Bottom Bun -&gt; Highest bun on {@link FoodStack} is {@code null} or {@link #topBun} */
         bottomBun,
-        /** Top Bun -> Highest bun on {@link FoodStack} is {@link #bottomBun} */
+        /** Top Bun -&gt; Highest bun on {@link FoodStack} is {@link #bottomBun} */
         topBun,
         /** Default */
         none

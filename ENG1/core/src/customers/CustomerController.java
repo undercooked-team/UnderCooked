@@ -35,6 +35,8 @@ public class CustomerController {
      * Constructor for the {@link CustomerController}.
      * <br>It sets up the array that the {@link Customer}s
      * will be stored in.
+     * @param gameScreen The {@link GameScreen} that the {@link CustomerController}
+     *                   was created by.
      */
     public CustomerController(GameScreen gameScreen) {
         this.customers = new Array<>();
@@ -53,7 +55,9 @@ public class CustomerController {
      * a {@link Customer} can be added to a {@link ServingStation}
      * on the {@link game.GameScreen}'s map or not.
      * or not.
-     * @return
+     * @return A {@code boolean} that is true when a
+     *         {@link Customer} can be added, and false when
+     *         they cannot.
      */
     public boolean canAddCustomer() {
         Array<ServingStation> stations = servingStations;
@@ -110,7 +114,8 @@ public class CustomerController {
 
     /**
      * Removes a customer from a {@link ServingStation}.
-     * @param station
+     * @param station The {@link ServingStation} to remove
+     *                the {@link Customer} from.
      */
     public void removeCustomer(ServingStation station) {
         // First make sure the station has a Customer
@@ -160,7 +165,9 @@ public class CustomerController {
      * Adds a {@link ServingStation} to the {@link Array} of
      * {@link ServingStation}s so that {@link Customer}s can
      * be assigned to them.
-     * @param station
+     * @param station The {@link ServingStation} to add as
+     *                an option for {@link Customer}'s to
+     *                be assigned to.
      */
     public void addServingStation(ServingStation station) {
         servingStations.add(station);
@@ -177,8 +184,10 @@ public class CustomerController {
     }
 
     /**
-     * Called when a
-     * @param station
+     * Called when a {@link Customer} has been sucessfully served at
+     * a {@link ServingStation} by a {@link cooks.Cook}.
+     * @param station The {@link ServingStation} that the {@link Customer}
+     *                was served at.
      */
     public void customerServed(ServingStation station) {
         int customerInd = customers.indexOf(station.getCustomer(),true);

@@ -362,7 +362,7 @@ public class GameScreen extends ScreenAdapter {
     /**
      * Intermediate function to allow the {@link MapHelper} to add
      * the {@link ServingStation}s to the {@link CustomerController}.
-     * @param station
+     * @param station The {@link ServingStation} to add to the {@link CustomerController}.
      */
     public void addServingStation(ServingStation station) { customerController.addServingStation(station); }
     /** Reset the game variables, map and world. */
