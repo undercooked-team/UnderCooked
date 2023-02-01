@@ -82,10 +82,13 @@ We quickly realised how limited our initial UML was surrounding the **gameMaster
 - **CookInteractable** allowed a station to become interactable with the cook.
 - We quickly realised that we would need more stations to allow the player to have greater ability to manipulate the stack of items that they will hold. For example, if the player accidentally collects 1 too many items, they need to be able to bin the top item (**BinStation**). Or if the player needs to swap items with the other cook, they need to be able to place their FoodStack down (**CounterStation**).
 
-### Addition N/A: Helper
+### Addition 7: Helper
 ![Helper UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/helper.png)
   
-- None of the Helper classes were orignally added into the initial UML, as none of them directly correlates to a user requirement. Rather, these classes were gradually added throughout development to allow for other classes to function properly, letting the other classes complete their assigned user requirement.
+- **Hud** is a superclass which easily allows for the addition of information on the screen during gameplay.
+- **GameHud** displays the number of customers remaining, as well as a time taken to complete the task.
+- **InstructionHud** displays the controls during gameplay, so the player always has a guide to tell them what to do next.
+- None of the other Helper classes were orignally added into the initial UML, as none of them directly correlated to a user requirement. Rather, these classes were gradually added throughout development to allow for other classes to function properly, letting the other classes complete their assigned user requirement.
 - **Constants** simply contained some global values.
   
 ## Method Selection and Planning
