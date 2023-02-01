@@ -48,8 +48,19 @@ Using the RDD above, we made our Initial UML Diagram.
 ### Initial UML Diagram:
 ![Initial UML Diagram](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/InitialUML.png)
 
-Over time, we expanded upon the Initial UML diagram.
-### Addition 1: 
+Over time, we expanded upon the Initial UML diagram, making changes where necessary:
+### Addition 1: Cooks
+![Cooks UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/cooks.png)
+
+- **Chef** was renamed to **Cook**.
+- **Collidable** branched into the **GameEntity** class, which was used as a base class for any item that could exist as an object with a physical position in the game-world. We learn't that classes **Cook** and **Customer** can use the same code in **GameEntity**.
+- We made **CookInteractor** because this object is solely responsible for letting a cook interact with other objects. Any other object within the **CookInteractor** Rectangle, is an object that the **Cook** and interact with.
+
+### Addition 3: Stations
+![Stations UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/stations.png)
+
+- **CookInteractable** allowed a station to become interactable with the cook.
+- We quickly realised that we would need more stations to allow the player to have greater ability to manipulate the stack of items that they will hold. For example, if the player accidentally collects 1 too many items, they need to be able to bin the top item (**BinStation**). Or if the player needs to swap items with the other cook, they need to be able to place their FoodStack down (**CounterStation**).
 
 ## Method Selection and Planning
 
