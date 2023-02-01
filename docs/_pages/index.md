@@ -59,29 +59,36 @@ We quickly realised how limited our initial UML was surrounding the **gameMaster
 - **GameSprites** is responsible for holding multiple sprites to render.
 - **gameMaster** branched off into 2 classes:
   - **ScreenController** is responsible for switching between the main, pause, instructions, credits, gameplay-screen and game-over screen.
-  - **GameScreen** is the gameplay-screen. It contiains various methods and attributes to allow for gameplay.
+  - **GameScreen** is the gameplay-screen. It contiains various methods and attributes to allow for gameplay, including **mapHelper** related methods.
 
 ### Addition 2: Food
 ![Food UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/food.png)
 
 - **FoodStack** is responsible for holding a stack of in-game cooking ingredients. The chef class will use this object to hold food items.
 - **FoodItem** contains information about how to render each ingredient.
-- **Recipe** contains each recipe and how each one is made. We learnt that to consrtuct salad and burgers, the cook must hold a certain **FoodStack**. Thus, certain **FoodStack**s correlate to certain recipes. **Recipe** holds a dict which translates a String recipeName to Array<String> listOfFoodStacks which are all the foodStacks which correlate to recipe recipeName.
-  
+- **Recipe** contains each recipe and how each one is made. We learnt that to consrtuct salad and burgers, the cook must hold a certain **FoodStack**. Thus, certain - **FoodStack**s correlate to certain recipes. **Recipe** holds a dict which translates a String recipeName to Array<String> listOfFoodStacks which are all the foodStacks which correlate to recipe recipeName.
+
 ### Addition 3: Cooks
 ![Cooks UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/cooks.png)
 
 - **Chef** was renamed to **Cook**.
 - **Collidable** branched into the **GameEntity** class, which was used as a base class for any item that could exist as an object with a physical position in the game-world. We learnt that classes **Cook** and **Customer** can use the same code in **GameEntity**.
 - We made **CookInteractor** because this object is solely responsible for letting a cook interact with other objects. Any other object within the **CookInteractor** Rectangle, is an object that the **Cook** and interact with.
-  
 
-### Addition 4: Stations
+### Addition 4: Interactions
+![Interactions UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/interactions.png)
+
+This class was also not present in our initial UML in any form. This class is an information class:
+- **Interactions** contained a dict, which accepted an ingredient (foodID), and a station (stationID), and outputted a processed ingredient (foodID). This information doesn't exclusively fit into Food, or Station, so it became a class of its own. This class also contains User-related interactions with the game-world, and would monitor which keys the player was pressing.
+- **InputKey** is a helper class of Interactions, aiding with the mapping of keyboard keys being pressed, to controls and output in the game.
+
+### Addition 5: Stations
 ![Stations UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/stations.png)
 
 - **CookInteractable** allowed a station to become interactable with the cook.
 - We quickly realised that we would need more stations to allow the player to have greater ability to manipulate the stack of items that they will hold. For example, if the player accidentally collects 1 too many items, they need to be able to bin the top item (**BinStation**). Or if the player needs to swap items with the other cook, they need to be able to place their FoodStack down (**CounterStation**).
 
+  
 ### Addition 7: Helper
 ![Helper UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/helper.png)
   
