@@ -33,9 +33,11 @@ Details for all the team members can be found here:
 </ul>
 
 ## Requirements:
-[]()
+[Requirements Document](https://docs.google.com/document/d/17tcN_Xeo0Gzz8ficlVVp_1x0h8Q2EDLzrCXvKtgHNlw/edit?usp=share_link)
 
 ## Architecture:
+Below are UML images showcasing our development process for the Final Architecture Design (for Assessment 1).
+
 ### Use-case Diagram:
 The below summarises the general outcome of this project:
 ![Use-case Diagram](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/UseCaseDiagramUnderCooked.png)
@@ -56,6 +58,11 @@ Over time, we expanded upon the Initial UML diagram, making changes where necess
 - **Collidable** branched into the **GameEntity** class, which was used as a base class for any item that could exist as an object with a physical position in the game-world. We learn't that classes **Cook** and **Customer** can use the same code in **GameEntity**.
 - We made **CookInteractor** because this object is solely responsible for letting a cook interact with other objects. Any other object within the **CookInteractor** Rectangle, is an object that the **Cook** and interact with.
 
+### Addition 2: Food
+![Food UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/food.png)
+
+- 
+
 ### Addition 3: Stations
 ![Stations UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/stations.png)
 
@@ -63,7 +70,10 @@ Over time, we expanded upon the Initial UML diagram, making changes where necess
 - We quickly realised that we would need more stations to allow the player to have greater ability to manipulate the stack of items that they will hold. For example, if the player accidentally collects 1 too many items, they need to be able to bin the top item (**BinStation**). Or if the player needs to swap items with the other cook, they need to be able to place their FoodStack down (**CounterStation**).
 
 ## Method Selection and Planning
+[Method Selection and Planning Doc](https://docs.google.com/document/d/1KpzhVRxdkBJPyYyQxW3aTuWMCYpDrK8jtEIiyoh-2Rw/edit?usp=share_link)
 
 ## Risk Assessment and Mitigation
+[Risk Assessment and Mitigation Doc](https://docs.google.com/document/d/1-oQ4ajU6W9XvK9kMU9fiHc9EGryhhc9Awz3sKuWzotQ/edit?usp=share_link)
 
 ## Implementation
+[Implementation Doc](https://docs.google.com/document/d/1rC9LAZ9OATbIcQgagMG_clQ7LpItRECm9ADfuPLFHQc/edit?usp=share_link)
