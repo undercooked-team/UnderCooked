@@ -38,7 +38,9 @@ Details for all the team members can be found here:
 ## Architecture:
 Below are UML images showcasing our development process for the Final Architecture Design (for Assessment 1).
 You can also find all the images here:
+
 Google Drive: https://drive.google.com/drive/folders/1KE2M_o6zdMu1JZjFEnv3oIxf5IxwgiiC
+
 GitHub: https://github.com/undercooked-team/UnderCooked/tree/main/ENG1/SUBMITTABLES/Architecture
 
 ### Use-case Diagram:
