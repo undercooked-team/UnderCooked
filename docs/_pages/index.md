@@ -51,14 +51,24 @@ Using the RDD above, we made our Initial UML Diagram.
 ![Initial UML Diagram](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/InitialUML.png)
 
 Over time, we expanded upon the Initial UML diagram, making changes where necessary:
-### Addition 1: Food
+### Addition 1: Game
+![Game UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/game.png)
+  
+We quickly realised how limited our initial UML was surrounding the **gameMaster**:
+- **Boot** is responsible for initialising the game.
+- **GameSprites** is responsible for holding multiple sprites to render.
+- **gameMaster** branched off into 2 classes:
+  - **ScreenController** is responsible for switching between the main, pause, instructions, credits, gameplay-screen and game-over screen.
+  - **GameScreen** is the gameplay-screen. It contiains various methods and attributes to allow for gameplay.
+
+### Addition 2: Food
 ![Food UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/food.png)
 
 - **FoodStack** is responsible for holding a stack of in-game cooking ingredients. The chef class will use this object to hold food items.
 - **FoodItem** contains information about how to render each ingredient.
 - **Recipe** contains each recipe and how each one is made. We learnt that to consrtuct salad and burgers, the cook must hold a certain **FoodStack**. Thus, certain **FoodStack**s correlate to certain recipes. **Recipe** holds a dict which translates a String recipeName to Array<String> listOfFoodStacks which are all the foodStacks which correlate to recipe recipeName.
 
-### Addition 2: Cooks
+### Addition 3: Cooks
 ![Cooks UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/cooks.png)
 
 - **Chef** was renamed to **Cook**.
@@ -66,12 +76,12 @@ Over time, we expanded upon the Initial UML diagram, making changes where necess
 - We made **CookInteractor** because this object is solely responsible for letting a cook interact with other objects. Any other object within the **CookInteractor** Rectangle, is an object that the **Cook** and interact with.
   
 
-### Addition 3: Stations
+### Addition 4: Stations
 ![Stations UML](https://raw.githubusercontent.com/undercooked-team/UnderCooked/main/ENG1/SUBMITTABLES/Architecture/stations.png)
 
 - **CookInteractable** allowed a station to become interactable with the cook.
 - We quickly realised that we would need more stations to allow the player to have greater ability to manipulate the stack of items that they will hold. For example, if the player accidentally collects 1 too many items, they need to be able to bin the top item (**BinStation**). Or if the player needs to swap items with the other cook, they need to be able to place their FoodStack down (**CounterStation**).
-
+  
 ## Method Selection and Planning
 [Method Selection and Planning Doc](https://docs.google.com/document/d/1KpzhVRxdkBJPyYyQxW3aTuWMCYpDrK8jtEIiyoh-2Rw/edit?usp=share_link)
 
