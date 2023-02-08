@@ -8,7 +8,7 @@ Do check out our presentation: it is focussed on the ***key deciding aspects*** 
 Aspects focussed on:
 1) The overall quality of the software product.
 2) Estimates of effort remaining to complete the implementation
-3) Clarity and quality of the requirements specification, architechture and implementation.
+3) Clarity and quality of the requirements specification, architecture and implementation.
 4) Testability
 
 ## Project Page:
