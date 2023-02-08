@@ -11,6 +11,8 @@ Aspects focussed on:
 3) Clarity and quality of the requirements specification, architecture and implementation.
 4) Testability
 
+There was a large focus on aspect 2 especially, meaning the presentation can likely form ***a rough guide to completing Assessment 2*** with our project.
+
 ## Project Page:
 To see all the tasks/issues encountered in our project, check out our ***Project Page***:
 > https://github.com/orgs/undercooked-team/projects/1
