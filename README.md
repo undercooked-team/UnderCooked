@@ -23,3 +23,9 @@ If you prefer to see a visual representation of our milestones met, check out th
 ## Website:
 Check out our website for more info on ***Documentation***:
 > https://undercooked-team.github.io/UnderCooked/
+
+---
+And finally:
+![Gigachad Thank You](https://www.meme-arsenal.com/memes/5b2a68a87e0f9de1c3a1f3e62bd994d3.jpg)
+
+Thank you for checking out our GitHub Repository! :D
