@@ -26,6 +26,7 @@ Check out our website for more info on ***Documentation***:
 
 ---
 And finally:
-<img alt="Gigachad Thank You" src="https://www.meme-arsenal.com/memes/5b2a68a87e0f9de1c3a1f3e62bd994d3.jpg"  width="600" height="300">
+
+<img alt="Gigachad Thank You" src="https://www.meme-arsenal.com/memes/5b2a68a87e0f9de1c3a1f3e62bd994d3.jpg"  width="631" height="500">
 
 Thank you for checking out our GitHub Repository! :D
