@@ -1,5 +1,5 @@
 # UnderCooked
-ENG1 Assessment 1 game made in libgdx, based on the game Overcooked
+ENG1 Assessment 1 game made in LibGDX, based on the game Overcooked.
 
 ## Presentation:
 Do check out our presentation: it is focussed on the ***key deciding aspects*** for ***choosing your Assessment 2 project***, as stated in the assessement brief:
