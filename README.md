@@ -17,6 +17,9 @@ There was a large focus on aspect 2 especially, meaning the presentation can lik
 To see all the tasks/issues encountered in our project, check out our ***Project Page***:
 > https://github.com/orgs/undercooked-team/projects/1
 
+If you prefer to see a visual representation of our milestones met, check out the milestones for our repository:
+> https://github.com/undercooked-team/UnderCooked/milestones
+
 ## Website:
 Check out our website for more info on ***Documentation***:
 > https://undercooked-team.github.io/UnderCooked/
